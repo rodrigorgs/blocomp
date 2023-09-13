@@ -1,4 +1,4 @@
-const toolbox = {
+export const toolbox = {
     "kind": "flyoutToolbox",
     "contents": [
       {
@@ -31,5 +31,3 @@ const toolbox = {
       },
     ]
 };
-
-module.exports.toolbox = toolbox;

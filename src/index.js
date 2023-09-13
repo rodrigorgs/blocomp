@@ -1,8 +1,9 @@
-const Blockly = require('blockly');
-const ptBR = require('blockly/msg/pt-br');
-const { pythonGenerator } = require('blockly/python');
-const { pyodideReadyPromise } = require('./runpython.js');
-const { toolbox } = require('./toolbox.js');
+import Blockly from 'blockly';
+// const ptBR = require('blockly/msg/pt-br');
+import * as ptBR from 'blockly/msg/pt-br';
+import { pythonGenerator } from 'blockly/python';
+import { pyodideReadyPromise } from './runpython.js';
+import { toolbox } from './toolbox.js';
 
 Blockly.setLocale(ptBR);
 
