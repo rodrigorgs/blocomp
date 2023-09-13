@@ -1,14 +1,14 @@
 import Blockly from 'blockly';
-// const ptBR = require('blockly/msg/pt-br');
 import * as ptBR from 'blockly/msg/pt-br';
 import { pythonGenerator } from 'blockly/python';
+import { javascriptGenerator } from 'blockly/javascript';
 import { pyodideReadyPromise } from './runpython.js';
 import { loadIlpBlocks } from './customBlocks.js';
 import { toolbox } from './toolbox.js';
 
 Blockly.setLocale(ptBR);
 
-loadIlpBlocks(Blockly, pythonGenerator);
+loadIlpBlocks();
 
 var workspace = Blockly.inject('blocklyDiv', {
     toolbox: toolbox,
@@ -20,10 +20,20 @@ workspace.addChangeListener(saveWorkspaceToLocalStorage);
 
 /////////////////////////////////////
 
+function highlightBlock(id) {
+    console.log('will highlight', id);
+    workspace.highlightBlock(id);
+}
+
 document.getElementById("btnRodar").addEventListener("click", async function() {
-    var code = pythonGenerator.workspaceToCode(workspace);
+    // var code = pythonGenerator.workspaceToCode(workspace);
+    // console.log(code);
+    // await runInPyodide(code);
+
+    var code = javascriptGenerator.workspaceToCode(workspace);
+    code = `async function main() { ${code} }\nmain();`;
     console.log(code);
-    await runInPyodide(code);
+    eval(code);
 });
 
 async function runInPyodide(code) {
