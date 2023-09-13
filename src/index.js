@@ -3,9 +3,12 @@ import Blockly from 'blockly';
 import * as ptBR from 'blockly/msg/pt-br';
 import { pythonGenerator } from 'blockly/python';
 import { pyodideReadyPromise } from './runpython.js';
+import { loadIlpBlocks } from './customBlocks.js';
 import { toolbox } from './toolbox.js';
 
 Blockly.setLocale(ptBR);
+
+loadIlpBlocks(Blockly, pythonGenerator);
 
 var workspace = Blockly.inject('blocklyDiv', {
     toolbox: toolbox,
@@ -25,7 +28,7 @@ document.getElementById("btnRodar").addEventListener("click", async function() {
 
 async function runInPyodide(code) {
     const pyodide = await pyodideReadyPromise;
-    pyodide.runPython(code);
+    pyodide.runPython(`import time\n${code}`);
 }
 
 function saveWorkspaceToLocalStorage(event) {
