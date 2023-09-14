@@ -52,7 +52,7 @@ export function runTests(code: string, testCases: Array<TestCase>): TestSuiteRep
     return report;
 }
 
-function runCodeInTestMode(code: any, inputText: any) {
+function runCodeInTestMode(code: string, inputText: string) {
     const oldAlert = window.alert;
     const oldPrompt = window.prompt;
 

@@ -1,11 +1,10 @@
 
 import * as Blockly from 'blockly';
 import * as ptBR from 'blockly/msg/pt-br';
-import { javascriptGenerator } from 'blockly/javascript';
 //@ts-ignore
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
-import { loadIlpBlocks } from './toolkits/structured/blocks.js';
-import { toolbox } from './toolbox.js';
+import { loadIlpBlocks } from './toolkits/structured/blocks';
+import { toolbox } from './toolbox';
 import { Editor } from './editor';
 
 Blockly.setLocale(ptBR);
