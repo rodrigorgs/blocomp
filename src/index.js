@@ -22,6 +22,10 @@ var workspace = Blockly.inject('blocklyDiv', {
         'metricsManager': ContinuousMetrics,
     },  
 });
+// workspace.registerToolboxCategoryCallback('VARIABLES', function(workspace) {
+
+// });
+
 
 workspace.addChangeListener(saveWorkspaceToLocalStorage);
 window.addEventListener('load', loadWorkspaceFromLocalStorage);

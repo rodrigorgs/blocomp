@@ -13,7 +13,7 @@ export const toolbox = {
       { "kind": "block", "type": "math_number", "fields": { "NUM": 1 } },
       { "kind": "block", "type": "math_arithmetic" },
     ]},
-    { "kind": "category", "flyoutOpen": true, "name": "Variáveis", "contents": [
+    { "kind": "category", "flyoutOpen": true, "name": "Variáveis", "custom": "VARIABLE", "contents": [
       // { "kind": "label", "text": "Variáveis" },
       { "kind": "block", "type": "variables_get", "fields": { "VAR": { "name": "x" } } },
       { "kind": "block", "type": "variables_set", "fields": { "VAR": { "name": "x" } } },
@@ -26,6 +26,8 @@ export const toolbox = {
     ]},
   ]
 };
+
+
 
 //     "contents": [
 
