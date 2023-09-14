@@ -30,7 +30,7 @@ const inputBlock: any = {
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 230,
+    "colour": 165,
     "tooltip": "",
     "helpUrl": ""
 };
