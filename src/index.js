@@ -17,6 +17,7 @@ var workspace = Blockly.inject('blocklyDiv', {
 });
 
 workspace.addChangeListener(saveWorkspaceToLocalStorage);
+window.addEventListener('load', loadWorkspaceFromLocalStorage);
 
 /////////////////////////////////////
 
@@ -53,8 +54,7 @@ function saveWorkspaceToLocalStorage(event) {
 
 function loadWorkspaceFromLocalStorage() {
     var json = localStorage.getItem("workspace") || "{}";
-    console.log('json=', json)
-    Blockly.serialization.workspaces.load(JSON.parse(json));
+    Blockly.serialization.workspaces.load(JSON.parse(json), workspace);
 }
 
 document.getElementById('btnCarregar').addEventListener("click", loadWorkspaceFromLocalStorage);
