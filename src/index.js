@@ -1,11 +1,9 @@
 import Blockly from 'blockly';
 import * as ptBR from 'blockly/msg/pt-br';
-import { pythonGenerator } from 'blockly/python';
 import { javascriptGenerator } from 'blockly/javascript';
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
 
 import { pyodideReadyPromise } from './runpython.js';
-// import { loadIlpBlocks } from './customBlocks.js';
 import { loadIlpBlocks } from './toolkits/structured/blocks.js';
 import { toolbox } from './toolbox.js';
 
@@ -22,10 +20,6 @@ var workspace = Blockly.inject('blocklyDiv', {
         'metricsManager': ContinuousMetrics,
     },  
 });
-// workspace.registerToolboxCategoryCallback('VARIABLES', function(workspace) {
-
-// });
-
 
 workspace.addChangeListener(saveWorkspaceToLocalStorage);
 window.addEventListener('load', loadWorkspaceFromLocalStorage);
@@ -36,7 +30,7 @@ document.getElementById("btnLimpar").addEventListener("click", () => {
     workspace.clear();
     localStorage.removeItem("workspace");
 });
-// Example of increment algorithm
+
 document.getElementById("btnTestar").addEventListener("click", () => {
     javascriptGenerator.STATEMENT_PREFIX = '';
 
@@ -109,10 +103,6 @@ function runTests(code, inputText) {
 }
 
 async function runWorkspace() {
-    // var code = pythonGenerator.workspaceToCode(workspace);
-    // console.log(code);
-    // await runInPyodide(code);
-
     javascriptGenerator.STATEMENT_PREFIX = 'await highlightBlock(%1);\n';
     javascriptGenerator.addReservedWords('highlightBlock');
     var code = javascriptGenerator.workspaceToCode(workspace);
@@ -129,10 +119,8 @@ async function runInPyodide(code) {
 function saveWorkspaceToLocalStorage(event) {
     var workspaceModel = Blockly.serialization.workspaces.save(workspace);
     workspaceModel['code'] = {
-        // 'python': pythonGenerator.workspaceToCode(workspace),
         'javascript': javascriptGenerator.workspaceToCode(workspace)
     };
-    // console.log('json = ', json)
     localStorage.setItem("workspace", JSON.stringify(workspaceModel));
 }
 

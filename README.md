@@ -41,3 +41,5 @@ See also:
 
 - [ ] Use TypeScript
 - [ ] Use React (or preact)
+- [ ] "Ask for a number": change block color
+- [ ] Add color to categories in the toolbox
