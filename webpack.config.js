@@ -41,14 +41,6 @@ module.exports = {
           from: require.resolve("pyodide/repodata.json"),
           to: "repodata.json",
         },
-        // {
-        //   from: require.resolve("pyodide/pyodide_py.tar"),
-        //   to: "pyodide_py.tar",
-        // },
-        // {
-        //   from: require.resolve("pyodide/pyodide.asm.data"),
-        //   to: "pyodide.asm.data",
-        // },
         {
           from: require.resolve("pyodide/pyodide.asm.wasm"),
           to: "pyodide.asm.wasm",

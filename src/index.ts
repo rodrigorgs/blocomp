@@ -9,20 +9,13 @@ declare global {
     }
 }
 
-//@ts-ignore
-import Blockly from 'blockly';
-//@ts-ignore
+
+import * as Blockly from 'blockly';
 import * as ptBR from 'blockly/msg/pt-br';
-//@ts-ignore
 import { javascriptGenerator } from 'blockly/javascript';
 //@ts-ignore
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
-
-//@ts-ignore
-// import { pyodideReadyPromise } from './runpython.js';
-//@ts-ignore
 import { loadIlpBlocks } from './toolkits/structured/blocks.js';
-//@ts-ignore
 import { toolbox } from './toolbox.js';
 
 Blockly.setLocale(ptBR);
