@@ -2,6 +2,8 @@ import Blockly from 'blockly';
 import * as ptBR from 'blockly/msg/pt-br';
 import { pythonGenerator } from 'blockly/python';
 import { javascriptGenerator } from 'blockly/javascript';
+import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
+
 import { pyodideReadyPromise } from './runpython.js';
 // import { loadIlpBlocks } from './customBlocks.js';
 import { loadIlpBlocks } from './toolkits/structured/blocks.js';
@@ -14,7 +16,11 @@ loadIlpBlocks();
 var workspace = Blockly.inject('blocklyDiv', {
     toolbox: toolbox,
     trashcan: true,
-    collapse: false,
+    plugins: {
+        'toolbox': ContinuousToolbox,
+        'flyoutsVerticalToolbox': ContinuousFlyout,
+        'metricsManager': ContinuousMetrics,
+    },  
 });
 
 workspace.addChangeListener(saveWorkspaceToLocalStorage);
@@ -29,7 +35,7 @@ document.getElementById("btnLimpar").addEventListener("click", () => {
 // Example of increment algorithm
 document.getElementById("btnTestar").addEventListener("click", () => {
     javascriptGenerator.STATEMENT_PREFIX = '';
-    
+
     const code = javascriptGenerator.workspaceToCode(workspace);
     const inputText = "5";
     const outputText = runTests(code, inputText);
