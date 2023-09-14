@@ -41,11 +41,34 @@ document.getElementById("btnTestar").addEventListener("click", () => {
     javascriptGenerator.STATEMENT_PREFIX = '';
 
     const code = javascriptGenerator.workspaceToCode(workspace);
-    const inputText = "5";
-    const outputText = runTests(code, inputText);
-    const expectedOutput = "6";
-    console.log('outputText', outputText);
-    alert(outputText?.trim() === expectedOutput?.trim());
+    
+    const testCases = window.problem.testCases;
+    let report = '';
+    let failedTests = 0;
+    for (const testCase of testCases) {
+        const inputText = testCase.input;
+        const expectedOutput = testCase.output;
+
+        const outputText = runTests(code, inputText);
+
+        console.log('inputText = ', inputText);
+        console.log('outputText = ', outputText);
+        console.log('expectedOutput = ', expectedOutput);
+
+        if (outputText?.trim() !== expectedOutput?.trim()) {
+            failedTests++;
+            report += `Entrada: ${inputText}\n`;
+            report += `Saída esperada: ${expectedOutput}\n`;
+            report += `Saída obtida: ${outputText}\n`;
+            report += '\n';
+        }
+    }
+    if (failedTests > 0) {
+        report = `Falhou em ${failedTests} testes:\n\n` + report;
+    } else {
+        report = 'Passou em todos os testes!';
+    }
+    alert(report);
 
 });
 /////////////////////////////////////
