@@ -43,6 +43,10 @@ async function runInPyodide(code) {
 
 function saveWorkspaceToLocalStorage(event) {
     var workspaceModel = Blockly.serialization.workspaces.save(workspace);
+    workspaceModel['code'] = {
+        'python': pythonGenerator.workspaceToCode(workspace),
+        'javascript': javascriptGenerator.workspaceToCode(workspace)
+    };
     // console.log('json = ', json)
     localStorage.setItem("workspace", JSON.stringify(workspaceModel));
 }
