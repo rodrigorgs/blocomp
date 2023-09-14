@@ -39,7 +39,7 @@ See also:
 - [ ] Run mode: test (use cin-like input)
 - [ ] Create grid-based canvas output: can move, read color, paint current block, etc. Like a 2D turing machine.
 
-- [ ] Use TypeScript
+- [x] Use TypeScript
 - [ ] Use React (or preact)
 - [ ] "Ask for a number": change block color
 - [ ] Add color to categories in the toolbox
