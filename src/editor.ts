@@ -44,6 +44,17 @@ export class Editor {
         globalWorkspace = this.workspace;
     }
 
+    getCode(debugging = false) {
+        const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
+        javascriptGenerator.STATEMENT_PREFIX = debugging ? 'await highlightBlock(%1);\n' : '';
+
+        try {
+            return javascriptGenerator.workspaceToCode(this.workspace);
+        } finally {
+            javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
+        }
+    }
+
     runTests() {
         const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
         javascriptGenerator.STATEMENT_PREFIX = '';
@@ -93,14 +104,19 @@ export class Editor {
         localStorage.removeItem("workspace");
     }
 
+
     saveWorkspaceToLocalStorage() {
-        var workspaceModel = Blockly.serialization.workspaces.save(this.workspace);
-        workspaceModel['code'] = {
-            'javascript': javascriptGenerator.workspaceToCode(this.workspace)
-        };
-        localStorage.setItem("workspace", JSON.stringify(workspaceModel));
+        localStorage.setItem("workspace", this.getWorkspaceJSON());
     }
     
+    getWorkspaceJSON() {
+        var workspaceModel = Blockly.serialization.workspaces.save(this.workspace);
+        workspaceModel['code'] = {
+            'javascript': this.getCode()
+        };
+        return JSON.stringify(workspaceModel);
+    }
+
     loadWorkspaceFromLocalStorage() {
         var json = localStorage.getItem("workspace") || "{}";
         Blockly.serialization.workspaces.load(JSON.parse(json), this.workspace);

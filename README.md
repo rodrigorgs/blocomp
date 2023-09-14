@@ -25,7 +25,7 @@ See also:
 
 ## TODO
 
-- [ ] Save to EZSubmission
+- [x] Save to EZSubmission
 
 - [x] Load block JSON
 - [x] Save generated code to workspace JSON
@@ -34,6 +34,7 @@ See also:
 
 - [ ] Use variable-sized editor
 - [ ] Show variable values
+- [ ] Maybe show output in a textarea or similar
 
 - [x] Run mode: debug (time interval between blocks)
 - [x] Run mode: test (redirect input/output)
