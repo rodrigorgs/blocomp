@@ -1,20 +1,20 @@
-import { EZSubmission } from "../ezsubmission/client";
+import { EZSubmissionClient } from "../ezsubmission/client";
 
-export class SubmissionSession {
+export class EZSubmissionSession {
     static get SESSION_KEY() { return "submissao_token_key"; }
   
-    constructor(private ez: EZSubmission) {
+    constructor(private ez: EZSubmissionClient) {
       this.ez.accessToken = this.getToken();
     }
   
     getToken() {
-      return sessionStorage.getItem(SubmissionSession.SESSION_KEY);
+      return sessionStorage.getItem(EZSubmissionSession.SESSION_KEY);
     }
     setToken(token: string | null) {
       if (token) {
-        sessionStorage.setItem(SubmissionSession.SESSION_KEY, token);
+        sessionStorage.setItem(EZSubmissionSession.SESSION_KEY, token);
       } else {
-        sessionStorage.removeItem(SubmissionSession.SESSION_KEY);
+        sessionStorage.removeItem(EZSubmissionSession.SESSION_KEY);
       }
       this.ez.accessToken = token;
     }

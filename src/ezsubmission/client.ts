@@ -18,7 +18,7 @@ export function createSingleAnswer(answer: string, assignmentUrl: string): EZAns
   };
 }
 
-export class EZSubmission {
+export class EZSubmissionClient {
     public accessToken: string | null;
 
     constructor(private apiUrl: string) {

@@ -6,9 +6,11 @@ import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/c
 import { loadIlpBlocks } from './toolkits/structured/blocks';
 import { toolbox } from './toolbox';
 import { Editor } from './editor';
-import { SubmissionSession } from './auth/session';
-import { EZSubmission, createSingleAnswer } from './ezsubmission/client';
+import { EZSubmissionSession } from './auth/session';
+import { EZSubmissionClient, createSingleAnswer } from './ezsubmission/client';
 import Swal from 'sweetalert2';
+
+//////////
 
 Blockly.setLocale(ptBR);
 
@@ -45,8 +47,15 @@ document.getElementById("btnTestar")!.addEventListener("click", () => {
 });
 /////////////////////////////////////
 
-let ez = new EZSubmission('http://localhost:5001/')
-let session = new SubmissionSession(ez);
+let ez = new EZSubmissionClient('http://localhost:5001/')
+let session = new EZSubmissionSession(ez);
+
+import * as React from "react";
+import { createRoot } from "react-dom/client";
+import SigninComponent from './auth/signin_component';
+const root = createRoot(document.getElementById("signinDiv"));
+root.render(React.createElement(SigninComponent, {client: ez, session}));
+
 
 async function submitAnswer() {
     try {
@@ -72,37 +81,13 @@ async function submitAnswer() {
 }
 
 document.getElementById("btnEnviar")!.addEventListener("click", async () => {
-    session.setToken(null);
-});
-document.getElementById("btnEnviar")!.addEventListener("click", async () => {
     if (session.isLoggedIn()) {
         submitAnswer();
     } else {
-        const username = await Swal.fire({
-            title: "Digite seu nome de usuário",
-            input: 'text',
-            showCancelButton: true,
+        await Swal.fire({
+            text: 'É preciso entrar com login e senha para enviar a resposta',
+            icon: 'error',
+            confirmButtonText: 'Ok'
         });
-        if (username.isConfirmed) {
-            const password = await Swal.fire({
-                title: "Digite sua senha",
-                input: 'password',
-                showCancelButton: true,
-            });
-            if (password.isConfirmed) {
-                try {
-                    const response = await ez.login(username.value, password.value);
-                    session.setToken(response.data.access_token);
-                    submitAnswer();
-                } catch (e) {
-                    console.log(e);
-                    await Swal.fire({
-                        text: 'Erro ao fazer login',
-                        icon: 'error',
-                        confirmButtonText: 'Ok'
-                    });
-                }
-            }
-        }
     }
 });

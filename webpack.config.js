@@ -10,15 +10,21 @@ module.exports = {
   },
   module: {
     rules: [
+      // `js` and `jsx` files are parsed using `babel`
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        test: /\.(js|jsx)$/, 
+        exclude: /node_modules/,
+        use: ["babel-loader"],
+      },
+		  // `ts` and `tsx` files are parsed using `ts-loader`
+      { 
+        test: /\.(ts|tsx)$/, 
+        loader: "ts-loader" 
       }
-    ]
+    ],
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: [".js", ".jsx", ".ts", ".tsx"],    
   },
   plugins: [
     new CopyWebpackPlugin({

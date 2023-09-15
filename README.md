@@ -25,6 +25,13 @@ See also:
 
 ## TODO
 
+- [ ] Run mode: stop button for debug mode
+- [x] Run mode: debug (time interval between blocks)
+- [x] Run mode: test (redirect input/output)
+- [ ] Run mode: debug (step-by-step, with button)
+- [ ] Run mode: production (run all blocks at once)
+- [ ] Run mode: test (use cin-like input)
+
 - [x] Save to EZSubmission
 
 - [x] Load block JSON
@@ -36,15 +43,9 @@ See also:
 - [ ] Show variable values
 - [ ] Maybe show output in a textarea or similar
 
-- [x] Run mode: debug (time interval between blocks)
-- [x] Run mode: test (redirect input/output)
-- [ ] Run mode: debug (step-by-step, with button)
-- [ ] Run mode: production (run all blocks at once)
-- [ ] Run mode: test (use cin-like input)
-
 - [ ] Create grid-based canvas output: can move, read color, paint current block, etc. Like a 2D turing machine.
 
 - [x] Use TypeScript
 - [x] "Ask for a number": change block color
 - [x] Add color to categories in the toolbox
-- [ ] Use React (or preact)
+- [x] Use React (or preact)
