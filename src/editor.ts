@@ -39,32 +39,33 @@ interface EditorState {
 let globalWorkspace: Blockly.WorkspaceSvg = null;
 
 export class Editor {
+    _cancelExecution: boolean = false;
 
     constructor(private workspace: Blockly.WorkspaceSvg, private problem: Problem) {
         globalWorkspace = this.workspace;
     }
-
+    
     getCode(debugging = false) {
         const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
         javascriptGenerator.STATEMENT_PREFIX = debugging ? 'await highlightBlock(%1);\n' : '';
-
+        
         try {
             return javascriptGenerator.workspaceToCode(this.workspace);
         } finally {
             javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
         }
     }
-
+    
     runTests() {
         const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
         javascriptGenerator.STATEMENT_PREFIX = '';
-
+        
         try {
             const code = javascriptGenerator.workspaceToCode(this.workspace);
             const testCases = this.problem.testCases;
-           
+            
             const report = runTests(code, testCases);
-    
+            
             if (report.passed) {
                 alert('Parabéns! Você passou em todos os testes!');
             } else {
@@ -83,30 +84,50 @@ export class Editor {
             javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
         }
     }
-
+    
     async debugWorkspace() {
         const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
-
+        
         try {
-            javascriptGenerator.STATEMENT_PREFIX = 'await highlightBlock(%1);\n';
+            javascriptGenerator.STATEMENT_PREFIX = 'await this.highlightBlock(%1);\n';
             javascriptGenerator.addReservedWords('highlightBlock');
             var code = javascriptGenerator.workspaceToCode(this.workspace);
-            code = `async function main() { ${code}; highlightBlock('') }\nmain();`;
+            code = `
+                (async () => {
+                    this._cancelExecution = false;
+                    try {
+                        ${code}
+                    } catch (e) {
+                        console.log('Execução cancelada');
+                    } finally {
+                        this.workspace.highlightBlock('');
+                    }
+                })();
+                `;
             console.log(code);
-            eval(code);
+            await eval(code);
         } finally {
             javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
         }
     }
 
+    stopExecution() {
+        this._cancelExecution = true;
+        // TODO: clear timeout
+    }
+    
     clearWorkspace() {
         this.workspace.clear();
         localStorage.removeItem("workspace");
     }
-
-
+    
+    
     saveWorkspaceToLocalStorage() {
-        localStorage.setItem("workspace", this.getWorkspaceJSON());
+        const json: any = this.getWorkspaceJSON();
+        const objModel = JSON.parse(json);
+        if (objModel && objModel['blocks']) {
+            localStorage.setItem("workspace", this.getWorkspaceJSON());
+        }
     }
     
     getWorkspaceJSON() {
@@ -116,16 +137,21 @@ export class Editor {
         };
         return JSON.stringify(workspaceModel);
     }
-
+    
     loadWorkspaceFromLocalStorage() {
+        console.log('loading workspace');
         var json = localStorage.getItem("workspace") || "{}";
         Blockly.serialization.workspaces.load(JSON.parse(json), this.workspace);
+        console.log('done');
     }
     
+    async highlightBlock(id: any) {
+        if (this._cancelExecution) {
+            throw new Error('Execution cancelled');
+        }
+        console.log('will highlight', id);
+        this.workspace.highlightBlock(id);
+        await new Promise(resolve => setTimeout(resolve, 1000)).catch(() => {});
+    }
     
-}
-async function highlightBlock(id: any) {
-    console.log('will highlight', id);
-    globalWorkspace.highlightBlock(id);
-    await new Promise(resolve => setTimeout(resolve, 1000));
 }
