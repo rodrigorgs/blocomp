@@ -65,6 +65,9 @@ document.getElementById('btnCarregar')!.addEventListener("click", () => {
 document.getElementById("btnRodar")!.addEventListener("click", () => {
     editor.debugWorkspace();
 });
+document.getElementById("btnParar")!.addEventListener("click", () => {
+    editor.stopExecution();
+});
 document.getElementById("btnLimpar")!.addEventListener("click", () => {
     editor.clearWorkspace();
 });
