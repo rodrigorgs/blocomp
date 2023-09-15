@@ -39,7 +39,7 @@ See also:
 - [x] Evaluate using input/output
 - [x] Create buttons to create variables
 
-- [ ] Use variable-sized editor
+- [x] Use variable-sized editor
 - [ ] Show variable values
 - [ ] Maybe show output in a textarea or similar
 
