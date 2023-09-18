@@ -21,6 +21,7 @@ var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject('blocklyDiv', {
     toolbox: toolbox,
     trashcan: true,
+    renderer: 'zelos',
     plugins: {
         'toolbox': ContinuousToolbox,
         'flyoutsVerticalToolbox': ContinuousFlyout,
