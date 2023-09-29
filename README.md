@@ -32,6 +32,7 @@ See also:
 - [ ] Run mode: production (run all blocks at once)
 - [ ] Run mode: test (use cin-like input)
 - [ ] Disable run button when code is being run
+- [ ] Customize time interval between steps
 
 - [x] Save to EZSubmission
 

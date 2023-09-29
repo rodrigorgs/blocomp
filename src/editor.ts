@@ -16,6 +16,13 @@ declare global {
     }
 }
 
+export enum RunMode {
+    FAST = "FAST",
+    SLOW = "SLOW",
+    STEP = "STEP",
+    NOT_RUNNING = "NOT_RUNNING",
+}
+
 enum EditorAction {
     RUN = "RUN",
     DEBUG = "DEBUG",
@@ -39,8 +46,9 @@ interface EditorState {
 let globalWorkspace: Blockly.WorkspaceSvg = null;
 
 export class Editor {
-    _cancelExecution: boolean = false;
-
+    _runMode: RunMode = RunMode.NOT_RUNNING;
+    _stepTimeout: any = null;
+    
     constructor(private workspace: Blockly.WorkspaceSvg, private problem: Problem) {
         globalWorkspace = this.workspace;
     }
@@ -85,35 +93,46 @@ export class Editor {
         }
     }
     
-    async debugWorkspace() {
+    async runWorkspace(runMode: RunMode = RunMode.SLOW) {
+        if (this._runMode != RunMode.NOT_RUNNING) {
+            console.log('already running');
+            return;
+        }
+
+        this._runMode = runMode;
+
         const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
         
         try {
             javascriptGenerator.STATEMENT_PREFIX = 'await this.highlightBlock(%1);\n';
+            javascriptGenerator.STATEMENT_SUFFIX = 'await this.onFinishStep(%1);\n';
             javascriptGenerator.addReservedWords('highlightBlock');
             var code = javascriptGenerator.workspaceToCode(this.workspace);
             code = `
-                (async () => {
-                    this._cancelExecution = false;
-                    try {
-                        ${code}
-                    } catch (e) {
-                        console.log('Execução cancelada');
-                    } finally {
-                        this.workspace.highlightBlock('');
-                    }
-                })();
-                `;
+            (async () => {
+                this._cancelExecution = false;
+                try {
+                    ${code}
+                } catch (e) {
+                    console.log('Execução cancelada');
+                } finally {
+                    this.workspace.highlightBlock('');
+                }
+            })();
+            `;
             console.log(code);
             await eval(code);
         } finally {
             javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
+            runMode = RunMode.NOT_RUNNING;
         }
     }
-
+    
     stopExecution() {
-        this._cancelExecution = true;
-        // TODO: clear timeout
+        window.dispatchEvent(new Event('signalNextStep'));
+        clearTimeout(this._stepTimeout);
+        this.highlightBlock('');
+        this._runMode = RunMode.NOT_RUNNING;
     }
     
     clearWorkspace() {
@@ -146,12 +165,29 @@ export class Editor {
     }
     
     async highlightBlock(id: any) {
-        if (this._cancelExecution) {
-            throw new Error('Execution cancelled');
-        }
-        console.log('will highlight', id);
         this.workspace.highlightBlock(id);
-        await new Promise(resolve => setTimeout(resolve, 1000)).catch(() => {});
+    }
+
+    async onFinishStep(id: any) {
+        console.log('onFinishStep');
+        
+        if (this._runMode == RunMode.STEP) {
+            await new Promise<void>(resolve => {
+                function handleSignal() {
+                window.removeEventListener('signalNextStep', handleSignal);
+                resolve();
+                }
+                window.addEventListener('signalNextStep', handleSignal);
+            });
+        } else if (this._runMode == RunMode.SLOW) {
+            await new Promise(resolve => this._stepTimeout = setTimeout(resolve, 1000)).catch((x) => {console.log('timeout cancelled', x)});
+        }
     }
     
+    runNextStep() {
+        if (this._runMode == RunMode.NOT_RUNNING) {
+            this.runWorkspace(RunMode.STEP);
+        }
+        window.dispatchEvent(new Event('signalNextStep'));
+    }
 }

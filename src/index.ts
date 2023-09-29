@@ -5,7 +5,7 @@ import * as ptBR from 'blockly/msg/pt-br';
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
 import { loadIlpBlocks } from './toolkits/structured/blocks';
 import { toolbox } from './toolbox';
-import { Editor } from './editor';
+import { Editor, RunMode } from './editor';
 import { EZSubmissionSession } from './auth/session';
 import { EZSubmissionClient, createSingleAnswer } from './ezsubmission/client';
 import Swal from 'sweetalert2';
@@ -64,10 +64,13 @@ document.getElementById('btnCarregar')!.addEventListener("click", () => {
     editor.loadWorkspaceFromLocalStorage();
 });
 document.getElementById("btnRodar")!.addEventListener("click", () => {
-    editor.debugWorkspace();
+    editor.runWorkspace(RunMode.SLOW);
 });
 document.getElementById("btnParar")!.addEventListener("click", () => {
     editor.stopExecution();
+});
+document.getElementById("btnPasso")!.addEventListener("click", () => {
+    editor.runNextStep();
 });
 document.getElementById("btnLimpar")!.addEventListener("click", () => {
     editor.clearWorkspace();
