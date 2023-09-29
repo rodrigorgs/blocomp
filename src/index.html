@@ -44,6 +44,16 @@ Resources:
         .content {
             flex: 1;
             background-color: #eee;
+            flex-direction: row;
+            display: flex;
+        }
+
+        .left {
+            flex: 1;
+        }
+        .right {
+            width: 480px;
+            background-color: #eee;
         }
     </style>
 </head>
@@ -51,7 +61,9 @@ Resources:
 
     <div class="container">
         <div class="top-bar"><div id="signinDiv"></div></div>
-        <div id="blocklyArea" class="content">
+        <div class="content">
+            <div id="blocklyArea" class="left"></div>
+            <div class="right"></div>
         </div>
         <div class="bottom-bar">
             <button id="btnRodar">Rodar</button>

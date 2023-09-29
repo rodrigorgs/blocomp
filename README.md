@@ -25,12 +25,12 @@ See also:
 
 ## TODO
 
-- [ ] Run mode: stop button for debug mode
+- [x] Run mode: stop button for debug mode
 - [x] Run mode: debug (time interval between blocks)
 - [x] Run mode: test (redirect input/output)
-- [ ] Run mode: debug (step-by-step, with button)
-- [ ] Run mode: production (run all blocks at once)
-- [ ] Run mode: test (use cin-like input)
+- [x] Run mode: debug (step-by-step, with button)
+- [.] Run mode: production (run all blocks at once)
+- [x] Run mode: test (use cin-like input)
 - [ ] Disable run button when code is being run
 - [ ] Customize time interval between steps
 
@@ -43,7 +43,7 @@ See also:
 
 - [x] Use variable-sized editor
 - [ ] Show variable values
-- [ ] Maybe show output in a textarea or similar
+- [ ] Show input/output in a whatsapp-like chat
 
 - [ ] Create grid-based canvas output: can move, read color, paint current block, etc. Like a 2D turing machine.
 
