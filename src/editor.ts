@@ -16,6 +16,10 @@ declare global {
                 output: string;
             }>;
         };
+        stage: {
+            type: string;
+            data: any;
+        };
     }
 }
 

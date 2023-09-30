@@ -88,8 +88,11 @@ document.getElementById("btnTestar")!.addEventListener("click", () => {
 
 import { CleaningCanvas } from './toolkits/cleaning/runtime';
 
-(window as any).stageManager = new CleaningCanvas(document.getElementById("stage"));
-(window as any).chatManager = new ChatManager(document.getElementById("chat-messages"));
+console.log('type', window.stage.type);
+if (window.stage.type == 'cleaning') {
+    window.stageManager = new CleaningCanvas(document.getElementById("stage"), window.stage.data.map);
+}
+window.chatManager = new ChatManager(document.getElementById("chat-messages"));
 
 /////////////////////////////////////
 
