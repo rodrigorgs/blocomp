@@ -20,6 +20,9 @@ declare global {
             type: string;
             data: any;
         };
+        toolbox: {
+            blocks: Array<string>;
+        };
     }
 }
 

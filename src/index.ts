@@ -5,7 +5,7 @@ import * as ptBR from 'blockly/msg/pt-br';
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
 import { loadIlpBlocks } from './toolkits/structured/blocks';
 import * as CleaningBlocks from './toolkits/cleaning/blocks';
-import { toolbox } from './toolbox';
+import { getToolboxJSON } from './toolbox';
 import { Editor, RunMode } from './editor';
 import { EZSubmissionSession } from './auth/session';
 import { EZSubmissionClient, createSingleAnswer } from './ezsubmission/client';
@@ -26,7 +26,7 @@ CleaningBlocks.loadBlocks();
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject('blocklyDiv', {
-    toolbox: toolbox,
+    toolbox: getToolboxJSON(window.toolbox?.blocks),
     trashcan: true,
     renderer: 'zelos',
     plugins: {
