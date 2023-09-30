@@ -3,6 +3,8 @@ export const toolbox = {
   "contents": [
     { "kind": "category", "flyoutOpen": true, "name": "Movimento", "colour": 165, "contents": [
       { "kind": "block", "type": "move_direction" },
+      { "kind": "block", "type": "move_forward", "inputs": { "STEPS": { "block": { "type": "math_number", "fields": { "NUM": 1 } } } } },
+      { "kind": "block", "type": "turn" },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "E/S", "colour": 165, "contents": [
       { "kind": "block", "type": "text_print", "inputs": { "TEXT": { "block": { "type": "text", "fields": { "TEXT": "Olá" } } } } },

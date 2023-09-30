@@ -22,9 +22,15 @@ class CleaningScene extends Phaser.Scene {
         this.robot = this.add.image(this.TILE_WIDTH * 1.5, this.TILE_HEIGHT * 1.5, 'robot')
     }
 
-    async moveRobot(angle: integer) {
+    getHeadingDirection() {
+        const radians = Phaser.Math.DegToRad(this.robot.angle);
+        const direction = { x: Math.cos(radians), y: Math.sin(radians) };
+        return direction;
+    }
+
+    async moveRobotAngle(angle: integer) {
         this.robot.angle = angle;
-        const direction = { x: Math.cos(angle), y: Math.sin(angle) };
+        const direction = this.getHeadingDirection();
 
         const newRobotX = this.robot.x + direction.x * this.TILE_WIDTH;
         const newRobotY = this.robot.y + direction.y * this.TILE_HEIGHT;
@@ -44,6 +50,30 @@ class CleaningScene extends Phaser.Scene {
         });
 
         await tweenPromise;
+    }
+
+    async turnRobot(deltaAngle: integer) {
+        const tweenPromise = new Promise<void>((resolve, _) => {
+            const tween = this.tweens.add({
+                targets: this.robot,
+                angle: this.robot.angle + deltaAngle,
+                duration: this.TWEEN_DURATION,
+                ease: 'Linear',
+                onComplete: () => {
+                    resolve();
+                }
+            });
+            tween.play();
+        });
+
+        await tweenPromise;
+    }
+
+    async moveRobotForward(steps: integer = 1) {
+        console.log('moveRobotForward', steps, 'angle = ', this.robot.angle)
+        for (let i = 0; i < steps; i++) {
+            await this.moveRobotAngle(this.robot.angle);
+        }
     }
 }
 
@@ -68,19 +98,25 @@ export class CleaningCanvas {
     }
 
     async moveDirection(direction: string) {
-        console.log(direction);
 
         if (direction == "LEFT") {
-            await this.getScene().moveRobot(180);
+            await this.getScene().moveRobotAngle(180);
         } else if (direction == "RIGHT") {
-            await this.getScene().moveRobot(0);
+            await this.getScene().moveRobotAngle(0);
         } else if (direction == "UP") {
-            await this.getScene().moveRobot(270);
+            await this.getScene().moveRobotAngle(270);
         } else if (direction == "DOWN") {
-            await this.getScene().moveRobot(90);
+            await this.getScene().moveRobotAngle(90);
         }
         
-        console.log('end');
+    }
+
+    async moveForward(steps: integer = 1) {
+        await this.getScene().moveRobotForward(steps);
+    }
+
+    async turn(angle: integer) {
+        await this.getScene().turnRobot(angle);
     }
 }
 
