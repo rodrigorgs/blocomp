@@ -1,25 +1,66 @@
 import * as Phaser from "phaser";
 
 class CleaningScene extends Phaser.Scene {
-    robot: Phaser.GameObjects.Image;
-    angle: integer;
-    
     TILE_WIDTH = 48;
     TILE_HEIGHT = 48;
     TWEEN_DURATION = 300;
 
+    robot: Phaser.GameObjects.Image;
+    angle: integer;
+    map: string[][];
+    floorLayer: Phaser.GameObjects.Layer;
+    dirtLayer: Phaser.GameObjects.Layer;
+    robotLayer: Phaser.GameObjects.Layer;
+
+    constructor(data: { map: string }) {
+        super({ key: 'CleaningScene' });
+    }
+    
+    init(data: { map: string }) {
+        console.log('scene init');
+        // TODO: validate map input
+        const map = data['map'];
+        if (map) {
+            this.map = map.split('\n')
+                    .map((line, _) => line.trim())
+                    .filter((line, _) => line.length > 0)
+                    .map((line, _) => line.split(''))
+            console.log(this.map);
+        }
+    }
+
     preload() {
         this.load.image('tile', 'assets/tile.png');
         this.load.image('robot', 'assets/robot.png');
+        this.load.image('dirt01', 'assets/dirt01.png');
+        this.load.image('dirt02', 'assets/dirt02.png');
+        this.load.image('dirt03', 'assets/dirt03.png');
     }
 
     create() {
-        for (let x = 0; x < 480; x += this.TILE_WIDTH) {
-            for (let y = 0; y < 360; y += this.TILE_HEIGHT) {
-                this.add.image(x, y, 'tile').setOrigin(0, 0);
+        this.floorLayer = this.add.layer();
+        this.dirtLayer = this.add.layer();
+        this.robotLayer = this.add.layer();
+
+        for (let tx = 0; tx < 10; tx++) {
+            for (let ty = 0; ty < 8; ty++) {
+
+                const cell = this.map[ty][tx];
+                const x = tx * this.TILE_WIDTH;
+                const y = ty * this.TILE_HEIGHT;
+
+                const tile = this.add.image(x, y, 'tile').setOrigin(0, 0);
+                this.floorLayer.add(tile);
+
+                if (cell == 'r') {
+                    this.robot = this.add.image(x + this.TILE_WIDTH / 2, y + this.TILE_HEIGHT / 2, 'robot')
+                    this.robotLayer.add(this.robot);
+                } else if (cell == 'd') {
+                    const dirt = this.add.image(x, y, 'dirt01').setOrigin(0, 0);
+                    this.dirtLayer.add(dirt);
+                }
             }
         }
-        this.robot = this.add.image(this.TILE_WIDTH * 1.5, this.TILE_HEIGHT * 1.5, 'robot')
     }
 
     getHeadingDirection() {
@@ -50,6 +91,18 @@ class CleaningScene extends Phaser.Scene {
         });
 
         await tweenPromise;
+
+        const tx = Math.floor(newRobotX / this.TILE_WIDTH);
+        const ty = Math.floor(newRobotY / this.TILE_HEIGHT);
+        console.log('cell = ', this.map[ty][tx]);
+        if (this.map[ty][tx] == 'd') {
+            this.map[ty][tx] = '.';
+            this.dirtLayer.getChildren().forEach((dirt: Phaser.GameObjects.Image) => {
+                if (dirt.x == tx * this.TILE_WIDTH && dirt.y == ty * this.TILE_HEIGHT) {
+                    dirt.destroy();
+                }
+            });
+        }
     }
 
     async turnRobot(deltaAngle: integer) {
@@ -80,18 +133,32 @@ class CleaningScene extends Phaser.Scene {
 export class CleaningCanvas {
     game: Phaser.Game;
 
-    constructor(elem: HTMLElement) {
+    constructor(elem: HTMLElement, map?: string) {
         this.game = new Phaser.Game({
             type: Phaser.AUTO,
             parent: elem,
             width: 480,
             height: 360,
-            scene: CleaningScene,
+            // scene: CleaningScene,
         });
+        if (!map) {
+            map = `
+            .........
+            .rd......
+            ...d.....
+            .........
+            .........
+            .........
+            .........
+            .........
+            `;
+        }
+        this.game.scene.add('CleaningScene', CleaningScene, true, {map: map});
     }
 
     clear() {
-        console.error('Clear not implemented yet');
+        this.game.scene.stop('CleaningScene');
+        this.game.scene.start('CleaningScene');
     }
     getScene() {
         return this.game.scene.scenes[0] as CleaningScene;
