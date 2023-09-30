@@ -13,7 +13,11 @@ import Swal from 'sweetalert2';
 
 //////////
 
+// translation
 Blockly.setLocale(ptBR);
+Blockly.Msg["TEXT_PRINT_TITLE"] = "diga %1";
+
+///////
 
 // load blocks
 loadIlpBlocks();

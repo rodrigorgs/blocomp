@@ -36,6 +36,7 @@ See also:
 - [ ] Automatically stop after running and reset the stage
 
 - [x] Save to EZSubmission
+- [ ] Export Python code for automatic evaluation
 
 - [x] Load block JSON
 - [x] Save generated code to workspace JSON

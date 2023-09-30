@@ -3,7 +3,7 @@ import { javascriptGenerator } from 'blockly/javascript';
 
 const inputBlock: any = {
     "type": "input",
-    "message0": "Pede um %1 %2 e guarda como %3",
+    "message0": "peça um %1 %2 e guarde como %3",
     "args0": [
       {
         "type": "field_dropdown",
