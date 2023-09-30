@@ -90,7 +90,7 @@ export function loadBlocks() {
 
     javascriptGenerator.forBlock['move_direction'] = function (block: Blockly.Block, generator: any) {
         var direction = block.getFieldValue('DIRECTION');
-        var code = `await window.stageManager.moveDirection(${direction});\n`;
+        var code = `await window.stageManager.moveDirection("${direction}");\n`;
         return code;
     };
     javascriptGenerator.forBlock['move_forward'] = function (block: Blockly.Block, generator: any) {
