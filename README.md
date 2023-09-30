@@ -33,6 +33,7 @@ See also:
 - [x] Run mode: test (use cin-like input)
 - [ ] Disable run button when code is being run
 - [ ] Customize time interval between steps
+- [ ] Automatically stop after running and reset the stage
 
 - [x] Save to EZSubmission
 

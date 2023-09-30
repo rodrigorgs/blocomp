@@ -4,6 +4,7 @@ import * as ptBR from 'blockly/msg/pt-br';
 //@ts-ignore
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
 import { loadIlpBlocks } from './toolkits/structured/blocks';
+import * as CleaningBlocks from './toolkits/cleaning/blocks';
 import { toolbox } from './toolbox';
 import { Editor, RunMode } from './editor';
 import { EZSubmissionSession } from './auth/session';
@@ -14,7 +15,9 @@ import Swal from 'sweetalert2';
 
 Blockly.setLocale(ptBR);
 
+// load blocks
 loadIlpBlocks();
+CleaningBlocks.loadBlocks();
 
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
@@ -79,8 +82,9 @@ document.getElementById("btnTestar")!.addEventListener("click", () => {
     editor.runTests();
 });
 
-import { CleaningCanvas } from './toolkits/cleaning';
-const cleaning = new CleaningCanvas(document.getElementById("stage"));
+import { CleaningCanvas } from './toolkits/cleaning/runtime';
+
+(window as any).stageManager = new CleaningCanvas(document.getElementById("stage"));
 
 /////////////////////////////////////
 

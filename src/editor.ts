@@ -48,6 +48,7 @@ let globalWorkspace: Blockly.WorkspaceSvg = null;
 export class Editor {
     _runMode: RunMode = RunMode.NOT_RUNNING;
     _stepTimeout: any = null;
+    _stepDuration: number = 500;
     
     constructor(private workspace: Blockly.WorkspaceSvg, private problem: Problem) {
         globalWorkspace = this.workspace;
@@ -180,7 +181,7 @@ export class Editor {
                 window.addEventListener('signalNextStep', handleSignal);
             });
         } else if (this._runMode == RunMode.SLOW) {
-            await new Promise(resolve => this._stepTimeout = setTimeout(resolve, 1000)).catch((x) => {console.log('timeout cancelled', x)});
+            await new Promise(resolve => this._stepTimeout = setTimeout(resolve, this._stepDuration)).catch((x) => {console.log('timeout cancelled', x)});
         }
     }
     

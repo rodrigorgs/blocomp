@@ -1,6 +1,9 @@
 export const toolbox = {
   "kind": "categoryToolbox",
   "contents": [
+    { "kind": "category", "flyoutOpen": true, "name": "Movimento", "colour": 165, "contents": [
+      { "kind": "block", "type": "move_direction" },
+    ]},
     { "kind": "category", "flyoutOpen": true, "name": "E/S", "colour": 165, "contents": [
       { "kind": "block", "type": "text_print" },
       { "kind": "block", "type": "text", "fields": { "TEXT": "Olá" } },
