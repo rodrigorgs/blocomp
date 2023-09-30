@@ -78,6 +78,10 @@ document.getElementById("btnLimpar")!.addEventListener("click", () => {
 document.getElementById("btnTestar")!.addEventListener("click", () => {
     editor.runTests();
 });
+
+import { CleaningCanvas } from './toolkits/cleaning';
+const cleaning = new CleaningCanvas(document.getElementById("stage"));
+
 /////////////////////////////////////
 
 let ez = new EZSubmissionClient('http://localhost:5001/')
@@ -86,6 +90,7 @@ let session = new EZSubmissionSession(ez);
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import SigninComponent from './auth/signin_component';
+
 const root = createRoot(document.getElementById("signinDiv"));
 root.render(React.createElement(SigninComponent, {client: ez, session}));
 
