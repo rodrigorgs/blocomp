@@ -7,7 +7,7 @@ npm install
 npm run watch
 ```
 
-Run a webserver and open `dist/index.html` in your browser.
+Run a webserver and open `dist/index.html?p=cavalo` in your browser.
 
 ## References for development
 

@@ -2,29 +2,7 @@ import { Problem, TestCase } from "./problem";
 import { javascriptGenerator } from 'blockly/javascript';
 import * as Blockly from 'blockly';
 import { runTests } from "./runner";
-import { ChatManager } from "./toolkits/chat/runtime";
-
-declare global {
-    interface Window {
-        chatManager: ChatManager;
-        stageManager: any;
-        problem: {
-            name: string;
-            description: string;
-            testCases: Array<{
-                input: string;
-                output: string;
-            }>;
-        };
-        stage: {
-            type: string;
-            data: any;
-        };
-        toolbox: {
-            blocks: Array<string>;
-        };
-    }
-}
+import './window';
 
 export enum RunMode {
     FAST = "FAST",

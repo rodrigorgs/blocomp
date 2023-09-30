@@ -16,14 +16,12 @@ class CleaningScene extends Phaser.Scene {
         super({ key: 'CleaningScene' });
     }
     
-    init(data: { map: string }) {
+    init(data: { map: Array<string> }) {
         console.log('scene init');
         // TODO: validate map input
         const map = data['map'];
         if (map) {
-            this.map = map.split('\n')
-                    .map((line, _) => line.trim())
-                    .filter((line, _) => line.length > 0)
+            this.map = map
                     .map((line, _) => line.split(''))
             console.log(this.map);
         }
@@ -133,25 +131,24 @@ class CleaningScene extends Phaser.Scene {
 export class CleaningCanvas {
     game: Phaser.Game;
 
-    constructor(elem: HTMLElement, map?: string) {
+    constructor(elem: HTMLElement, map?: Array<string>) {
         this.game = new Phaser.Game({
             type: Phaser.AUTO,
             parent: elem,
             width: 480,
             height: 360,
-            // scene: CleaningScene,
         });
         if (!map) {
-            map = `
-            .........
-            .rd......
-            ...d.....
-            .........
-            .........
-            .........
-            .........
-            .........
-            `;
+            map = [
+                '.........',
+                '.rd......',
+                '...d.....',
+                '.........',
+                '.........',
+                '.........',
+                '.........',
+                '.........',
+            ];
         }
         this.game.scene.add('CleaningScene', CleaningScene, true, {map: map});
     }

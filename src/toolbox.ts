@@ -31,12 +31,12 @@ export function getToolboxJSON(blocks?: Array<string>) {
   let filteredToolbox = JSON.parse(JSON.stringify(toolbox));
 
   if (blocks?.length > 0) {
-    if (window.toolbox?.blocks?.length > 0) {
+    if (window.workspaceConfig.toolbox?.blocks?.length > 0) {
       filteredToolbox.contents = [];
       for (let section of toolbox.contents) {
         let filteredSection = JSON.parse(JSON.stringify(section));
         filteredSection.contents = section.contents.filter((block: any) => {
-            return window.toolbox.blocks.includes(block.type);
+            return window.workspaceConfig.toolbox.blocks.includes(block.type);
         });
         if (filteredSection.contents.length > 0) {
           filteredToolbox.contents.push(filteredSection);
