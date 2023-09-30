@@ -44,8 +44,8 @@ See also:
 - [x] Create buttons to create variables
 
 - [x] Use variable-sized editor
+- [x] Show input/output in a whatsapp-like chat
 - [ ] Show variable values
-- [ ] Show input/output in a whatsapp-like chat
 
 - [ ] Create grid-based canvas output: can move, read color, paint current block, etc. Like a 2D turing machine.
 

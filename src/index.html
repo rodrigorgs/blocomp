@@ -54,11 +54,102 @@ Resources:
         .right {
             width: 480px;
             background-color: #eee;
+            flex-direction: column;
+            display: flex;
         }
         #stage {
             width: 480px;
             height: 360px;
             background-color: #eee;
+        }
+
+        /* Chat */
+        .chat-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            height: 100%;
+            width: 100%;
+        }
+
+        .chat {
+            background-color: #fff;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .chat-header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .chat-header h2 {
+            margin: 0;
+        }
+
+        .chat-messages {
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+
+        .message {
+            background-color: #DCF8C6;
+            max-width: 70%; /* Limit message width */
+            padding: 8px 12px;
+            border-radius: 15px;
+            margin: 8px;
+            clear: both;
+            word-wrap: break-word; /* Wrap long words */
+            position: relative;
+        }
+
+        /* Style for sent messages (align to the right) */
+        .message.sent {
+            float: right;
+            background-color: #DCF8C6;
+            color: #000;
+        }
+
+        /* Style for received messages (align to the left) */
+        .message.received {
+            float: left;
+            background-color: #ECE5DD;
+            color: #000;
+        }
+
+        /* Arrow for sent messages */
+        .message.sent::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid #DCF8C6; /* Same as message background color */
+            right: -10px;
+            top: 50%;
+            margin-top: -10px;
+        }
+
+        /* Arrow for received messages */
+        .message.received::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid #ECE5DD; /* Same as message background color */
+            left: -10px;
+            top: 50%;
+            margin-top: -10px;
         }
     </style>
 </head>
@@ -68,7 +159,16 @@ Resources:
         <div class="top-bar"><div id="signinDiv"></div></div>
         <div class="content">
             <div id="blocklyArea" class="left"></div>
-            <div id="stage" class="right"></div>
+            <div class="right">
+                <div id="stage"></div>
+                <div class="chat-container">
+                    <div class="chat">
+                        <div class="chat-messages" id="chat-messages">
+                            <!-- Messages will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="bottom-bar">
             <button id="btnRodar">Rodar</button>
@@ -82,6 +182,23 @@ Resources:
     </div>
     <div id="blocklyDiv" style="position: absolute"></div>
 
+    <script>
+        // function sendMessage(messageText, isSent = false) {
+        //     const chatMessages = document.getElementById('chat-messages');
+
+        //     const messageElement = document.createElement('div');
+        //     messageElement.classList.add('message');
+        //     messageElement.classList.add(isSent ? 'sent' : 'received');
+        //     messageElement.textContent = messageText;
+
+        //     // Append the message to the chat
+        //     chatMessages.appendChild(messageElement);
+        // }
+
+        // sendMessage('Hello World!', true);
+        // sendMessage('This is a message', true);
+        // sendMessage('Ok!', false);
+    </script>
 
     <script type="text/javascript">
         window.problem = {

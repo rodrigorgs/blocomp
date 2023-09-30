@@ -89,6 +89,7 @@ document.getElementById("btnTestar")!.addEventListener("click", () => {
 import { CleaningCanvas } from './toolkits/cleaning/runtime';
 
 (window as any).stageManager = new CleaningCanvas(document.getElementById("stage"));
+(window as any).chatManager = new ChatManager(document.getElementById("chat-messages"));
 
 /////////////////////////////////////
 
@@ -98,6 +99,7 @@ let session = new EZSubmissionSession(ez);
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import SigninComponent from './auth/signin_component';
+import { ChatManager, MessageType } from './toolkits/chat/runtime';
 
 const root = createRoot(document.getElementById("signinDiv"));
 root.render(React.createElement(SigninComponent, {client: ez, session}));
