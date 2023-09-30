@@ -31,7 +31,7 @@ See also:
 - [x] Run mode: debug (step-by-step, with button)
 - [.] Run mode: production (run all blocks at once)
 - [x] Run mode: test (use cin-like input)
-- [ ] Disable run button when code is being run
+- [ ] Improve run bar: disable run button when code is being run etc.
 - [ ] Customize time interval between steps
 - [ ] Automatically stop after running and reset the stage
 

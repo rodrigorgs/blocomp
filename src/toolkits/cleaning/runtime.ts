@@ -1,8 +1,9 @@
-import { Vector } from "matter";
 import * as Phaser from "phaser";
 
 class CleaningScene extends Phaser.Scene {
     robot: Phaser.GameObjects.Image;
+    angle: integer;
+    
     TILE_WIDTH = 48;
     TILE_HEIGHT = 48;
     TWEEN_DURATION = 300;
@@ -21,21 +22,13 @@ class CleaningScene extends Phaser.Scene {
         this.robot = this.add.image(this.TILE_WIDTH * 1.5, this.TILE_HEIGHT * 1.5, 'robot')
     }
 
-    async moveRobot(direction: Vector) {
+    async moveRobot(angle: integer) {
+        this.robot.angle = angle;
+        const direction = { x: Math.cos(angle), y: Math.sin(angle) };
+
         const newRobotX = this.robot.x + direction.x * this.TILE_WIDTH;
         const newRobotY = this.robot.y + direction.y * this.TILE_HEIGHT;
       
-        // rotate robot according to direction
-        if (direction.x > 0) {
-            this.robot.angle = 0;
-        } else if (direction.x < 0) {
-            this.robot.angle = 180;
-        } else if (direction.y > 0) {
-            this.robot.angle = 90;
-        } else if (direction.y < 0) {
-            this.robot.angle = 270;
-        }
-
         const tweenPromise = new Promise<void>((resolve, _) => {
             const tween = this.tweens.add({
                 targets: this.robot,
@@ -78,13 +71,13 @@ export class CleaningCanvas {
         console.log(direction);
 
         if (direction == "LEFT") {
-            await this.getScene().moveRobot({x: -1, y: 0});
+            await this.getScene().moveRobot(180);
         } else if (direction == "RIGHT") {
-            await this.getScene().moveRobot({x: 1, y: 0});
+            await this.getScene().moveRobot(0);
         } else if (direction == "UP") {
-            await this.getScene().moveRobot({x: 0, y: -1});
+            await this.getScene().moveRobot(270);
         } else if (direction == "DOWN") {
-            await this.getScene().moveRobot({x: 0, y: 1});
+            await this.getScene().moveRobot(90);
         }
         
         console.log('end');
