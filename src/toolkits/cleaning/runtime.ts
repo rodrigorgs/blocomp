@@ -67,6 +67,9 @@ export class CleaningCanvas {
         });
     }
 
+    clear() {
+        console.error('Clear not implemented yet');
+    }
     getScene() {
         return this.game.scene.scenes[0] as CleaningScene;
     }

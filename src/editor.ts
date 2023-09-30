@@ -2,9 +2,12 @@ import { Problem, TestCase } from "./problem";
 import { javascriptGenerator } from 'blockly/javascript';
 import * as Blockly from 'blockly';
 import { runTests } from "./runner";
+import { ChatManager } from "./toolkits/chat/runtime";
 
 declare global {
     interface Window {
+        chatManager: ChatManager;
+        stageManager: any;
         problem: {
             name: string;
             description: string;
@@ -133,6 +136,8 @@ export class Editor {
         window.dispatchEvent(new Event('signalNextStep'));
         clearTimeout(this._stepTimeout);
         this.highlightBlock('');
+        window.chatManager.clear()
+        window.stageManager.clear();
         this._runMode = RunMode.NOT_RUNNING;
     }
     
