@@ -57,12 +57,12 @@ export default function SigninComponent(props: { client: EZSubmissionClient, ses
     }
 
     return (
-        <div>
+        <>
             {username ? (
-                <p>Olá, {username}! <button onClick={handleLogoutClick}>Sair</button></p>
+                <span>Olá, {username}! <button onClick={handleLogoutClick}>Sair</button></span>
             ) : (
-                <p><button onClick={handleLoginClick}>Entrar</button></p>
+                <span><button onClick={handleLoginClick}>Entrar</button></span>
             )}
-        </div>
+        </>
     )
 }

@@ -85,6 +85,9 @@ export function configureWorkspace() {
     document.getElementById("btnTestar")!.addEventListener("click", () => {
         editor.runTests();
     });
+    document.getElementById("btnOpenChallenge")!.addEventListener("click", () => {
+        openChallenge();
+    });
     
     if (window.workspaceConfig?.stage?.type == 'cleaning') {
         window.stageManager = new CleaningRobotStageManager(document.getElementById("stage"), window.workspaceConfig.stage.data.map);
@@ -148,13 +151,33 @@ export function run() {
             .then(function (response) {
                 // if response is a string
                 if (typeof response.data == 'string') {
-                    throw new Error(`${path} is not a valid JSON file`);
+                    openChallenge();
+                    console.error(`${path} is not a valid JSON file`);
+                    return;
                 }
                 window.workspaceConfig = response.data;
                 window.workspaceConfig.problem.id = jsonFile;
                 configureWorkspace();
+            }).catch(function (error) {
+                openChallenge();
+                console.error(error);
             });
+    } else {
+        openChallenge();
     }
 }
 
 run();
+
+async function openChallenge() {
+    const name = await Swal.fire({
+        title: "Digite o código do desafio",
+        input: 'text',
+        showCancelButton: true,
+    });
+    if (name.dismiss) {
+        return;
+    }
+
+    window.location.href = `?p=${name.value}`;
+}
