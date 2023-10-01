@@ -3,6 +3,7 @@ import { javascriptGenerator } from 'blockly/javascript';
 import * as Blockly from 'blockly';
 import { runTests } from "../runner";
 import '../window';
+import { Toast } from "../alerts/toast";
 
 export enum RunMode {
     SLOW = "SLOW",
@@ -244,6 +245,11 @@ export class Editor {
         this.runState = RunState.PAUSED;
 
         // TODO: evaluate result (success or failure)
+        const outcome = window.stageManager.outcome();
+        Toast.fire({
+            icon: outcome.successful ? 'success' : 'error',
+            title: outcome.message
+        });
     }
 
     runNextStep(abort = false) {

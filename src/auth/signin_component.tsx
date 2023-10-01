@@ -2,18 +2,7 @@ import * as React from 'react';
 import { EZSubmissionClient } from '../ezsubmission/client';
 import { EZSubmissionSession } from './session';
 import Swal from 'sweetalert2';
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-start',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-});
+import { Toast } from '../alerts/toast';
 
 export default function SigninComponent(props: { client: EZSubmissionClient, session: EZSubmissionSession }) {
     const [username, setUsername] = React.useState<string>('');

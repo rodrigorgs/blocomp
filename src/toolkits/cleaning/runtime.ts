@@ -126,6 +126,10 @@ class CleaningScene extends Phaser.Scene {
             await this.moveRobotAngle(this.robot.angle);
         }
     }
+
+    isFloorClean() {
+        return this.dirtLayer.getChildren().length == 0;
+    }
 }
 
 export class CleaningRobotStageManager implements StageManager {
@@ -181,6 +185,20 @@ export class CleaningRobotStageManager implements StageManager {
 
     async turn(angle: integer) {
         await this.getScene().turnRobot(angle);
+    }
+
+    outcome(): StageOutcome {
+        if (this.getScene().isFloorClean()) {
+            return {
+                successful: true,
+                message: 'Parabéns, você limpou tudo!',
+            }
+        } else {
+            return {
+                successful: false,
+                message: 'Ainda há sujeira no chão!',
+            }
+        }
     }
 }
 

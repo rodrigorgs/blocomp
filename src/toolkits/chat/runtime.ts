@@ -2,7 +2,7 @@ export enum MessageType {
     RECEIVED,
     SENT,
 }
-export class ChatManager implements StageManager {
+export class ChatManager {
     element: HTMLElement;
 
     constructor(element: HTMLElement) {
