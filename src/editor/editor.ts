@@ -1,14 +1,21 @@
-import { Problem, TestCase } from "./problem";
+import { Problem, TestCase } from "../problem";
 import { javascriptGenerator } from 'blockly/javascript';
 import * as Blockly from 'blockly';
-import { runTests } from "./runner";
-import './window';
+import { runTests } from "../runner";
+import '../window';
 
 export enum RunMode {
     FAST = "FAST",
     SLOW = "SLOW",
     STEP = "STEP",
     NOT_RUNNING = "NOT_RUNNING",
+}
+
+export enum RunState {
+    RESET = "RESET",
+    RUNNING = "RUNNING",
+    STOPPED = "STOPPED",
+    FINISHED = "FINISHED",
 }
 
 enum EditorAction {

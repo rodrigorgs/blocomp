@@ -6,7 +6,7 @@ import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/c
 import { loadIlpBlocks } from './toolkits/structured/blocks';
 import * as CleaningBlocks from './toolkits/cleaning/blocks';
 import { getToolboxJSON } from './toolbox';
-import { Editor, RunMode } from './editor';
+import { Editor, RunMode } from './editor/editor';
 import { EZSubmissionSession } from './auth/session';
 import { EZSubmissionClient, createSingleAnswer } from './ezsubmission/client';
 import Swal from 'sweetalert2';
@@ -16,6 +16,7 @@ import { createRoot } from "react-dom/client";
 import SigninComponent from './auth/signin_component';
 import { ChatManager, MessageType } from './toolkits/chat/runtime';
 import axios from 'axios';
+import RunBarComponent from './editor/run_bar';
 
 //////////
 
@@ -78,15 +79,6 @@ export function configureWorkspace() {
     document.getElementById('btnCarregar')!.addEventListener("click", () => {
         editor.loadWorkspaceFromLocalStorage();
     });
-    document.getElementById("btnRodar")!.addEventListener("click", () => {
-        editor.runWorkspace(RunMode.SLOW);
-    });
-    document.getElementById("btnParar")!.addEventListener("click", () => {
-        editor.stopExecution();
-    });
-    document.getElementById("btnPasso")!.addEventListener("click", () => {
-        editor.runNextStep();
-    });
     document.getElementById("btnLimpar")!.addEventListener("click", () => {
         editor.clearWorkspace();
     });
@@ -108,7 +100,9 @@ export function configureWorkspace() {
     const root = createRoot(document.getElementById("signinDiv"));
     root.render(React.createElement(SigninComponent, {client: ez, session}));
     
-    
+    const rootRunbar = createRoot(document.getElementById("runbar"));
+    rootRunbar.render(React.createElement(RunBarComponent, {editor}));
+
     async function submitAnswer() {
         try {
             const answer = createSingleAnswer(
