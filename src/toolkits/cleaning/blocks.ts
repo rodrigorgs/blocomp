@@ -3,7 +3,7 @@ import { Order, javascriptGenerator } from 'blockly/javascript';
 
 const moveDirectionBlock: any = {
     "type": "move_direction",
-    "message0": "mova para %1",
+    "message0": "ande para %1",
     "args0": [
         {
             "type": "field_dropdown",
@@ -38,7 +38,7 @@ const moveDirectionBlock: any = {
 
 const moveForwardBlock: any = {
     "type": "move_forward",
-    "message0": "mova %1 passo(s) para frente",
+    "message0": "ande %1 passo(s) para frente",
     "args0": [
         {
             "type": "input_value",
