@@ -22,5 +22,8 @@ export class ChatManager {
     
         // Append the message to the chat
         this.element.appendChild(messageElement);
+
+        // Scroll to the bottom of the chat window
+        this.element.scrollTop = this.element.scrollHeight;
     }
 }

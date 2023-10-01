@@ -40,7 +40,7 @@ See also:
 
 - [x] Load block JSON
 - [x] Save generated code to workspace JSON
-- [x] Evaluate using input/output
+- [ ] Evaluate using input/output
 - [x] Create buttons to create variables
 
 - [x] Use variable-sized editor
