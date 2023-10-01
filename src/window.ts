@@ -1,3 +1,4 @@
+import { Problem } from "./problem";
 import { ChatManager } from "./toolkits/chat/runtime";
 
 declare global {
@@ -5,14 +6,7 @@ declare global {
         chatManager?: ChatManager;
         stageManager?: any;
         workspaceConfig: {
-            problem: {
-                name: string;
-                description: string;
-                testCases: Array<{
-                    input: string;
-                    output: string;
-                }>;
-            };
+            problem: Problem;
             stage?: {
                 type: string;
                 data: any;

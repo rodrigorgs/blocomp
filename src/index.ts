@@ -157,6 +157,7 @@ export function run() {
                     throw new Error(`${path} is not a valid JSON file`);
                 }
                 window.workspaceConfig = response.data;
+                window.workspaceConfig.problem.id = jsonFile;
                 configureWorkspace();
             });
     }

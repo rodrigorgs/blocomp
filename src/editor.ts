@@ -136,7 +136,7 @@ export class Editor {
         const json: any = this.getWorkspaceJSON();
         const objModel = JSON.parse(json);
         if (objModel && objModel['blocks']) {
-            localStorage.setItem("workspace", this.getWorkspaceJSON());
+            localStorage.setItem(`workspace-${this.problem.id}`, this.getWorkspaceJSON());
         }
     }
     
@@ -150,7 +150,7 @@ export class Editor {
     
     loadWorkspaceFromLocalStorage() {
         console.log('loading workspace');
-        var json = localStorage.getItem("workspace") || "{}";
+        var json = localStorage.getItem(`workspace-${this.problem.id}`) || "{}";
         Blockly.serialization.workspaces.load(JSON.parse(json), this.workspace);
         console.log('done');
     }
