@@ -121,8 +121,8 @@ export class Editor {
         window.dispatchEvent(new Event('signalNextStep'));
         clearTimeout(this._stepTimeout);
         this.highlightBlock('');
-        window.chatManager.clear()
-        window.stageManager.clear();
+        window.chatManager?.clear()
+        window.stageManager?.clear();
         this._runMode = RunMode.NOT_RUNNING;
     }
     
