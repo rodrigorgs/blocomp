@@ -244,7 +244,6 @@ export class Editor {
         this.programState = ProgramState.FINISHED;
         this.runState = RunState.PAUSED;
 
-        // TODO: evaluate result (success or failure)
         const outcome = window.stageManager?.outcome();
         if (outcome) {
             Toast.fire({
