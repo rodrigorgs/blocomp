@@ -97,7 +97,8 @@ export function configureWorkspace() {
     
     /////////////////////////////////////
     
-    let ez = new EZSubmissionClient('http://localhost:5001/')
+    // let ez = new EZSubmissionClient('http://localhost:5001/')
+    let ez = new EZSubmissionClient('https://ezsubmission.app.ic.ufba.br/')
     let session = new EZSubmissionSession(ez);
     
     
