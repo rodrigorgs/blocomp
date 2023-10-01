@@ -111,21 +111,21 @@ Resources:
         }
 
         /* Style for sent messages (align to the right) */
-        .message.sent {
+        .message.received {
             float: right;
             background-color: #DCF8C6;
             color: #000;
         }
 
         /* Style for received messages (align to the left) */
-        .message.received {
+        .message.sent {
             float: left;
             background-color: #ECE5DD;
             color: #000;
         }
 
         /* Arrow for sent messages */
-        .message.sent::after {
+        .message.received::after {
             content: '';
             position: absolute;
             width: 0;
@@ -139,7 +139,7 @@ Resources:
         }
 
         /* Arrow for received messages */
-        .message.received::after {
+        .message.sent::after {
             content: '';
             position: absolute;
             width: 0;

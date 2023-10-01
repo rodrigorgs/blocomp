@@ -1,6 +1,6 @@
 export enum MessageType {
-    RECEIVED,
-    SENT,
+    RECEIVED = 'received',
+    SENT = 'sent',
 }
 export class ChatManager {
     element: HTMLElement;
@@ -17,7 +17,7 @@ export class ChatManager {
         console.log('addMessage', type);
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
-        messageElement.classList.add(type == MessageType.SENT ? 'received' : 'sent');
+        messageElement.classList.add(type);
         messageElement.textContent = messageText;
     
         // Append the message to the chat
