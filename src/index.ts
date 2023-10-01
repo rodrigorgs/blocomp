@@ -10,7 +10,7 @@ import { Editor, RunMode } from './editor/editor';
 import { EZSubmissionSession } from './auth/session';
 import { EZSubmissionClient, createSingleAnswer } from './ezsubmission/client';
 import Swal from 'sweetalert2';
-import { CleaningCanvas } from './toolkits/cleaning/runtime';
+import { CleaningRobotStageManager } from './toolkits/cleaning/runtime';
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import SigninComponent from './auth/signin_component';
@@ -87,7 +87,7 @@ export function configureWorkspace() {
     });
     
     if (window.workspaceConfig?.stage?.type == 'cleaning') {
-        window.stageManager = new CleaningCanvas(document.getElementById("stage"), window.workspaceConfig.stage.data.map);
+        window.stageManager = new CleaningRobotStageManager(document.getElementById("stage"), window.workspaceConfig.stage.data.map);
     }
     window.chatManager = new ChatManager(document.getElementById("chat-messages"));
     

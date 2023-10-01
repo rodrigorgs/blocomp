@@ -128,7 +128,7 @@ class CleaningScene extends Phaser.Scene {
     }
 }
 
-export class CleaningCanvas {
+export class CleaningRobotStageManager implements StageManager {
     game: Phaser.Game;
 
     constructor(elem: HTMLElement, map?: Array<string>) {
