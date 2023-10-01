@@ -245,11 +245,13 @@ export class Editor {
         this.runState = RunState.PAUSED;
 
         // TODO: evaluate result (success or failure)
-        const outcome = window.stageManager.outcome();
-        Toast.fire({
-            icon: outcome.successful ? 'success' : 'error',
-            title: outcome.message
-        });
+        const outcome = window.stageManager?.outcome();
+        if (outcome) {
+            Toast.fire({
+                icon: outcome.successful ? 'success' : 'error',
+                title: outcome.message
+            });
+        }
     }
 
     runNextStep(abort = false) {
