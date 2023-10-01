@@ -93,6 +93,7 @@ export function configureWorkspace() {
         window.stageManager = new CleaningRobotStageManager(document.getElementById("stage"), window.workspaceConfig.stage.data.map);
     }
     window.chatManager = new ChatManager(document.getElementById("chat-messages"));
+    window.chatManager.addMessage(window.workspaceConfig.problem.description, MessageType.STATUS);
     
     /////////////////////////////////////
     

@@ -1,6 +1,7 @@
 export enum MessageType {
     RECEIVED = 'received',
     SENT = 'sent',
+    STATUS = 'status',
 }
 export class ChatManager {
     element: HTMLElement;

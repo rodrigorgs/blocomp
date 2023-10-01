@@ -74,7 +74,7 @@ Resources:
         }
 
         .chat {
-            background-color: #fff;
+            background-color: #999;
             width: 100%;
             height: 100%;
             margin: 0 auto;
@@ -95,6 +95,7 @@ Resources:
 
         .chat-messages {
             padding: 10px;
+            /* TODO: use parent's height */
             height: 300px;
             overflow-y: scroll;
         }
@@ -110,6 +111,13 @@ Resources:
             position: relative;
         }
 
+        .message.status {
+            background-color: #ECE5DD;
+            color: #000;
+            /* center */
+            margin: 0 auto;
+        }
+
         /* Style for sent messages (align to the right) */
         .message.received {
             float: right;
@@ -120,7 +128,7 @@ Resources:
         /* Style for received messages (align to the left) */
         .message.sent {
             float: left;
-            background-color: #ECE5DD;
+            background-color: #eee;
             color: #000;
         }
 
@@ -146,7 +154,7 @@ Resources:
             height: 0;
             border-top: 2px solid transparent;
             border-bottom: 10px solid transparent;
-            border-right: 10px solid #ECE5DD; /* Same as message background color */
+            border-right: 10px solid #eee; /* Same as message background color */
             left: -10px;
             top: 50%;
             margin-top: -10px;
