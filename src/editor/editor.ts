@@ -5,17 +5,20 @@ import { runTests } from "../runner";
 import '../window';
 
 export enum RunMode {
-    FAST = "FAST",
     SLOW = "SLOW",
+    FAST = "FAST",
     STEP = "STEP",
-    NOT_RUNNING = "NOT_RUNNING",
+}
+
+export enum ProgramState {
+    RESET = "RESET",
+    STARTED = "STARTED",
+    FINISHED = "FINISHED",
 }
 
 export enum RunState {
-    RESET = "RESET",
     RUNNING = "RUNNING",
-    STOPPED = "STOPPED",
-    FINISHED = "FINISHED",
+    PAUSED = "PAUSED",
 }
 
 enum EditorAction {
@@ -41,14 +44,53 @@ interface EditorState {
 let globalWorkspace: Blockly.WorkspaceSvg = null;
 
 export class Editor {
-    _runMode: RunMode = RunMode.NOT_RUNNING;
     _stepTimeout: any = null;
     _stepDuration: number = 500;
+    private _programState = ProgramState.RESET;
+    private _runMode = RunMode.SLOW;
+    private _runState = RunState.PAUSED;
+    private changeListeners: Array<() => void> = [];
     
     constructor(private workspace: Blockly.WorkspaceSvg, private problem: Problem) {
         globalWorkspace = this.workspace;
     }
     
+    addChangeListener(listener: () => void) {
+        this.changeListeners.push(listener);
+    }
+    removeChangeListener(listener: () => void) {
+        this.changeListeners = this.changeListeners.filter(x => x != listener);
+    }
+    onChange() {
+        // console.log('onchange', this._runMode, this._runState, this._programState);
+        for (const listener of this.changeListeners) {
+            listener();
+        }
+    }
+
+    get runMode() { return this._runMode; }
+    get runState() { return this._runState; }
+    get programState() { return this._programState; }
+
+    private set runMode(value: RunMode) {
+        if (value != this._runMode) {
+            this._runMode = value;
+            this.onChange();
+        }
+    }
+    private set runState(value: RunState) {
+        if (value != this._runState) {
+            this._runState = value;
+            this.onChange();
+        }
+    }
+    private set programState(value: ProgramState) {
+        if (value != this._programState) {
+            this._programState = value;
+            this.onChange();
+        }
+    }
+
     getCode(debugging = false) {
         const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
         javascriptGenerator.STATEMENT_PREFIX = debugging ? 'await highlightBlock(%1);\n' : '';
@@ -61,41 +103,46 @@ export class Editor {
     }
     
     runTests() {
-        const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
-        javascriptGenerator.STATEMENT_PREFIX = '';
+        throw new Error('Method not implemented.');
+        // const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
+        // javascriptGenerator.STATEMENT_PREFIX = '';
         
-        try {
-            const code = javascriptGenerator.workspaceToCode(this.workspace);
-            const testCases = this.problem.testCases;
+        // try {
+        //     const code = javascriptGenerator.workspaceToCode(this.workspace);
+        //     const testCases = this.problem.testCases;
             
-            const report = runTests(code, testCases);
+        //     const report = runTests(code, testCases);
             
-            if (report.passed) {
-                alert('Parabéns! Você passou em todos os testes!');
-            } else {
-                let reportText = '';
-                for (const testCaseResult of report.testCaseResults) {
-                    if (!testCaseResult.passed) {
-                        reportText += `Entrada: ${testCaseResult.input}\n`;
-                        reportText += `Saída esperada: ${testCaseResult.expectedOutput?.trim()}\n`;
-                        reportText += `Saída obtida: ${testCaseResult.actualOutput?.trim()}\n`;
-                        reportText += '\n';
-                    }
-                }
-                alert(`Você falhou em ${report.totalTestsRun - report.totalTestsPassed} testes:\n\n${reportText}`);
-            }
-        } finally {
-            javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
-        }
+        //     if (report.passed) {
+        //         alert('Parabéns! Você passou em todos os testes!');
+        //     } else {
+        //         let reportText = '';
+        //         for (const testCaseResult of report.testCaseResults) {
+        //             if (!testCaseResult.passed) {
+        //                 reportText += `Entrada: ${testCaseResult.input}\n`;
+        //                 reportText += `Saída esperada: ${testCaseResult.expectedOutput?.trim()}\n`;
+        //                 reportText += `Saída obtida: ${testCaseResult.actualOutput?.trim()}\n`;
+        //                 reportText += '\n';
+        //             }
+        //         }
+        //         alert(`Você falhou em ${report.totalTestsRun - report.totalTestsPassed} testes:\n\n${reportText}`);
+        //     }
+        // } finally {
+        //     javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
+        // }
     }
     
-    async runWorkspace(runMode: RunMode = RunMode.SLOW) {
-        if (this._runMode != RunMode.NOT_RUNNING) {
-            console.log('already running');
-            return;
+    async runWorkspace(_runMode: RunMode) {
+        if (this.programState == ProgramState.FINISHED) {
+            this.reset();
+        }
+        if (this.programState == ProgramState.STARTED) {
+            throw new Error('Program is already running');
         }
 
-        this._runMode = runMode;
+        this.programState = ProgramState.STARTED;
+        this.runMode = _runMode;
+        this.runState = RunState.PAUSED;
 
         const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;
         
@@ -106,36 +153,37 @@ export class Editor {
             var code = javascriptGenerator.workspaceToCode(this.workspace);
             code = `
             (async () => {
-                this._cancelExecution = false;
-                try {
-                    ${code}
-                } catch (e) {
-                    console.log('Execução cancelada');
-                } finally {
-                    this.workspace.highlightBlock('');
-                }
+                ${code}
+                this.workspace.highlightBlock('');
             })();
             `;
             console.log(code);
             await eval(code);
+            this.onFinishedProgram();
+        } catch (e) {
+            console.log('error', e);
         } finally {
             javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
-            runMode = RunMode.NOT_RUNNING;
         }
     }
     
-    stopExecution() {
-        window.dispatchEvent(new Event('signalNextStep'));
-        clearTimeout(this._stepTimeout);
-        this.highlightBlock('');
+    reset() {
+        this.programState = ProgramState.RESET;
+        this.runState = RunState.PAUSED;
+        this.runMode = RunMode.FAST;
+
         window.chatManager?.clear()
         window.stageManager?.clear();
-        this._runMode = RunMode.NOT_RUNNING;
+
+        clearTimeout(this._stepTimeout);
+        window.dispatchEvent(new CustomEvent('signalNextStep', {detail: {abort: true}}));
+        
+        this.highlightBlock('');
     }
     
     clearWorkspace() {
         this.workspace.clear();
-        localStorage.removeItem("workspace");
+        localStorage.removeItem(`workspace-${this.problem.id}`);
     }
     
     
@@ -163,29 +211,45 @@ export class Editor {
     }
     
     async highlightBlock(id: any) {
+        if (id !== '') {
+            this.runState = RunState.RUNNING;
+        }
         this.workspace.highlightBlock(id);
     }
 
     async onFinishStep(id: any) {
         console.log('onFinishStep');
         
-        if (this._runMode == RunMode.STEP) {
-            await new Promise<void>(resolve => {
-                function handleSignal() {
-                window.removeEventListener('signalNextStep', handleSignal);
-                resolve();
+        if (this.runMode == RunMode.STEP) {
+            this.runState = RunState.PAUSED;
+            await new Promise<void>((resolve, reject) => {
+                function handleSignal(event: CustomEvent) {
+                    window.removeEventListener('signalNextStep', handleSignal);
+                    if (event.detail.abort) {
+                        reject();
+                    } else {
+                        resolve();
+                    }
                 }
                 window.addEventListener('signalNextStep', handleSignal);
             });
-        } else if (this._runMode == RunMode.SLOW) {
+        } else if (this.runMode == RunMode.SLOW) {
             await new Promise(resolve => this._stepTimeout = setTimeout(resolve, this._stepDuration)).catch((x) => {console.log('timeout cancelled', x)});
         }
     }
-    
-    runNextStep() {
-        if (this._runMode == RunMode.NOT_RUNNING) {
+
+    async onFinishedProgram() {
+        console.log('onFinishedProgram');
+        this.programState = ProgramState.FINISHED;
+        this.runState = RunState.PAUSED;
+
+        // TODO: evaluate result (success or failure)
+    }
+
+    runNextStep(abort = false) {
+        if (this.programState != ProgramState.STARTED) {
             this.runWorkspace(RunMode.STEP);
         }
-        window.dispatchEvent(new Event('signalNextStep'));
+        window.dispatchEvent(new CustomEvent('signalNextStep', {detail: {abort}}));
     }
 }
