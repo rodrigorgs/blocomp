@@ -11,6 +11,7 @@ class CleaningScene extends Phaser.Scene {
     floorLayer: Phaser.GameObjects.Layer;
     dirtLayer: Phaser.GameObjects.Layer;
     robotLayer: Phaser.GameObjects.Layer;
+    goalPosition?: {x: integer, y: integer} = null;
 
     constructor(data: { map: string }) {
         super({ key: 'CleaningScene' });
@@ -33,6 +34,8 @@ class CleaningScene extends Phaser.Scene {
         this.load.image('dirt01', 'assets/dirt01.png');
         this.load.image('dirt02', 'assets/dirt02.png');
         this.load.image('dirt03', 'assets/dirt03.png');
+        this.load.image('cone', 'assets/cone.png');
+        this.load.image('goal', 'assets/goal.png');
     }
 
     create() {
@@ -56,6 +59,13 @@ class CleaningScene extends Phaser.Scene {
                 } else if (cell == 'd') {
                     const dirt = this.add.image(x, y, 'dirt01').setOrigin(0, 0);
                     this.dirtLayer.add(dirt);
+                } else if (cell == 'x') {
+                    const cone = this.add.image(x, y, 'cone').setOrigin(0, 0);
+                    this.dirtLayer.add(cone);
+                } else if (cell == '!') {
+                    const goal = this.add.image(x, y, 'goal').setOrigin(0, 0);
+                    this.dirtLayer.add(goal);
+                    this.goalPosition = {x: tx, y: ty};
                 }
             }
         }
@@ -67,13 +77,51 @@ class CleaningScene extends Phaser.Scene {
         return direction;
     }
 
+    async playWrongMoveAnimation() {
+        await new Promise<void>((resolve, _) => {
+            const tween = this.tweens.add({
+                targets: this.robot,
+                scale: 1.5,
+                duration: this.TWEEN_DURATION / 2,
+                ease: Phaser.Math.Easing.Bounce.Out,
+                onComplete: () => {
+                    resolve();
+                }
+            });
+            tween.play();
+        });
+        await new Promise<void>((resolve, _) => {
+            const tween = this.tweens.add({
+                targets: this.robot,
+                scale: 1,
+                duration: this.TWEEN_DURATION / 2,
+                ease: Phaser.Math.Easing.Bounce.In,
+                onComplete: () => {
+                    resolve();
+                }
+            });
+            tween.play();
+        });
+    }
+
     async moveRobotAngle(angle: integer) {
         this.robot.angle = angle;
         const direction = this.getHeadingDirection();
 
         const newRobotX = this.robot.x + direction.x * this.TILE_WIDTH;
         const newRobotY = this.robot.y + direction.y * this.TILE_HEIGHT;
-      
+        const tx = Math.floor(newRobotX / this.TILE_WIDTH);
+        const ty = Math.floor(newRobotY / this.TILE_HEIGHT);
+
+        if (tx < 0 || tx >= 10 || ty < 0 || ty >= 8) {
+            await this.playWrongMoveAnimation();
+            return;
+        }
+        if (this.map[ty][tx] == 'x') {
+            await this.playWrongMoveAnimation();
+            return;
+        }
+
         const tweenPromise = new Promise<void>((resolve, _) => {
             const tween = this.tweens.add({
                 targets: this.robot,
@@ -90,8 +138,6 @@ class CleaningScene extends Phaser.Scene {
 
         await tweenPromise;
 
-        const tx = Math.floor(newRobotX / this.TILE_WIDTH);
-        const ty = Math.floor(newRobotY / this.TILE_HEIGHT);
         console.log('cell = ', this.map[ty][tx]);
         if (this.map[ty][tx] == 'd') {
             this.map[ty][tx] = '.';
@@ -128,7 +174,20 @@ class CleaningScene extends Phaser.Scene {
     }
 
     isFloorClean() {
-        return this.dirtLayer.getChildren().length == 0;
+        return this.map.join('').indexOf('d') == -1;
+    }
+
+    hasGoalPosition() {
+        return this.goalPosition != null;
+    }
+    
+    hasRobotReachedGoalPosition() {
+        if (!this.goalPosition) {
+            return false;
+        }
+        const tx = Math.floor(this.robot.x / this.TILE_WIDTH);
+        const ty = Math.floor(this.robot.y / this.TILE_HEIGHT);
+        return tx == this.goalPosition.x && ty == this.goalPosition.y;
     }
 }
 
@@ -188,16 +247,21 @@ export class CleaningRobotStageManager implements StageManager {
     }
 
     outcome(): StageOutcome {
-        if (this.getScene().isFloorClean()) {
-            return {
-                successful: true,
-                message: 'Parabéns, você limpou tudo!',
-            }
-        } else {
+        if (!this.getScene().isFloorClean()) {
             return {
                 successful: false,
                 message: 'Ainda há sujeira no chão!',
             }
+        } else if (this.getScene().hasGoalPosition() && !this.getScene().hasRobotReachedGoalPosition()) {
+            return {
+                successful: false,
+                message: 'O robô não está no destino!',
+            }
+        } else {
+            return {
+                successful: true,
+                message: 'Parabéns, você concluiu o desafio!',
+            }           
         }
     }
 }
