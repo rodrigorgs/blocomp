@@ -66,6 +66,7 @@ Resources:
         /* Chat */
         .chat-container {
             display: flex;
+            flex: 1;
             justify-content: center;
             align-items: center;
             /* height: 100vh; */
@@ -74,7 +75,7 @@ Resources:
         }
 
         .chat {
-            background-color: #999;
+            background-color: #ccc;
             width: 100%;
             height: 100%;
             margin: 0 auto;
@@ -94,6 +95,7 @@ Resources:
         }
 
         .chat-messages {
+            background-color: #999;
             padding: 10px;
             /* TODO: use parent's height */
             height: 300px;
@@ -109,6 +111,7 @@ Resources:
             clear: both;
             word-wrap: break-word; /* Wrap long words */
             position: relative;
+            font: 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         .message.status {
@@ -160,6 +163,7 @@ Resources:
             margin-top: -10px;
         }
     </style>
+    <script src="http://localhost:8097"></script>
 </head>
 <body>
 
@@ -169,6 +173,7 @@ Resources:
             <span>
                 <button id="btnOpenChallenge">Abrir outro desafio</button>
             </span>
+            <span id="workspaceInfo"></span>
         </div>
         <div class="content">
             <div id="blocklyArea" class="left"></div>

@@ -1,0 +1,29 @@
+{
+    "problem": {
+        "name": "Lab03",
+        "description": "Movimente o robô para limpar toda a sujeira"
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                ".........",
+                ".rddddd..",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "controls_repeat_ext"
+        ],
+        "maxBlocks": 3
+    }
+}
