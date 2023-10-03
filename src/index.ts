@@ -17,6 +17,7 @@ import SigninComponent from './auth/signin_component';
 import { ChatManager, MessageType } from './toolkits/chat/runtime';
 import axios from 'axios';
 import RunBarComponent from './editor/run_bar';
+import { Toast } from './alerts/toast';
 
 //////////
 
@@ -44,7 +45,37 @@ export function configureWorkspace() {
             'metricsManager': ContinuousMetrics,
         },  
     });
-    
+
+
+    // Control number of blocks used (if maxBlocks is defined)
+    workspace.addChangeListener((event) => {
+        const maxBlocks = window.workspaceConfig?.toolbox?.maxBlocks ?? Infinity;
+        const blocks = workspace.getAllBlocks(false);
+        const blocksCount = blocks.length;
+        const toolbox = workspace.getToolbox() as ContinuousToolbox;
+        const flyout = toolbox.getFlyout();
+        console.log(event.type);
+        if (event.type == Blockly.Events.CREATE) {
+            if (blocksCount > maxBlocks) {
+                Toast.fire({
+                    icon: 'error',
+                    title: `Você não pode adicionar mais que ${maxBlocks} blocos`
+                });
+                workspace.undo(false);
+            }
+        } else if (blocksCount == maxBlocks) {
+            flyout.workspace_.getTopBlocks(false).forEach((block: any) => {
+                block.setEnabled(false);
+            });
+        }
+        const workspaceInfoElem = document.getElementById('workspaceInfo');
+        if (workspaceInfoElem && maxBlocks != Infinity) {
+            const blocks = workspace.getAllBlocks(false);
+            const blocksCount = blocks.length;
+            workspaceInfoElem.innerHTML = `Blocos restantes: ${maxBlocks - blocksCount}`;
+        }
+    });
+
     var onresize = function(e:any) {
         var element: any = blocklyArea;
         var x = 0;

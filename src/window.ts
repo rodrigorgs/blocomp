@@ -13,6 +13,7 @@ declare global {
             };
             toolbox?: {
                 blocks: Array<string>;
+                maxBlocks?: number;
             };
         }
     }
