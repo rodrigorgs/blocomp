@@ -1,0 +1,28 @@
+{
+    "problem": {
+        "name": "Lab01",
+        "description": "Ande para frente até limpar toda a sujeira."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                ".........",
+                "..rdd....",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward",
+            "turn",
+            "math_number"
+        ]
+    }
+}
