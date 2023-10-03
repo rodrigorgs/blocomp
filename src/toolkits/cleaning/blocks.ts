@@ -91,12 +91,78 @@ const turnBlock: any = {
     "helpUrl": ""
 }
 
+const repeatUntilGoalBlock: any = {
+    "type": "repeat_until_goal",
+    "message0": "repita até chegar ao %1 %2 %3",
+    "args0": [
+      {
+        "type": "field_image",
+        "src": "assets/goal.png",
+        "width": 15,
+        "height": 15,
+        "alt": "destino",
+        "flipRtl": false
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "STATEMENT"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 120,
+    "tooltip": "",
+    "helpUrl": ""
+}
+
+const ifNoObstacleBlock: any = {
+    "type": "if_no_obstacle",
+    "message0": "se não tem obstáculo à %1 %2 %3",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "DIRECTION",
+        "options": [
+          [
+            "frente",
+            "AHEAD"
+          ],
+          [
+            "esquerda ↺",
+            "LEFT"
+          ],
+          [
+            "direita ↻",
+            "RIGHT"
+          ]
+        ]
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "STATEMENT"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 165,
+    "tooltip": "",
+    "helpUrl": ""
+}
+
 export function loadBlocks() {
     Blockly.defineBlocksWithJsonArray([
         moveDirectionBlock,
         moveForwardOneBlock,
         moveForwardBlock,
-        turnBlock
+        turnBlock,
+        repeatUntilGoalBlock,
+        ifNoObstacleBlock,
     ]);
 
     javascriptGenerator.forBlock['move_direction'] = function (block: Blockly.Block, generator: any) {
@@ -112,6 +178,17 @@ export function loadBlocks() {
     };
     javascriptGenerator.forBlock['move_forward_one'] = function (block: Blockly.Block, generator: any) {
         return `await window.stageManager.moveForward(1);\n`;
+    };
+    javascriptGenerator.forBlock['repeat_until_goal'] = function (block: Blockly.Block, generator: any) {
+        var statements = generator.statementToCode(block, 'STATEMENT');
+        var code = `while (!window.stageManager.hasRobotReachedGoalPosition()) {\n${statements}\n}\n`;
+        return code;
+    };
+    javascriptGenerator.forBlock['if_no_obstacle'] = function (block: Blockly.Block, generator: any) {
+        var statements = generator.statementToCode(block, 'STATEMENT');
+        const direction = block.getFieldValue('DIRECTION');
+        var code = `if (!window.stageManager.hasObstacleAtDirection("${direction}")) {\n${statements}\n}\n`;
+        return code;
     };
 
     javascriptGenerator.forBlock['turn'] = function (block: Blockly.Block, generator: any) {

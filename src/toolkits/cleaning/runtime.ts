@@ -71,8 +71,8 @@ class CleaningScene extends Phaser.Scene {
         }
     }
 
-    getHeadingDirection() {
-        const radians = Phaser.Math.DegToRad(this.robot.angle);
+    getHeadingDirection(deltaAngle: integer = 0) {
+        const radians = Phaser.Math.DegToRad(this.robot.angle + deltaAngle);
         const direction = { x: Math.cos(radians), y: Math.sin(radians) };
         return direction;
     }
@@ -189,6 +189,25 @@ class CleaningScene extends Phaser.Scene {
         const ty = Math.floor(this.robot.y / this.TILE_HEIGHT);
         return tx == this.goalPosition.x && ty == this.goalPosition.y;
     }
+
+    hasObstacleAtDirection(directionString: string) {
+        let deltaAngle = 0;
+        if (directionString == 'LEFT') {
+            deltaAngle -= 90;
+        } else if (directionString == 'RIGHT') {
+            deltaAngle += 90;
+        }
+        const direction = this.getHeadingDirection(deltaAngle);
+
+        const tx = Math.floor((this.robot.x / this.TILE_WIDTH) + direction.x);
+        const ty = Math.floor((this.robot.y / this.TILE_HEIGHT) + direction.y);
+
+        if (tx < 0 || tx >= 10 || ty < 0 || ty >= 8) {
+            return true;
+        }
+
+        return this.map[ty][tx] == 'x';
+    }
 }
 
 export class CleaningRobotStageManager implements StageManager {
@@ -244,6 +263,14 @@ export class CleaningRobotStageManager implements StageManager {
 
     async turn(angle: integer) {
         await this.getScene().turnRobot(angle);
+    }
+
+    hasRobotReachedGoalPosition() {
+        return this.getScene().hasRobotReachedGoalPosition();
+    }
+
+    hasObstacleAtDirection(direction: string) {
+        return this.getScene().hasObstacleAtDirection(direction);
     }
 
     outcome(): StageOutcome {

@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Lab07",
+        "name": "Lab06",
         "description": "Leve o robô ao seu destino"
     },
     "stage": {
@@ -8,12 +8,12 @@
         "data": {
             "map": [
                 "xxxxxxxxx",
-                "xxxxx..xx",
-                "xr.!..xxx",
-                "xxxxx..xx",
-                "x...x.xxx",
-                "x.x.x.xxx",
-                "x......xx",
+                "x.....xxx",
+                "x.xxx.xxx",
+                "x..!x.xxx",
+                "xxxxx.xxx",
+                "xr....xxx",
+                "xxxxxxxxx",
                 "xxxxxxxxx"
             ]
         }
@@ -22,7 +22,8 @@
         "blocks": [
             "move_forward_one",
             "turn",
-            "repeat_until_goal"
+            "repeat_until_goal",
+            "if_no_obstacle"
         ]
     }
 }

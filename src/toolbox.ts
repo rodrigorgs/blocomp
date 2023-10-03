@@ -24,7 +24,9 @@ const toolbox = {
     { "kind": "category", "flyoutOpen": true, "name": "Controle", "colour": 120, "contents": [
       { "kind": "block", "type": "controls_if" },
       { "kind": "block", "type": "controls_repeat_ext", "inputs": { "TIMES": { "block": { "type": "math_number", "fields": { "NUM": 2 } } } } },
+      { "kind": "block", "type": "repeat_until_goal" },
       { "kind": "block", "type": "logic_compare" },
+      { "kind": "block", "type": "if_no_obstacle" },
     ]},
   ]
 };
