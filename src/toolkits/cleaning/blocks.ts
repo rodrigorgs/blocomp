@@ -54,6 +54,16 @@ const moveForwardBlock: any = {
     "helpUrl": ""
 }
 
+const moveForwardOneBlock: any = {
+  "type": "move_forward_one",
+  "message0": "ande 1 passo para frente",
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 165,
+  "tooltip": "Move um passo para frente",
+  "helpUrl": ""
+}
+
 const turnBlock: any = {
     "type": "turn",
     "message0": "gire para a %1",
@@ -84,6 +94,7 @@ const turnBlock: any = {
 export function loadBlocks() {
     Blockly.defineBlocksWithJsonArray([
         moveDirectionBlock,
+        moveForwardOneBlock,
         moveForwardBlock,
         turnBlock
     ]);
@@ -98,6 +109,9 @@ export function loadBlocks() {
         var steps = generator.valueToCode(block, 'STEPS', Order.ATOMIC);
         var code = `await window.stageManager.moveForward(${steps});\n`;
         return code;
+    };
+    javascriptGenerator.forBlock['move_forward_one'] = function (block: Blockly.Block, generator: any) {
+        return `await window.stageManager.moveForward(1);\n`;
     };
 
     javascriptGenerator.forBlock['turn'] = function (block: Blockly.Block, generator: any) {

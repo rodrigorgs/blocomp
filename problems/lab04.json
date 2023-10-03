@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Lab02",
+        "name": "Lab04",
         "description": "Movimente o robô para limpar toda a sujeira"
     },
     "stage": {
@@ -9,11 +9,11 @@
             "map": [
                 ".........",
                 ".........",
-                ".........",
+                ".....d...",
+                "....dd...",
                 "...dd....",
-                "..rd.....",
-                ".........",
-                ".........",
+                "..dd.....",
+                ".rd......",
                 "........."
             ]
         }
@@ -21,7 +21,9 @@
     "toolbox": {
         "blocks": [
             "move_forward_one",
-            "turn"
-        ]
+            "turn",
+            "controls_repeat_ext"
+        ],
+        "maxBlocks": 6
     }
 }

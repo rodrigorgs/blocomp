@@ -1,7 +1,7 @@
 {
     "problem": {
-        "name": "Lab01",
-        "description": "Ande para frente até limpar toda a sujeira."
+        "name": "Lab03",
+        "description": "Movimente o robô para limpar toda a sujeira"
     },
     "stage": {
         "type": "cleaning",
@@ -11,7 +11,7 @@
                 ".........",
                 ".........",
                 ".........",
-                "..rdd....",
+                ".rddddd..",
                 ".........",
                 ".........",
                 "........."
@@ -21,7 +21,9 @@
     "toolbox": {
         "blocks": [
             "move_forward_one",
-            "turn"
-        ]
+            "turn",
+            "controls_repeat_ext"
+        ],
+        "maxBlocks": 3
     }
 }
