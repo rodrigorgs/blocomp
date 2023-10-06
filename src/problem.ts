@@ -6,6 +6,7 @@ export interface Problem {
     name: string;
     description: string;
     testCases: Array<TestCase>;
+    initialWorkspace?: object;
 }
 
 export interface TestCase {

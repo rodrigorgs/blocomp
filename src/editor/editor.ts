@@ -42,8 +42,6 @@ interface EditorState {
     speed: number;
 }
 
-let globalWorkspace: Blockly.WorkspaceSvg = null;
-
 export class Editor {
     _stepTimeout: any = null;
     _stepDuration: number = 200;
@@ -53,7 +51,11 @@ export class Editor {
     private changeListeners: Array<() => void> = [];
     
     constructor(private workspace: Blockly.WorkspaceSvg, private problem: Problem) {
-        globalWorkspace = this.workspace;
+        this.loadWorkspaceFromLocalStorage();
+        const numBlocks = this.workspace.getAllBlocks(false).length;
+        if (numBlocks == 0) {
+            this.loadInitialWorkspaceIfExists();
+        }
     }
     
     addChangeListener(listener: () => void) {
@@ -185,9 +187,9 @@ export class Editor {
     clearWorkspace() {
         this.workspace.clear();
         localStorage.removeItem(`workspace-${this.problem.id}`);
+        this.loadInitialWorkspaceIfExists();
     }
-    
-    
+        
     saveWorkspaceToLocalStorage() {
         const json: any = this.getWorkspaceJSON();
         const objModel = JSON.parse(json);
@@ -206,9 +208,18 @@ export class Editor {
     
     loadWorkspaceFromLocalStorage() {
         console.log('loading workspace');
-        var json = localStorage.getItem(`workspace-${this.problem.id}`) || "{}";
+        const json = localStorage.getItem(`workspace-${this.problem.id}`) || "{}";
+        this.loadWorkspaceFromJSON(json);
+    }
+
+    loadWorkspaceFromJSON(json: string) {
         Blockly.serialization.workspaces.load(JSON.parse(json), this.workspace);
-        console.log('done');
+    }
+
+    loadInitialWorkspaceIfExists() {
+        if (this.problem.initialWorkspace) {
+            this.loadWorkspaceFromJSON(JSON.stringify(this.problem.initialWorkspace));
+        }
     }
     
     async highlightBlock(id: any) {
