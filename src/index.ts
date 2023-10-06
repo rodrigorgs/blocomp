@@ -40,6 +40,7 @@ export function configureWorkspace() {
         toolbox: getToolboxJSON(window.workspaceConfig?.toolbox?.blocks),
         trashcan: true,
         renderer: 'zelos',
+        // theme: 'zelos',
         plugins: {
             'toolbox': ContinuousToolbox,
             'flyoutsVerticalToolbox': ContinuousFlyout,
