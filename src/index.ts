@@ -18,6 +18,7 @@ import { ChatManager, MessageType } from './toolkits/chat/runtime';
 import axios from 'axios';
 import RunBarComponent from './editor/run_bar';
 import { Toast } from './alerts/toast';
+import ProblemNavigationComponent from './problem_navigation/problem_navigation_component';
 
 //////////
 
@@ -113,9 +114,6 @@ export function configureWorkspace() {
     document.getElementById("btnTestar")!.addEventListener("click", () => {
         editor.runTests();
     });
-    document.getElementById("btnOpenChallenge")!.addEventListener("click", () => {
-        openChallenge();
-    });
     
     if (window.workspaceConfig?.stage?.type == 'cleaning') {
         window.stageManager = new CleaningRobotStageManager(document.getElementById("stage"), window.workspaceConfig.stage.data.map);
@@ -135,6 +133,9 @@ export function configureWorkspace() {
     
     const rootRunbar = createRoot(document.getElementById("runbar"));
     rootRunbar.render(React.createElement(RunBarComponent, {editor}));
+
+    const rootProblembar = createRoot(document.getElementById("problemBar"));
+    rootProblembar.render(React.createElement(ProblemNavigationComponent, {problem: window.workspaceConfig.problem}));
 
     async function submitAnswer() {
         try {
@@ -181,15 +182,24 @@ export function run() {
             .then(function (response) {
                 // if response is a string
                 if (typeof response.data == 'string') {
-                    openChallenge();
-                    console.error(`${path} is not a valid JSON file`);
+                    Swal.fire({
+                        title: 'Erro',
+                        text: `Erro ao tentar carregar problema ${jsonFile}`,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
                     return;
                 }
                 window.workspaceConfig = response.data;
                 window.workspaceConfig.problem.id = jsonFile;
                 configureWorkspace();
             }).catch(function (error) {
-                openChallenge();
+                Swal.fire({
+                    title: 'Erro',
+                    text: `O problema ${jsonFile} não existe`,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
                 console.error(error);
             });
     } else {
@@ -198,16 +208,3 @@ export function run() {
 }
 
 run();
-
-async function openChallenge() {
-    const name = await Swal.fire({
-        title: "Digite o código do desafio",
-        input: 'text',
-        showCancelButton: true,
-    });
-    if (name.dismiss) {
-        return;
-    }
-
-    window.location.href = `?p=${name.value}`;
-}
