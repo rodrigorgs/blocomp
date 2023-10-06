@@ -59,10 +59,36 @@ const commentBlock: any = {
   "helpUrl": ""
 }
 
+var repeatNBlock: any = {
+  "type": "repeat_n",
+  "message0": "repita %1 vezes %2 %3",
+  "args0": [
+    {
+      "type": "field_number",
+      "name": "COUNT",
+      "value": 2,
+      "min": 2
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "STATEMENTS"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
 export function loadIlpBlocks() {
     Blockly.defineBlocksWithJsonArray([
         inputBlock,
         commentBlock,
+        repeatNBlock
     ]);
     
     javascriptGenerator.forBlock['input'] = function(block: Blockly.Block, generator: any) {
@@ -93,4 +119,17 @@ export function loadIlpBlocks() {
     var code = `// ${comment}\n${statements}`;
     return code;
   };
+
+  javascriptGenerator.forBlock['repeat_n'] = function (block: Blockly.Block, generator: any) {
+    const repeats = block.getFieldValue('COUNT');
+    let branch = generator.statementToCode(block, 'STATEMENTS');
+    branch = generator.addLoopTrap(branch, block);
+    let code = '';
+    const loopVar =
+        generator.nameDB_.getDistinctName('count', 'VARIABLE');
+    let endVar = repeats;
+    code += 'for (var ' + loopVar + ' = 0; ' + loopVar + ' < ' + endVar + '; ' +
+        loopVar + '++) {\n' + branch + '}\n';
+    return code;
+  }
 }

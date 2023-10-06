@@ -1,7 +1,7 @@
 {
     "problem": {
         "name": "Robô 01",
-        "description": "O robô UFBABot possui 8 rodas, 3 sensores de obstáculos e limpa o chão à medida que se move. Programe o robô para limpar essa sujeira."
+        "description": "A UFBA comprou um robô aspirador, o UFBABot, e precisa que você programe o robô para limpar essa sujeira que vai até os cones. O UFBABot possui 8 rodas, 3 sensores e um aspirador de 900 W, capaz de limpar as sujeiras mais difíceis. (Use a estratégia de ABSTRAÇÃO para focar apenas nos aspectos relevantes do problema.)"
     },
     "stage": {
         "type": "cleaning",
@@ -10,9 +10,9 @@
                 ".........",
                 ".........",
                 ".........",
-                ".........",
+                "....x....",
                 "..rdd....",
-                ".........",
+                "....x....",
                 ".........",
                 "........."
             ]
@@ -21,8 +21,7 @@
     "toolbox": {
         "blocks": [
             "move_forward_one",
-            "turn",
-            "comment"
+            "turn"
         ],
         "maxBlocks": 2
     }

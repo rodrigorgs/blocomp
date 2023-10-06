@@ -1,0 +1,27 @@
+{
+    "problem": {
+        "name": "Robô 02",
+        "description": "Limpe toda a sujeira. Use os motores de giro para andar em zig-zag."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                "...dd....",
+                "..rdx...",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn"
+        ]
+    }
+}
