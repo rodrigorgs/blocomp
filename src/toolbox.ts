@@ -28,6 +28,9 @@ const toolbox = {
       { "kind": "block", "type": "logic_compare" },
       { "kind": "block", "type": "if_no_obstacle" },
     ]},
+    { "kind": "category", "flyoutOpen": true, "name": "Organização", "colour": 45, "contents": [
+      { "kind": "block", "type": "comment" },
+    ]},
   ]
 };
 

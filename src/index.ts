@@ -50,8 +50,9 @@ export function configureWorkspace() {
     // Control number of blocks used (if maxBlocks is defined)
     workspace.addChangeListener((event) => {
         const maxBlocks = window.workspaceConfig?.toolbox?.maxBlocks ?? Infinity;
-        const blocks = workspace.getAllBlocks(false);
+        const blocks = workspace.getAllBlocks(false).filter(b => b.type !== 'comment');
         const blocksCount = blocks.length;
+        console.log(blocks);
         const toolbox = workspace.getToolbox() as ContinuousToolbox;
         const flyout = toolbox.getFlyout();
         console.log(event.type);
@@ -70,8 +71,6 @@ export function configureWorkspace() {
         }
         const workspaceInfoElem = document.getElementById('workspaceInfo');
         if (workspaceInfoElem && maxBlocks != Infinity) {
-            const blocks = workspace.getAllBlocks(false);
-            const blocksCount = blocks.length;
             workspaceInfoElem.innerHTML = `Blocos restantes: ${maxBlocks - blocksCount}`;
         }
     });

@@ -1,0 +1,29 @@
+{
+    "problem": {
+        "name": "Robô 01",
+        "description": "O robô UFBABot possui 8 rodas, 3 sensores de obstáculos e limpa o chão à medida que se move. Programe o robô para limpar essa sujeira."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                ".........",
+                "..rdd....",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "comment"
+        ],
+        "maxBlocks": 2
+    }
+}

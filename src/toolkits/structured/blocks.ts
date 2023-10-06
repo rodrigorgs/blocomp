@@ -35,10 +35,34 @@ const inputBlock: any = {
     "helpUrl": ""
 };
 
+const commentBlock: any = {
+  "type": "comment",
+  "message0": "%1 %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "CONTENT",
+      "text": "Anotação pessoal..."
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "STATEMENTS"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 45,
+  "tooltip": "",
+  "helpUrl": ""
+}
 
 export function loadIlpBlocks() {
     Blockly.defineBlocksWithJsonArray([
         inputBlock,
+        commentBlock,
     ]);
     
     javascriptGenerator.forBlock['input'] = function(block: Blockly.Block, generator: any) {
@@ -61,4 +85,12 @@ export function loadIlpBlocks() {
       
       return `window.chatManager.addMessage(${msg}, 'received');\n`;
   }
+
+  javascriptGenerator.forBlock['comment'] = function (block: Blockly.Block, generator: any) {
+    var comment = block.getFieldValue('CONTENT');
+    var statements = generator.statementToCode(block, 'STATEMENTS');
+    
+    var code = `// ${comment}\n${statements}`;
+    return code;
+  };
 }
