@@ -150,7 +150,7 @@ const ifNoObstacleBlock: any = {
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 165,
+    "colour": 120,
     "tooltip": "",
     "helpUrl": ""
 }
