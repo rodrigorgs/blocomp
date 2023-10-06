@@ -1,0 +1,29 @@
+{
+    "problem": {
+        "name": "Lab06",
+        "description": "Leve o robô ao seu destino"
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                "xxxxxxxxx",
+                "x.....xxx",
+                "x.xxx.xxx",
+                "x..!x.xxx",
+                "xxxxx.xxx",
+                "xr....xxx",
+                "xxxxxxxxx",
+                "xxxxxxxxx"
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "repeat_until_goal",
+            "if_no_obstacle"
+        ]
+    }
+}
