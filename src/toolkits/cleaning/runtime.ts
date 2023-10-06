@@ -3,7 +3,7 @@ import * as Phaser from "phaser";
 class CleaningScene extends Phaser.Scene {
     TILE_WIDTH = 48;
     TILE_HEIGHT = 48;
-    TWEEN_DURATION = 300;
+    TWEEN_DURATION = 200;
 
     robot: Phaser.GameObjects.Image;
     angle: integer;

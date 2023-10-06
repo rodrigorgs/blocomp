@@ -46,7 +46,7 @@ let globalWorkspace: Blockly.WorkspaceSvg = null;
 
 export class Editor {
     _stepTimeout: any = null;
-    _stepDuration: number = 500;
+    _stepDuration: number = 200;
     private _programState = ProgramState.RESET;
     private _runMode = RunMode.SLOW;
     private _runState = RunState.PAUSED;
