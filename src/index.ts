@@ -106,13 +106,13 @@ export function configureWorkspace() {
     window.addEventListener('load', () => {
         editor.loadWorkspaceFromLocalStorage();
     });
-    document.getElementById('btnCarregar')!.addEventListener("click", () => {
+    document.getElementById('btnCarregar')?.addEventListener("click", () => {
         editor.loadWorkspaceFromLocalStorage();
     });
-    document.getElementById("btnLimpar")!.addEventListener("click", () => {
+    document.getElementById("btnLimpar")?.addEventListener("click", () => {
         editor.clearWorkspace();
     });
-    document.getElementById("btnTestar")!.addEventListener("click", () => {
+    document.getElementById("btnTestar")?.addEventListener("click", () => {
         editor.runTests();
     });
     
@@ -130,48 +130,13 @@ export function configureWorkspace() {
     
     
     const root = createRoot(document.getElementById("signinDiv"));
-    root.render(React.createElement(SigninComponent, {client: ez, session}));
+    root.render(React.createElement(SigninComponent, {client: ez, session, fnGetAnswer: () => editor.getWorkspaceJSON() }));
     
     const rootRunbar = createRoot(document.getElementById("runbar"));
     rootRunbar.render(React.createElement(RunBarComponent, {editor}));
 
     const rootProblembar = createRoot(document.getElementById("problemBar"));
     rootProblembar.render(React.createElement(ProblemNavigationComponent, {problem: window.workspaceConfig.problem}));
-
-    async function submitAnswer() {
-        try {
-            const answer = createSingleAnswer(
-                editor.getWorkspaceJSON(),
-                window.location.href,    
-            )
-            const response = await ez.submit(answer);
-            console.log(response);
-            await Swal.fire({
-                text: 'Sua resposta foi enviada com sucesso!',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            });
-        } catch (e) {
-            console.log(e);
-            await Swal.fire({
-                text: 'Erro ao enviar resposta',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
-        }
-    }
-    
-    document.getElementById("btnEnviar")!.addEventListener("click", async () => {
-        if (session.isLoggedIn()) {
-            submitAnswer();
-        } else {
-            await Swal.fire({
-                text: 'É preciso entrar com login e senha para enviar a resposta',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            });
-        }
-    });
 }
 
 export function run() {

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { EZSubmissionClient } from '../ezsubmission/client';
+import { EZSubmissionClient, createSingleAnswer } from '../ezsubmission/client';
 import { EZSubmissionSession } from './session';
 import Swal from 'sweetalert2';
 import { Toast } from '../alerts/toast';
 
-export default function SigninComponent(props: { client: EZSubmissionClient, session: EZSubmissionSession }) {
+export default function SigninComponent(props: { client: EZSubmissionClient, session: EZSubmissionSession, fnGetAnswer: () => any }) {
     const [username, setUsername] = React.useState<string>('');
 
     // when mounting, check if there is a token in the session
@@ -56,12 +56,39 @@ export default function SigninComponent(props: { client: EZSubmissionClient, ses
         setUsername(null);
     }
 
+    async function submitAnswer() {
+        try {
+            const answer = createSingleAnswer(
+                props.fnGetAnswer(),
+                window.location.href,    
+            )
+            const response = await props.client.submit(answer);
+            console.log(response);
+            await Swal.fire({
+                text: 'Sua resposta foi enviada com sucesso!',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            });
+        } catch (e) {
+            console.log(e);
+            await Swal.fire({
+                text: 'Erro ao enviar resposta',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        }
+    }
+
     return (
         <>
             {username ? (
+                <>
                 <span>Olá, {username}! <button onClick={handleLogoutClick}>Sair</button></span>
+                &nbsp;
+                <button onClick={submitAnswer}>Enviar solução</button>
+                </>
             ) : (
-                <span><button onClick={handleLoginClick}>Entrar</button></span>
+                <span><button onClick={handleLoginClick}>Fazer login</button></span>
             )}
         </>
     )
