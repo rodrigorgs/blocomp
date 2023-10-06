@@ -29,14 +29,9 @@ export default function ProblemNavigationComponent(props: { problem: Problem }) 
     }
 
     return (<>
-        <span><b>Problema</b>: {props.problem.name}</span>
-        <span> </span>
-        <button id="btnOpenChallenge" onClick={openChallenge}>Outro problema...</button>
-        { problemNumber ? 
-            <>
-            <button onClick={() => navigateProblem(-1)} disabled={problemNumber == 1}>Anterior</button>
-            <button onClick={() => navigateProblem(1)}>Próximo</button>
-            </> : <></>
-        }
+        { problemNumber ? <button onClick={() => navigateProblem(-1)} disabled={problemNumber == 1}>&lt; Anterior</button> : <> </> }
+        &nbsp;<span><b>Problema</b>: {props.problem.name} (<code>{ props.problem.id }</code>)</span>&nbsp;
+        { problemNumber ? <button onClick={() => navigateProblem(1)}>Próximo &gt;</button> : <></> }
+        &nbsp;<button id="btnOpenChallenge" onClick={openChallenge}>Abrir problema...</button>
     </>);
 }
