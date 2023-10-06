@@ -1,7 +1,7 @@
 {
     "problem": {
-        "name": "Robô 04",
-        "description": "O robô possui um bloco que permite executar uma sequência de blocos várias vezes. Use isso para limpar a sujeira usando apenas 2 blocos no seu programa."
+        "name": "Robô 09",
+        "description": "Algumas salas possuem uma estação de carregamento, marcada por um pino vermelho. Nesses casos, o robô deve limpar tudo e no final parar na estação de carregamento."
     },
     "stage": {
         "type": "cleaning",
@@ -10,8 +10,8 @@
                 ".........",
                 ".........",
                 ".........",
+                ".r.dd !..",
                 ".........",
-                ".rddddd..",
                 ".........",
                 ".........",
                 "........."
@@ -19,12 +19,11 @@
         }
     },
     "toolbox": {
-        "maxBlocks": 2,
         "blocks": [
             "move_forward_one",
             "turn",
             "comment",
-            "repeat_n"
+            "repeat_until_goal"
         ]
     }
 }

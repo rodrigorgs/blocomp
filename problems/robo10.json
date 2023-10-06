@@ -1,0 +1,31 @@
+{
+    "problem": {
+        "name": "Robô 10",
+        "description": "O robô possui um avançado sensor capaz de detectar obstáculos a uma distância de 1 azulejo. O robô deve chegar até a estação de carregamento, mas não pode se chocar com nenhum obstáculo.",
+        "initialWorkspace": {"blocks":{"languageVersion":0,"blocks":[{"type":"repeat_until_goal","id":";@mp)FDM26::2~#{1TpK","x":31,"y":65}]}}
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".....x!..",
+                ".....x...",
+                ".....xd..",
+                ".xxxxx...",
+                ".r.ddd.x.",
+                ".........",
+                "........."
+
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "repeat_until_goal",
+            "if_no_obstacle"
+        ]
+    }
+}

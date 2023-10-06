@@ -1,0 +1,31 @@
+{
+    "problem": {
+        "name": "Robô 08",
+        "description": "O mesmo problema de antes, mas agora o robô precisa andar 5 passos para limpar cada lado do quadrado.",
+        "initialWorkspace": {"blocks":{"languageVersion":0,"blocks":[{"type":"repeat_n","id":"%|cYe(!Rdmq;^hCYSHDc","x":58,"y":189,"fields":{"COUNT":4},"inputs":{"STATEMENTS":{"block":{"type":"comment","id":"M0zn{FCugurGZRj1CI,/","fields":{"CONTENT":"Ande 5 passos para frente"},"next":{"block":{"type":"turn","id":"Wb/WmWvUmS%g=lVcq;by","fields":{"ORIENTATION":"RIGHT"}}}}}}}]}}
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                "..rddddd.",
+                "..d....d.",
+                "..d....d.",
+                "..d....d.",
+                "..d....d.",
+                "..dddddd.",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "maxBlocks": 4,
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "comment",
+            "repeat_n"
+        ]
+    }
+}
