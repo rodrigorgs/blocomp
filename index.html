@@ -169,11 +169,9 @@ Resources:
 
     <div class="container">
         <div class="top-bar">
-            <span id="signinDiv"></span>
-            <span>
-                <button id="btnOpenChallenge">Abrir outro desafio</button>
-            </span>
-            <span id="workspaceInfo"></span>
+            <span id="problemBar" style="float: left;"></span>
+            <span id="signinDiv" style="float: right;"></span>
+            <span id="workspaceInfo" style="margin: 0 auto; display: block; text-align: center;"></span>
         </div>
         <div class="content">
             <div id="blocklyArea" class="left"></div>
@@ -190,10 +188,12 @@ Resources:
         </div>
         <div class="bottom-bar">
             <span id="runbar"></span>
-            <button id="btnCarregar">Carregar</button>
-            <button id="btnLimpar">Limpar</button>
-            <button id="btnTestar">Testar</button>
-            <button id="btnEnviar">Enviar</button>        
+            <span>
+                &nbsp;
+                <button id="btnLimpar">Limpar programa</button>
+                <!-- <button id="btnCarregar">Carregar</button> -->
+                <!-- <button id="btnTestar">Testar</button> -->
+            </span>
         </div>
     </div>
     <div id="blocklyDiv" style="position: absolute"></div>

@@ -1,0 +1,30 @@
+{
+    "problem": {
+        "name": "Robô 11",
+        "description": "Esta sala é diferente, mas talvez você consiga usar o mesmo programa do desafio anterior."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                "xxxxxxxxx",
+                "x.....xxx",
+                "xdxxx.xxx",
+                "x..!x.xxx",
+                "xxxxx.xxx",
+                "xr.dd.xxx",
+                "xxxxxxxxx",
+                "xxxxxxxxx"
+            ]
+        }
+    },
+    "toolbox": {
+        "maxBlocks": 6,
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "repeat_until_goal",
+            "if_no_obstacle"
+        ]
+    }
+}

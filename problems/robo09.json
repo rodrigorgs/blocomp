@@ -1,0 +1,29 @@
+{
+    "problem": {
+        "name": "Robô 09",
+        "description": "Algumas salas possuem uma estação de carregamento, marcada por um pino vermelho. Nesses casos, o robô deve limpar tudo e no final parar na estação de carregamento."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                ".r.dd !..",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "comment",
+            "repeat_until_goal"
+        ]
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "problem": {
+        "name": "Robô 07",
+        "description": "Limpe a sujeira em forma de quadrado.",
+        "initialWorkspace": {"blocks":{"languageVersion":0,"blocks":[{"type":"repeat_n","id":"%|cYe(!Rdmq;^hCYSHDc","x":58,"y":189,"fields":{"COUNT":4}}]}}
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                "...rdd...",
+                "...d.d...",
+                "...ddd...",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "maxBlocks": 4,
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "comment",
+            "repeat_n"
+        ]
+    }
+}

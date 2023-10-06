@@ -1,0 +1,30 @@
+{
+    "problem": {
+        "name": "Robô 04",
+        "description": "O robô possui um bloco que permite executar uma sequência de blocos várias vezes. Use isso para limpar a sujeira usando apenas 2 blocos no seu programa."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                ".........",
+                ".rddddd..",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "maxBlocks": 2,
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "comment",
+            "repeat_n"
+        ]
+    }
+}
