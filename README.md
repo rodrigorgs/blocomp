@@ -1,4 +1,4 @@
-# Blockly-ILP
+# Blocomp
 
 To run:
 

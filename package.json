@@ -6,11 +6,11 @@
     "phaser": "^3.60.0",
     "sweetalert2": "^11.7.28"
   },
-  "name": "blockly-ilp",
+  "name": "blocomp",
   "version": "1.0.0",
-  "homepage": "https://rodrigorgs.github.io/blockly-ilp",
+  "homepage": "https://rodrigorgs.github.io/blocomp",
   "repository": {
-    "url": "git+https://github.com/rodrigorgs/blockly-ilp.git"
+    "url": "git+https://github.com/rodrigorgs/blocomp.git"
   },
   "main": "main.js",
   "scripts": {
