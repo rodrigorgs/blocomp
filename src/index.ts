@@ -196,7 +196,7 @@ export function run() {
                 console.error(error);
             });
     } else {
-        openChallenge();
+        window.location.href = `?p=robo-livre`;
     }
 }
 
