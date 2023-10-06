@@ -52,10 +52,8 @@ export function configureWorkspace() {
         const maxBlocks = window.workspaceConfig?.toolbox?.maxBlocks ?? Infinity;
         const blocks = workspace.getAllBlocks(false).filter(b => b.type !== 'comment');
         const blocksCount = blocks.length;
-        console.log(blocks);
         const toolbox = workspace.getToolbox() as ContinuousToolbox;
         const flyout = toolbox.getFlyout();
-        console.log(event.type);
         if (event.type == Blockly.Events.CREATE) {
             if (blocksCount > maxBlocks) {
                 Toast.fire({
