@@ -9,6 +9,12 @@ npm run watch
 
 Run a webserver and open `dist/index.html?p=cavalo` in your browser.
 
+To deploy on GitHub Pages, edit `homepage` and `repository` on `package.json`, then run
+
+```
+npm run deploy
+```
+
 ## References for development
 
 - [Guide](https://developers.google.com/blockly/guides/overview)
