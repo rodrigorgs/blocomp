@@ -7,20 +7,26 @@ def _feed_buffer():
     while len(_buffer.strip()) == 0:
         _buffer = input()
 
-def _read_number(number_type):
+def read_number(number_type = None):
     global _buffer
     _feed_buffer()
 
     if match := re.match(r'\s*(-?\d+([.]\d+)?)', _buffer):            
         _buffer = _buffer[match.end():]
-        return number_type(match.group(1))
+        if number_type is None:
+            if '.' in match.group(1):
+                return float(match.group(1))
+            else:
+                return int(match.group(1))
+        else:
+            return number_type(match.group(1))
     else:
         raise ValueError('Expected integer')
 
 def read_int():
-    return _read_number(int)
+    return read_number(int)
 def read_float():
-    return _read_number(float)
+    return read_number(float)
 
 def read_line():
     global _buffer

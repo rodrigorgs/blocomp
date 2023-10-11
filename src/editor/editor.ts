@@ -4,6 +4,7 @@ import * as Blockly from 'blockly';
 import { runTests } from "../runner";
 import '../window';
 import { Toast } from "../alerts/toast";
+import { pythonGenerator } from "blockly/python";
 
 export enum RunMode {
     SLOW = "SLOW",
@@ -104,7 +105,13 @@ export class Editor {
             javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
         }
     }
-    
+
+    getPythonCode() {
+        pythonGenerator.PREFIX = '';
+        const code = pythonGenerator.workspaceToCode(this.workspace);
+        return code;
+    }
+
     runTests() {
         throw new Error('Method not implemented.');
         // const _oldStatementPrefix = javascriptGenerator.STATEMENT_PREFIX;

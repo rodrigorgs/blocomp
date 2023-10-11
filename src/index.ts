@@ -19,6 +19,7 @@ import axios from 'axios';
 import RunBarComponent from './editor/run_bar';
 import { Toast } from './alerts/toast';
 import ProblemNavigationComponent from './problem_navigation/problem_navigation_component';
+import { generatePythonCode, loadPythonGenerator } from './python/generator';
 
 //////////
 
@@ -32,6 +33,9 @@ export function configureWorkspace() {
     // load blocks
     loadIlpBlocks();
     CleaningBlocks.loadBlocks();
+
+    // load generators
+    loadPythonGenerator();
     
 
     var blocklyArea = document.getElementById('blocklyArea');
@@ -114,6 +118,16 @@ export function configureWorkspace() {
     });
     document.getElementById("btnTestar")?.addEventListener("click", () => {
         editor.runTests();
+    });
+    document.getElementById("btnPython")?.addEventListener("click", () => {
+        const code = generatePythonCode(workspace);
+        Swal.fire({
+            title: 'Código Python',
+            html: `<pre style="text-align: left; font-size: 8pt; max-height: 350px; overflow-y: scroll;">${code}</pre>`,
+            icon: 'info',
+            confirmButtonText: 'Ok'
+        });
+        // console.log(code);
     });
     
     if (window.workspaceConfig?.stage?.type == 'cleaning') {
