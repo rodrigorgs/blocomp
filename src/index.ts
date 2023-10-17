@@ -125,9 +125,24 @@ export function configureWorkspace() {
             title: 'Código Python',
             html: `<pre style="text-align: left; font-size: 8pt; max-height: 350px; overflow-y: scroll;">${code}</pre>`,
             icon: 'info',
-            confirmButtonText: 'Ok'
+            showDenyButton: true,
+            confirmButtonText: 'Copiar',
+            denyButtonText: 'Fechar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigator.clipboard.writeText(code).then(() => {
+                    Toast.fire({
+                        title: 'Código copiado!',
+                        icon: 'success',
+                    });
+                }, (error) => {
+                    Toast.fire({
+                        title: 'Erro ao copiar código',
+                        icon: 'error',
+                    });
+                });
+            }
         });
-        // console.log(code);
     });
     
     if (window.workspaceConfig?.stage?.type == 'cleaning') {
