@@ -92,6 +92,22 @@ export function loadPythonGenerator() {
         // require every operator to be wrapped in a function call.  This would kill
         // legibility of the generated code.
     }
+
+    pythonGenerator.forBlock['round'] = function (block: Blockly.Block, generator: any) {
+        const numericExpression = generator.valueToCode(block, 'NUMBER', Order.ATOMIC);
+        const precision = block.getFieldValue('PRECISION');
+
+        console.log('precision', precision);
+        
+        let code = '';
+        if (precision == 0) {
+            code = `math.round(${numericExpression})`;
+        } else {
+            code = `math.round(${numericExpression}, ${precision})`;
+        }
+    
+        return [code, Order.FUNCTION_CALL];
+      };
 }
 
 function detectNumericType(s: string) {
@@ -103,5 +119,5 @@ function detectNumericType(s: string) {
 }
 
 export function generatePythonCode(workspace: Blockly.Workspace) {
-    return pythonScanner + '\n' + pythonGenerator.workspaceToCode(workspace);   
+    return `import math\n` + pythonScanner + '\n' + pythonGenerator.workspaceToCode(workspace);   
 }

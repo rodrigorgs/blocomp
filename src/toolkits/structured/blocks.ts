@@ -84,11 +84,35 @@ var repeatNBlock: any = {
   "helpUrl": ""
 }
 
+const roundBlock: any = {
+  "type": "round",
+  "message0": "arredonda %1 para %2 casa(s) decimal(is)",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "NUMBER",
+      "check": "Number"
+    },
+    {
+      "type": "field_number",
+      "name": "PRECISION",
+      "value": 0,
+      "min": 0
+    }
+  ],
+  "inputsInline": false,
+  "output": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
 export function loadIlpBlocks() {
     Blockly.defineBlocksWithJsonArray([
         inputBlock,
         commentBlock,
-        repeatNBlock
+        repeatNBlock,
+        roundBlock
     ]);
     
     javascriptGenerator.forBlock['input'] = function(block: Blockly.Block, generator: any) {
@@ -132,4 +156,13 @@ export function loadIlpBlocks() {
         loopVar + '++) {\n' + branch + '}\n';
     return code;
   }
+
+  javascriptGenerator.forBlock['round'] = function (block: Blockly.Block, generator: any) {
+    const numericExpression = generator.valueToCode(block, 'NUMBER', Order.ATOMIC);
+    const precision = block.getFieldValue('PRECISION');
+    
+    const code = 'Math.round((' + numericExpression + ') * Math.pow(10, ' + precision + ')) / Math.pow(10, ' + precision + ')';
+
+    return [code, Order.FUNCTION_CALL];
+  };
 }
