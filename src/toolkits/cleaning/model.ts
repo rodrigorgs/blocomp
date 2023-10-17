@@ -1,3 +1,8 @@
+interface StageOutcome {
+    successful: boolean;
+    message: string;
+}
+
 export interface Position {
     x: integer;
     y: integer;
@@ -130,4 +135,47 @@ export class CleaningModel {
 
         return this.map[ty][tx] == 'x';
     }
+
+    outcome(): StageOutcome {
+        if (!this.isFloorClean()) {
+            return {
+                successful: false,
+                message: 'Ainda há sujeira no chão!',
+            }
+        } else if (this.hasGoalPosition() && !this.hasRobotReachedGoalPosition()) {
+            return {
+                successful: false,
+                message: 'O robô não está no destino!',
+            }
+        } else {
+            return {
+                successful: true,
+                message: 'Parabéns, você concluiu o desafio!',
+            }           
+        }
+    }
+
+    // methods added for compatibility with CleaningRobotStageManager
+    moveDirection(direction: string) {
+
+        if (direction == "LEFT") {
+            this.moveRobotAngle(180);
+        } else if (direction == "RIGHT") {
+            this.moveRobotAngle(0);
+        } else if (direction == "UP") {
+            this.moveRobotAngle(270);
+        } else if (direction == "DOWN") {
+            this.moveRobotAngle(90);
+        }
+        
+    }
+
+    moveForward(steps: integer = 1) {
+        this.moveRobotForward(steps);
+    }
+
+    turn(angle: integer) {
+        this.turnRobot(angle);
+    }
+
 }

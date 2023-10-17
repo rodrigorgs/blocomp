@@ -192,6 +192,7 @@ export class CleaningRobotStageManager implements StageManager {
     game: Phaser.Game;
 
     constructor(elem: HTMLElement, map?: Array<string>) {
+        elem.innerHTML = '';
         this.game = new Phaser.Game({
             type: Phaser.AUTO,
             parent: elem,
@@ -252,22 +253,7 @@ export class CleaningRobotStageManager implements StageManager {
     }
 
     outcome(): StageOutcome {
-        if (!this.getScene().isFloorClean()) {
-            return {
-                successful: false,
-                message: 'Ainda há sujeira no chão!',
-            }
-        } else if (this.getScene().hasGoalPosition() && !this.getScene().hasRobotReachedGoalPosition()) {
-            return {
-                successful: false,
-                message: 'O robô não está no destino!',
-            }
-        } else {
-            return {
-                successful: true,
-                message: 'Parabéns, você concluiu o desafio!',
-            }           
-        }
+        return this.getScene().model.outcome();
     }
 }
 
