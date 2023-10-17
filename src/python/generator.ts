@@ -101,9 +101,9 @@ export function loadPythonGenerator() {
         
         let code = '';
         if (precision == 0) {
-            code = `math.round(${numericExpression})`;
+            code = `round(${numericExpression})`;
         } else {
-            code = `math.round(${numericExpression}, ${precision})`;
+            code = `round(${numericExpression}, ${precision})`;
         }
     
         return [code, Order.FUNCTION_CALL];
