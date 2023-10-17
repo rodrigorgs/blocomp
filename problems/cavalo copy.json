@@ -24,6 +24,7 @@
             "turn",
             "math_number",
             "controls_repeat_ext"
-        ]
+        ],
+        "maxBlocks": 5
     }
 }

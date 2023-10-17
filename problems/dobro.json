@@ -1,0 +1,20 @@
+{
+    "problem": {
+        "name": "Dobro",
+        "description": "Leia um número e imprima seu dobro."
+    },
+    "toolbox": {
+        "blocks": [
+            "text_print",
+            "input",
+            "text",
+            "controls_if",
+            "controls_repeat_ext",
+            "logic_compare",
+            "variables_get",
+            "variables_set",
+            "math_number",
+            "math_arithmetic"
+        ]
+    }
+}
