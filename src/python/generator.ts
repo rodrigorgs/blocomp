@@ -108,6 +108,14 @@ export function loadPythonGenerator() {
     
         return [code, Order.FUNCTION_CALL];
       };
+
+      pythonGenerator.forBlock['truncate'] = function (block: Blockly.Block, generator: any) {
+        const numericExpression = generator.valueToCode(block, 'NUMBER', Order.ATOMIC);
+        
+        const code = `int(${numericExpression})`;
+    
+        return [code, Order.FUNCTION_CALL];
+      };
 }
 
 function detectNumericType(s: string) {

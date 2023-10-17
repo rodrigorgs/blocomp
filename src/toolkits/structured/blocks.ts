@@ -107,12 +107,29 @@ const roundBlock: any = {
   "helpUrl": ""
 }
 
+const truncateBlock: any = {
+  "type": "truncate",
+  "message0": "trunca %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "NUMBER",
+      "check": "Number"
+    }
+  ],
+  "output": null,
+  "colour": 230,
+  "tooltip": "Calcula a parte inteira de um número",
+  "helpUrl": ""
+}
+
 export function loadIlpBlocks() {
     Blockly.defineBlocksWithJsonArray([
         inputBlock,
         commentBlock,
         repeatNBlock,
-        roundBlock
+        roundBlock,
+        truncateBlock,
     ]);
     
     javascriptGenerator.forBlock['input'] = function(block: Blockly.Block, generator: any) {
@@ -162,6 +179,14 @@ export function loadIlpBlocks() {
     const precision = block.getFieldValue('PRECISION');
     
     const code = 'Math.round((' + numericExpression + ') * Math.pow(10, ' + precision + ')) / Math.pow(10, ' + precision + ')';
+
+    return [code, Order.FUNCTION_CALL];
+  };
+
+  javascriptGenerator.forBlock['truncate'] = function (block: Blockly.Block, generator: any) {
+    const numericExpression = generator.valueToCode(block, 'NUMBER', Order.ATOMIC);
+    
+    const code = 'Math.trunc(' + numericExpression + ')';
 
     return [code, Order.FUNCTION_CALL];
   };
