@@ -1,0 +1,66 @@
+{
+    "problem": {
+        "name": "Robô Var 01",
+        "description": "Um mesmo programa deve funcionar para vários cenários.",
+        "testCases": [
+            { 
+                "input": "3", 
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rdd.....",
+                        ".d.d.....",
+                        ".ddd.....",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "input": "4", 
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rddd....",
+                        ".d..d....",
+                        ".d..d....",
+                        ".dddd....",
+                        ".........",
+                        ".........",
+                        "........."            
+                    ]
+                }
+            }
+        ]
+
+
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".rdd.....",
+                ".d.d.....",
+                ".ddd.....",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "controls_repeat_ext",
+            "variables_get",
+            "input",
+            "math_number",
+            "math_arithmetic"
+        ]
+    }
+}
