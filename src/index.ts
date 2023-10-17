@@ -144,10 +144,22 @@ export function configureWorkspace() {
             }
         });
     });
-    
     if (window.workspaceConfig?.stage?.type == 'cleaning') {
         window.stageManager = new CleaningRobotStageManager(document.getElementById("stage"), window.workspaceConfig.stage.data.map);
     }
+    document.getElementById("btnLoadMap").addEventListener("click", async () => {
+        const mapData = await Swal.fire({
+            title: "Cole aqui o mapa",
+            input: 'text',
+            showCancelButton: true,
+        });
+        if (mapData.dismiss) {
+            return;
+        }
+        const data = { map: JSON.parse(mapData.value) };
+        window.stageManager = new CleaningRobotStageManager(document.getElementById("stage"), data.map);
+        console.log('fim');
+    });
     window.chatManager = new ChatManager(document.getElementById("chat-messages"));
     window.chatManager.addMessage(window.workspaceConfig.problem.description, MessageType.STATUS);
     
