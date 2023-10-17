@@ -1,31 +1,32 @@
 import * as Phaser from "phaser";
+import { CleaningModel, Position } from "./model";
 
 class CleaningScene extends Phaser.Scene {
     TILE_WIDTH = 48;
     TILE_HEIGHT = 48;
     TWEEN_DURATION = 200;
-
     robot: Phaser.GameObjects.Image;
-    angle: integer;
-    map: string[][];
     floorLayer: Phaser.GameObjects.Layer;
     dirtLayer: Phaser.GameObjects.Layer;
     robotLayer: Phaser.GameObjects.Layer;
-    goalPosition?: {x: integer, y: integer} = null;
+    
+    model: CleaningModel;
 
-    constructor(data: { map: string }) {
+    constructor() {
         super({ key: 'CleaningScene' });
     }
     
     init(data: { map: Array<string> }) {
-        console.log('scene init');
-        // TODO: validate map input
-        const map = data['map'];
-        if (map) {
-            this.map = map
-                    .map((line, _) => line.split(''))
-            console.log(this.map);
-        }
+        this.model = new CleaningModel(data);
+        this.model.addChangeListener((x, y, oldValue, newValue) => {
+            if (oldValue == 'd' && newValue == '.') {
+                this.dirtLayer.getChildren().forEach((dirt: Phaser.GameObjects.Image) => {
+                    if (dirt.x == x * this.TILE_WIDTH && dirt.y == y * this.TILE_HEIGHT) {
+                        dirt.destroy();
+                    }
+                });
+            }
+        });
     }
 
     preload() {
@@ -46,35 +47,44 @@ class CleaningScene extends Phaser.Scene {
         for (let tx = 0; tx < 10; tx++) {
             for (let ty = 0; ty < 8; ty++) {
 
-                const cell = this.map[ty][tx];
+                const cell = this.model.map[ty][tx];
                 const x = tx * this.TILE_WIDTH;
                 const y = ty * this.TILE_HEIGHT;
 
                 const tile = this.add.image(x, y, 'tile').setOrigin(0, 0);
                 this.floorLayer.add(tile);
 
-                if (cell == 'r') {
-                    this.robot = this.add.image(x + this.TILE_WIDTH / 2, y + this.TILE_HEIGHT / 2, 'robot')
-                    this.robotLayer.add(this.robot);
-                } else if (cell == 'd') {
+                
+                if (cell == 'd') {
                     const dirt = this.add.image(x, y, 'dirt01').setOrigin(0, 0);
                     this.dirtLayer.add(dirt);
                 } else if (cell == 'x') {
                     const cone = this.add.image(x, y, 'cone').setOrigin(0, 0);
                     this.dirtLayer.add(cone);
-                } else if (cell == '!') {
-                    const goal = this.add.image(x, y, 'goal').setOrigin(0, 0);
-                    this.dirtLayer.add(goal);
-                    this.goalPosition = {x: tx, y: ty};
                 }
+                
             }
+        }
+
+        this.robot = this.add.image(this.model.robot.position.x * this.TILE_WIDTH + this.TILE_WIDTH / 2, this.model.robot.position.y * this.TILE_HEIGHT + this.TILE_HEIGHT / 2, 'robot')
+        this.robotLayer.add(this.robot);
+
+        if (this.model.goalPosition) {
+            const pos = this.convertTileToScreenPosition(this.model.goalPosition);
+            const goal = this.add.image(pos.x, pos.y, 'goal').setOrigin(0, 0);
+            this.dirtLayer.add(goal);
+        }
+    }
+
+    private convertTileToScreenPosition(pos: Position) {
+        return {
+            x: pos.x * this.TILE_WIDTH,
+            y: pos.y * this.TILE_HEIGHT,
         }
     }
 
     getHeadingDirection(deltaAngle: integer = 0) {
-        const radians = Phaser.Math.DegToRad(this.robot.angle + deltaAngle);
-        const direction = { x: Math.cos(radians), y: Math.sin(radians) };
-        return direction;
+        return this.model.getHeadingDirection(deltaAngle);
     }
 
     async playWrongMoveAnimation() {
@@ -106,21 +116,14 @@ class CleaningScene extends Phaser.Scene {
 
     async moveRobotAngle(angle: integer) {
         this.robot.angle = angle;
-        const direction = this.getHeadingDirection();
 
-        const newRobotX = this.robot.x + direction.x * this.TILE_WIDTH;
-        const newRobotY = this.robot.y + direction.y * this.TILE_HEIGHT;
-        const tx = Math.floor(newRobotX / this.TILE_WIDTH);
-        const ty = Math.floor(newRobotY / this.TILE_HEIGHT);
-
-        if (tx < 0 || tx >= 10 || ty < 0 || ty >= 8) {
+        if (!this.model.moveRobotAngle(angle)) {
             await this.playWrongMoveAnimation();
             return;
         }
-        if (this.map[ty][tx] == 'x') {
-            await this.playWrongMoveAnimation();
-            return;
-        }
+
+        const newRobotX = this.model.robot.position.x * this.TILE_WIDTH + this.TILE_WIDTH / 2;
+        const newRobotY = this.model.robot.position.y * this.TILE_HEIGHT + this.TILE_HEIGHT / 2;
 
         const tweenPromise = new Promise<void>((resolve, _) => {
             const tween = this.tweens.add({
@@ -137,16 +140,6 @@ class CleaningScene extends Phaser.Scene {
         });
 
         await tweenPromise;
-
-        console.log('cell = ', this.map[ty][tx]);
-        if (this.map[ty][tx] == 'd') {
-            this.map[ty][tx] = '.';
-            this.dirtLayer.getChildren().forEach((dirt: Phaser.GameObjects.Image) => {
-                if (dirt.x == tx * this.TILE_WIDTH && dirt.y == ty * this.TILE_HEIGHT) {
-                    dirt.destroy();
-                }
-            });
-        }
     }
 
     async turnRobot(deltaAngle: integer) {
@@ -174,39 +167,24 @@ class CleaningScene extends Phaser.Scene {
     }
 
     isFloorClean() {
-        return this.map.join('').indexOf('d') == -1;
+        return this.model.isFloorClean();
     }
 
     hasGoalPosition() {
-        return this.goalPosition != null;
+        return this.model.hasGoalPosition();
     }
     
     hasRobotReachedGoalPosition() {
-        if (!this.goalPosition) {
+        if (!this.model.goalPosition) {
             return false;
         }
         const tx = Math.floor(this.robot.x / this.TILE_WIDTH);
         const ty = Math.floor(this.robot.y / this.TILE_HEIGHT);
-        return tx == this.goalPosition.x && ty == this.goalPosition.y;
+        return tx == this.model.goalPosition.x && ty == this.model.goalPosition.y;
     }
 
     hasObstacleAtDirection(directionString: string) {
-        let deltaAngle = 0;
-        if (directionString == 'LEFT') {
-            deltaAngle -= 90;
-        } else if (directionString == 'RIGHT') {
-            deltaAngle += 90;
-        }
-        const direction = this.getHeadingDirection(deltaAngle);
-
-        const tx = Math.floor((this.robot.x / this.TILE_WIDTH) + direction.x);
-        const ty = Math.floor((this.robot.y / this.TILE_HEIGHT) + direction.y);
-
-        if (tx < 0 || tx >= 10 || ty < 0 || ty >= 8) {
-            return true;
-        }
-
-        return this.map[ty][tx] == 'x';
+        return this.model.hasObstacleAtDirection(directionString);
     }
 }
 
