@@ -134,7 +134,7 @@ export function loadIlpBlocks() {
     
     javascriptGenerator.forBlock['input'] = function(block: Blockly.Block, generator: any) {
         var variable_var = generator.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Names.NameType.VARIABLE);
-        const msg = `Digite um ${block.getFieldValue('TYPE')} para guardar como ${variable_var}`;
+        const msg = `Digite um ${block.getField('TYPE').getText()} para guardar como ${variable_var}`;
         const msgJSON = JSON.stringify(msg);
         let code = `window.chatManager.addMessage(${msgJSON}, 'received');\n`;
         if (block.getFieldValue('TYPE') === 'NUMBER') {
