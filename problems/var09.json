@@ -1,7 +1,7 @@
 {
     "problem": {
         "name": "Var 09",
-        "description": "Programe o robô para pedir o número de passos que ele deve dar. Se o número for positivo, o robô deve andar em direção ao lado direito da sala; se for negativo, ele deve andar em direção ao lado esquerdo da sala.",
+        "description": "Programe o robô para pedir o número de passos que ele deve dar. Se o número for positivo, o robô deve andar em direção ao lado direito da sala; se for negativo, ele deve andar em direção ao lado esquerdo da sala. No exemplo, você deve digitar -3.",
         "testCases": [
             { 
                 "input": "3", 
@@ -42,7 +42,7 @@
                 ".........",
                 ".........",
                 ".........",
-                "...rdd!..",
+                ".!ddr....",
                 ".........",
                 ".........",
                 ".........",
@@ -54,11 +54,12 @@
         "blocks": [
             "move_forward",
             "turn",
-            "controls_repeat_ext",
             "variables_get",
-            "input",
+            "input_question",
             "math_number",
-            "controls_if"
+            "math_arithmetic",
+            "controls_if",
+            "logic_compare"
         ]
     }
 }

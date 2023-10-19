@@ -82,13 +82,15 @@
     },
     "toolbox": {
         "blocks": [
-            "move_forward",
-            "turn",
-            "controls_repeat_ext",
-            "variables_get",
-            "input",
-            "math_number",
+            "text_print",
+            "move_forward_one",
+            "repeat_until_goal",
             "controls_if",
+            "condition_presence",
+            "variables_get",
+            "variables_set",
+            "math_number",
+            "math_arithmetic",
             "comment"
         ]
     }

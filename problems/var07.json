@@ -71,8 +71,10 @@
             "turn",
             "controls_repeat_ext",
             "variables_get",
-            "input",
-            "math_number"
+            "input_question",
+            "math_number",
+            "math_arithmetic",
+            "comment"
         ]
     }
 }

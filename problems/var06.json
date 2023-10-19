@@ -1,7 +1,7 @@
 {
     "problem": {
         "name": "Var 06",
-        "description": "Nesse cenário, as sujeiras sempre formam um quadrado, e o robô está posicionado no canto superior esquerdo. Programe o robô para pedir o número de blocos de lado do quadrado e limpar todas as sujeiras.",
+        "description": "Nesse cenário, as sujeiras sempre formam um quadrado, e o robô está posicionado no canto superior esquerdo. Programe o robô para perguntar o número de blocos de lado do quadrado e limpar todas as sujeiras. No exemplo, o lado mede 3 blocos.",
         "testCases": [
             {
                 "input": "3",
@@ -71,8 +71,10 @@
             "turn",
             "controls_repeat_ext",
             "variables_get",
-            "input",
-            "math_number"
+            "input_question",
+            "math_number",
+            "math_arithmetic",
+            "comment"
         ]
     }
 }

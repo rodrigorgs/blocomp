@@ -1,7 +1,7 @@
 {
     "problem": {
         "name": "Var 04",
-        "description": "Digite um número e faça o robô girar para a esquerda esse número de vezes, e então andar para frente duas vezes.",
+        "description": "Programe o robô para perguntar quantas vezes ele deve girar para a esquerda antes de dar dois passos para frente. No exemplo, ele deve girar 1 vez.",
         "testCases": [
             { 
                 "input": "0", 
@@ -70,9 +70,9 @@
         "data": {
             "map": [
                 ".........",
-                ".........",
-                ".........",
-                "....rdd..",
+                "....d....",
+                "....d....",
+                "....r....",
                 ".........",
                 ".........",
                 ".........",
@@ -86,8 +86,9 @@
             "turn",
             "controls_repeat_ext",
             "variables_get",
-            "input",
-            "math_number"
+            "input_question",
+            "math_number",
+            "comment"
         ]
     }
 }
