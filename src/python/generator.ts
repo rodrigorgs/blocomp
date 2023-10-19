@@ -69,6 +69,8 @@ export function loadPythonGenerator() {
         return code;
     };
 
+    pythonGenerator.forBlock['input_question'] = pythonGenerator.forBlock['input']
+
     pythonGenerator.forBlock['math_arithmetic'] = function(block: Blockly.Block, generator: any) {
         // Basic arithmetic operators, and power.
         const OPERATORS: {[index: string]: Array<string|number>} = {
