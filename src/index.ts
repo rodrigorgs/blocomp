@@ -150,7 +150,7 @@ export function configureWorkspace() {
     document.getElementById("btnLoadMap").addEventListener("click", async () => {
         const mapData = await Swal.fire({
             title: "Cole aqui o mapa",
-            input: 'text',
+            input: 'textarea',
             showCancelButton: true,
         });
         if (mapData.dismiss) {
