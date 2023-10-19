@@ -1,0 +1,80 @@
+{
+    "problem": {
+        "name": "Var 06",
+        "description": "Nesse cenário, as sujeiras sempre formam um quadrado, e o robô está posicionado no canto superior esquerdo. Programe o robô para perguntar o número de blocos de lado do quadrado e limpar todas as sujeiras. No exemplo, o lado mede 3 blocos.",
+        "testCases": [
+            {
+                "input": "3",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rdd.....",
+                        ".d.d.....",
+                        ".ddd.....",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            {
+                "input": "4",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rddd....",
+                        ".d..d....",
+                        ".d..d....",
+                        ".dddd....",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            {
+                "input": "5",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rdddd...",
+                        ".d...d...",
+                        ".d...d...",
+                        ".d...d...",
+                        ".ddddd...",
+                        ".........",
+                        "........."
+                    ]
+                }
+            }
+        ]
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".rdd.....",
+                ".d.d.....",
+                ".ddd.....",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward",
+            "turn",
+            "controls_repeat_ext",
+            "variables_get",
+            "input_question",
+            "math_number",
+            "math_arithmetic",
+            "comment"
+        ]
+    }
+}

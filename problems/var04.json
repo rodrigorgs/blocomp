@@ -1,0 +1,94 @@
+{
+    "problem": {
+        "name": "Var 04",
+        "description": "Programe o robô para perguntar quantas vezes ele deve girar para a esquerda antes de dar dois passos para frente. No exemplo, ele deve girar 1 vez.",
+        "testCases": [
+            { 
+                "input": "0", 
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        "....rdd..",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "input": "1", 
+                "data": {
+                    "map": [
+                        ".........",
+                        "....d....",
+                        "....d....",
+                        "....r....",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "input": "2", 
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        "..ddr....",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "input": "3", 
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        "....r....",
+                        "....d....",
+                        "....d....",
+                        ".........",
+                        "........."
+                    ]
+                }
+            }
+        ]
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                "....d....",
+                "....d....",
+                "....r....",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward",
+            "turn",
+            "controls_repeat_ext",
+            "variables_get",
+            "input_question",
+            "math_number",
+            "comment"
+        ]
+    }
+}

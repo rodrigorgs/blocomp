@@ -16,10 +16,9 @@
     "toolbox": {
         "blocks": [
             "text_print",
-            "input",
-            "math_number",
-            "math_arithmetic",
-            "variables_get"
+            "input_question",
+            "variables_get",
+            "comment"
         ]
     }
 }

@@ -1,0 +1,82 @@
+{
+    "problem": {
+        "name": "Var 09",
+        "description": "Programe o robô para limpar toda a sujeira à frente, até chegar à estação de carregamento. Ao final, o robô deve dizer o número de sujeiras que ele limpou.",
+        "testCases": [
+            { 
+                "output": "2",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        "...rdd!..",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "output": "4",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        "...rdddd!",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "output": "3",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        ".r.d.d.d!",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            }
+        ]
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                "...rdd!..",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "text_print",
+            "move_forward_one",
+            "repeat_until_goal",
+            "controls_if",
+            "condition_presence",
+            "variables_get",
+            "variables_set",
+            "math_number",
+            "math_arithmetic",
+            "comment"
+        ]
+    }
+}

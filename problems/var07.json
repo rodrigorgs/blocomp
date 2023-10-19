@@ -1,0 +1,80 @@
+{
+    "problem": {
+        "name": "Var 07",
+        "description": "Este desafio é igual ao anterior, mas desta vez você não tem à disposição o bloco de andar N vezes.",
+        "testCases": [
+            {
+                "input": "3",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rdd.....",
+                        ".d.d.....",
+                        ".ddd.....",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            {
+                "input": "4",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rddd....",
+                        ".d..d....",
+                        ".d..d....",
+                        ".dddd....",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            {
+                "input": "5",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".rdddd...",
+                        ".d...d...",
+                        ".d...d...",
+                        ".d...d...",
+                        ".ddddd...",
+                        ".........",
+                        "........."
+                    ]
+                }
+            }
+        ]
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".rdd.....",
+                ".d.d.....",
+                ".ddd.....",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward_one",
+            "turn",
+            "controls_repeat_ext",
+            "variables_get",
+            "input_question",
+            "math_number",
+            "math_arithmetic",
+            "comment"
+        ]
+    }
+}
