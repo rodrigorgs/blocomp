@@ -1,0 +1,64 @@
+{
+    "problem": {
+        "name": "Var 09",
+        "description": "Programe o robô para pedir o número de passos que ele deve dar. Se o número for positivo, o robô deve andar em direção ao lado direito da sala; se for negativo, ele deve andar em direção ao lado esquerdo da sala.",
+        "testCases": [
+            { 
+                "input": "3", 
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        "...rdd!..",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "input": "-2", 
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        ".!dr.....",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            }
+        ]
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                "...rdd!..",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward",
+            "turn",
+            "controls_repeat_ext",
+            "variables_get",
+            "input",
+            "math_number",
+            "controls_if"
+        ]
+    }
+}

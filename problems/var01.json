@@ -11,7 +11,8 @@
     },
     "toolbox": {
         "blocks": [
-            "text_print"
+            "text_print",
+            "comment"
         ]
     }
 }

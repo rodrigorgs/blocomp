@@ -19,7 +19,8 @@
             "input",
             "math_number",
             "math_arithmetic",
-            "variables_get"
+            "variables_get",
+            "comment"
         ]
     }
 }
