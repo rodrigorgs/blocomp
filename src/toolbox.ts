@@ -35,6 +35,9 @@ const toolbox = {
       { "kind": "block", "type": "controls_repeat_ext", "inputs": { "TIMES": { "block": { "type": "math_number", "fields": { "NUM": 2 } } } } },
       { "kind": "block", "type": "repeat_n" },
       { "kind": "block", "type": "repeat_until_goal" },
+      { "kind": "block", "type": "controls_whileUntil" },
+      { "kind": "block", "type": "controls_for" },
+      { "kind": "block", "type": "controls_flow_statements" },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Organização", "colour": 45, "contents": [
       { "kind": "block", "type": "comment" },
