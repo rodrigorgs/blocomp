@@ -24,13 +24,17 @@ const toolbox = {
       { "kind": "block", "type": "variables_get", "fields": { "VAR": { "name": "x" } } },
       { "kind": "block", "type": "variables_set", "fields": { "VAR": { "name": "x" } } },
     ]},
-    { "kind": "category", "flyoutOpen": true, "name": "Controle", "colour": 120, "contents": [
+    { "kind": "category", "flyoutOpen": true, "name": "Condição", "colour": 120, "contents": [
       { "kind": "block", "type": "controls_if" },
+      { "kind": "block", "type": "logic_compare" },
+      { "kind": "block", "type": "logic_negate" },
+      { "kind": "block", "type": "logic_operation" },
+      { "kind": "block", "type": "if_no_obstacle" },
+    ]},
+    { "kind": "category", "flyoutOpen": true, "name": "Repetição", "colour": 120, "contents": [
       { "kind": "block", "type": "controls_repeat_ext", "inputs": { "TIMES": { "block": { "type": "math_number", "fields": { "NUM": 2 } } } } },
       { "kind": "block", "type": "repeat_n" },
       { "kind": "block", "type": "repeat_until_goal" },
-      { "kind": "block", "type": "logic_compare" },
-      { "kind": "block", "type": "if_no_obstacle" },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Organização", "colour": 45, "contents": [
       { "kind": "block", "type": "comment" },
