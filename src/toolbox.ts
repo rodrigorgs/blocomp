@@ -11,6 +11,7 @@ const toolbox = {
     { "kind": "category", "flyoutOpen": true, "name": "E/S", "colour": 165, "contents": [
       { "kind": "block", "type": "text_print", "inputs": { "TEXT": { "block": { "type": "text", "fields": { "TEXT": "Olá" } } } } },
       { "kind": "block", "type": "text", "fields": { "TEXT": "Olá" } },
+      { "kind": "block", "type": "text_join" },
       { "kind": "block", "type": "input" },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Números", "colour": 230, "contents": [
