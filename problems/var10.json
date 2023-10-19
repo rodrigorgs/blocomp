@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 09",
+        "name": "Conta sujeiras",
         "description": "Programe o robô para limpar toda a sujeira à frente, até chegar à estação de carregamento. Ao final, o robô deve dizer o número de sujeiras que ele limpou.",
         "testCases": [
             { 

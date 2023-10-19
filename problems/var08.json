@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 08",
+        "name": "Retângulo",
         "description": "Agora as sujeiras estão organizadas em um retângulo, com o robô iniciando no canto superior esquerdo do retângulo. Programe o robô para pedir a largura e a altura do retângulo, e então limpar toda a sujeira. No exemplo, o retângulo possui 4 blocos de largura e 3 blocos de altura. Você vai precisar de duas variáveis nesse programa.",
         "testCases": [
             {

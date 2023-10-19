@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 02",
+        "name": "Seu nome",
         "description": "O robô também pode pedir informações. Mande o robô perguntar o seu nome e então dizer o nome 2 vezes.",
         "testCases": [
             {

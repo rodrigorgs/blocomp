@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 04",
+        "name": "Gira e anda",
         "description": "Programe o robô para perguntar quantas vezes ele deve girar para a esquerda antes de dar dois passos para frente. No exemplo, ele deve girar 1 vez.",
         "testCases": [
             { 

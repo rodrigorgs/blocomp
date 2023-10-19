@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 11",
+        "name": "Conta sujeiras e cones",
         "description": "Programe o robô para limpar toda a sujeira à frente, até chegar à estação de carregamento. Ao final, o robô deve dizer o número de sujeiras que ele limpou e também o número de cones que encontrou do seu lado esquerdo.",
         "testCases": [
             { 

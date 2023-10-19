@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 01",
+        "name": "Oi",
         "description": "Você pode programar o robô para dizer coisas. Mande o robô dizer \"Oi\" (sem as aspas). Atenção: para completar o desafio, o robô deve escrever exatamente o que foi pedido. Note que são duas letras, a primeira maiúscula.",
         "testCases": [
             {

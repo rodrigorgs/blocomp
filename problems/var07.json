@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 07",
+        "name": "Quadrado 2",
         "description": "Este desafio é igual ao anterior, mas desta vez você não tem à disposição o bloco de andar N vezes.",
         "testCases": [
             {
