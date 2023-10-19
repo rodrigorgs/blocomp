@@ -1,0 +1,25 @@
+{
+    "problem": {
+        "name": "Var 02",
+        "description": "O robô também pode pedir informações. Mande o robô perguntar o seu nome e então dizer o nome 2 vezes.",
+        "testCases": [
+            {
+                "input": "Fulano",
+                "output": "Fulano\nFulano"
+            },
+            {
+                "input": "Sicrana da Silva",
+                "output": "Sicrana da Silva\nSicrana da Silva"
+            }
+        ]
+    },
+    "toolbox": {
+        "blocks": [
+            "text_print",
+            "input",
+            "math_number",
+            "math_arithmetic",
+            "variables_get"
+        ]
+    }
+}

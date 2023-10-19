@@ -1,0 +1,25 @@
+{
+    "problem": {
+        "name": "Var 01",
+        "description": "O robô também pode pedir informações. Mande o robô perguntar seu ano de nascimento e então dizer a idade que você tinha no início de 2020. Atenção: o robô deve dizer apenas o número da idade, sem nenhum texto adicional.",
+        "testCases": [
+            {
+                "input": "2000",
+                "output": "20"
+            },
+            {
+                "input": "1991",
+                "output": "29"
+            }
+        ]
+    },
+    "toolbox": {
+        "blocks": [
+            "text_print",
+            "input",
+            "math_number",
+            "math_arithmetic",
+            "variables_get"
+        ]
+    }
+}
