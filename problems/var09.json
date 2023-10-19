@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 09",
+        "name": "Pra frente ou pra trás",
         "description": "Programe o robô para pedir o número de passos que ele deve dar. Se o número for positivo, o robô deve andar em direção ao lado direito da sala; se for negativo, ele deve andar em direção ao lado esquerdo da sala. No exemplo, você deve digitar -3.",
         "testCases": [
             { 

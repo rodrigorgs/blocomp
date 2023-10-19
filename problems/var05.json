@@ -1,6 +1,6 @@
 {
     "problem": {
-        "name": "Var 05",
+        "name": "Anda para frente",
         "description": "Dado um número x, faça o robô andar x - 1 vezes para frente. Neste exemplo, digite 4.",
         "testCases": [
             { 
