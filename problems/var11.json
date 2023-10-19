@@ -1,0 +1,95 @@
+{
+    "problem": {
+        "name": "Var 11",
+        "description": "Programe o robô para limpar toda a sujeira à frente, até chegar à estação de carregamento. Ao final, o robô deve dizer o número de sujeiras que ele limpou e também o número de cones que encontrou do seu lado esquerdo.",
+        "testCases": [
+            { 
+                "output": "2\n0",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".........",
+                        "...rdd!..",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "output": "2\n1",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".....x...",
+                        "...rdd!..",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "output": "4\n2",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        ".....xx..",
+                        "...rdddd!",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            },
+            { 
+                "output": "3\n3",
+                "data": {
+                    "map": [
+                        ".........",
+                        ".........",
+                        "..x.x.x..",
+                        ".r.d.d.d!",
+                        ".........",
+                        ".........",
+                        ".........",
+                        "........."
+                    ]
+                }
+            }
+        ]
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                "....x....",
+                "...rdd!..",
+                ".........",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "move_forward",
+            "turn",
+            "controls_repeat_ext",
+            "variables_get",
+            "input",
+            "math_number",
+            "controls_if",
+            "comment"
+        ]
+    }
+}
