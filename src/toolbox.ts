@@ -13,6 +13,7 @@ const toolbox = {
       { "kind": "block", "type": "text", "fields": { "TEXT": "Olá" } },
       { "kind": "block", "type": "text_join" },
       { "kind": "block", "type": "input" },
+      { "kind": "block", "type": "input_question", "inputs": { "QUESTION": { "block": { "type": "text", "fields": { "TEXT": "Qual sua idade?" } } } } },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Números", "colour": 230, "contents": [
       { "kind": "block", "type": "math_number", "fields": { "NUM": 1 } },
