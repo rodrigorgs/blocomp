@@ -1,0 +1,25 @@
+{
+    "problem": {
+        "name": "Var 03",
+        "description": "O robô também sabe calcular. Mande o robô perguntar em que ano você nasceu e então dizer a idade que você tinha no dia 31/12/2019. Atenção: o robô deve dizer apenas o número da idade, sem nenhum texto adicional.",
+        "testCases": [
+            {
+                "input": "2000",
+                "output": "20"
+            },
+            {
+                "input": "1991",
+                "output": "29"
+            }
+        ]
+    },
+    "toolbox": {
+        "blocks": [
+            "text_print",
+            "input",
+            "math_number",
+            "math_arithmetic",
+            "variables_get"
+        ]
+    }
+}

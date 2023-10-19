@@ -1,0 +1,21 @@
+{
+    "problem": {
+        "name": "Robô Var 02",
+        "description": "Leia dois números inteiros e imprima a soma deles.",
+        "testCases": [
+            { 
+                "input": "3\n2", 
+                "output": "5"
+            },
+            { 
+                "input": "4\n6", 
+                "output": "10"
+            }
+        ]
+    },
+    "stage": {
+        "type": "structured"
+    },
+    "toolbox": {
+    }
+}
