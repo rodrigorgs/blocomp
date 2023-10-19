@@ -190,7 +190,7 @@ export function loadIlpBlocks() {
       var variable_var = generator.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Names.NameType.VARIABLE);
       var question = generator.valueToCode(block, 'QUESTION', Order.ATOMIC);
       let msg = `"Digite um ${block.getField('TYPE').getText()} para guardar como ${variable_var}"`;
-      if (question) {
+      if (question && question != "''" && question != '""') {
         msg = question;
       }
       
