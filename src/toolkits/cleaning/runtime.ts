@@ -143,6 +143,7 @@ class CleaningScene extends Phaser.Scene {
     }
 
     async turnRobot(deltaAngle: integer) {
+        this.model.turnRobot(deltaAngle);
         const tweenPromise = new Promise<void>((resolve, _) => {
             const tween = this.tweens.add({
                 targets: this.robot,
