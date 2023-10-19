@@ -5,6 +5,7 @@ import { runTests } from "../runner";
 import '../window';
 import { Toast } from "../alerts/toast";
 import { pythonGenerator } from "blockly/python";
+import { MessageType } from "../toolkits/chat/runtime";
 
 export enum RunMode {
     SLOW = "SLOW",
@@ -183,6 +184,7 @@ export class Editor {
         this.runMode = RunMode.FAST;
 
         window.chatManager?.clear()
+        window.chatManager?.addMessage(this.problem.description, MessageType.STATUS);
         window.stageManager?.clear();
 
         clearTimeout(this._stepTimeout);
