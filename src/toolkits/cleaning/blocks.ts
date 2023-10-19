@@ -206,8 +206,9 @@ const conditionPresenceBlock: any = {
         ]
       }
     ],
-    "output": null,
-    "colour": 230,
+    "style": "logic_blocks",
+    "inputsInline": true,
+    "output": "Boolean",
     "tooltip": "",
     "helpUrl": ""
   }
