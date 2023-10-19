@@ -253,6 +253,10 @@ export class CleaningRobotStageManager implements StageManager {
         return this.getScene().hasObstacleAtDirection(direction);
     }
 
+    verifyCell(verifyPresence: boolean, item: string, side: 'FORWARD' | 'LEFT' | 'RIGHT') {
+        return this.getScene().model.verifyCell(verifyPresence, item, side);
+    }
+
     outcome(): StageOutcome {
         return this.getScene().model.outcome();
     }

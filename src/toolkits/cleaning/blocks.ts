@@ -155,6 +155,64 @@ const ifNoObstacleBlock: any = {
     "helpUrl": ""
 }
 
+const conditionPresenceBlock: any = {
+    "type": "condition_presence",
+    "message0": "%1 %2 à %3",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "PRESENCE",
+        "options": [
+          [
+            "tem",
+            "TRUE"
+          ],
+          [
+            "não tem",
+            "FALSE"
+          ]
+        ]
+      },
+      {
+        "type": "field_dropdown",
+        "name": "ITEM",
+        "options": [
+          [
+            "sujeira",
+            "d"
+          ],
+          [
+            "cone",
+            "x"
+          ]
+        ]
+      },
+      {
+        "type": "field_dropdown",
+        "name": "DIRECTION",
+        "options": [
+          [
+            "esquerda ↺",
+            "LEFT"
+          ],
+          [
+            "frente",
+            "FORWARD"
+          ],
+          [
+            "direita ↻",
+            "RIGHT"
+          ]
+        ]
+      }
+    ],
+    "output": null,
+    "colour": 230,
+    "tooltip": "",
+    "helpUrl": ""
+  }
+
+
 export function loadBlocks() {
     Blockly.defineBlocksWithJsonArray([
         moveDirectionBlock,
@@ -163,6 +221,7 @@ export function loadBlocks() {
         turnBlock,
         repeatUntilGoalBlock,
         ifNoObstacleBlock,
+        conditionPresenceBlock
     ]);
 
     javascriptGenerator.forBlock['move_direction'] = function (block: Blockly.Block, generator: any) {
@@ -197,4 +256,14 @@ export function loadBlocks() {
         var code = `await window.stageManager.turn(${angle});\n`;
         return code;
     };
+
+    javascriptGenerator.forBlock['condition_presence'] = function (block: Blockly.Block, generator: any) {
+        var presence = block.getFieldValue('PRESENCE');
+        var item = block.getFieldValue('ITEM');
+        var direction = block.getFieldValue('DIRECTION');
+
+        var code = `window.stageManager.verifyCell(${presence == 'TRUE'}, "${item}", "${direction}")`;
+        
+        return [code, Order.FUNCTION_CALL];
+      };
 }

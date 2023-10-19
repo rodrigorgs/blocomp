@@ -30,6 +30,7 @@ const toolbox = {
       { "kind": "block", "type": "logic_negate" },
       { "kind": "block", "type": "logic_operation" },
       { "kind": "block", "type": "if_no_obstacle" },
+      { "kind": "block", "type": "condition_presence" },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Repetição", "colour": 120, "contents": [
       { "kind": "block", "type": "controls_repeat_ext", "inputs": { "TIMES": { "block": { "type": "math_number", "fields": { "NUM": 2 } } } } },
