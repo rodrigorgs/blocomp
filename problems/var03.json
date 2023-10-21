@@ -5,11 +5,15 @@
         "testCases": [
             {
                 "input": "2000",
-                "output": "20"
+                "output": "19"
             },
             {
                 "input": "1991",
-                "output": "29"
+                "output": "28"
+            },
+            {
+                "input": "2018",
+                "output": "1"
             }
         ]
     },

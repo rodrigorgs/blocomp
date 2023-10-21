@@ -1,0 +1,41 @@
+{
+    "problem": {
+        "name": "Livre",
+        "description": "Explore os blocos livremente."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                ".........",
+                "..r......",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    },
+    "toolbox": {
+        "blocks": [
+            "text_print",
+            "move_forward_one",
+            "input_question",
+            "Xturn",
+            "Xrepeat_until_goal",
+            "controls_repeat_ext",
+            "controls_if",
+            "condition_presence",
+            "logic_compare",
+            "logic_operation",
+            "logic_negate",
+            "variables_get",
+            "variables_set",
+            "math_number",
+            "math_arithmetic",
+            "comment"
+        ]
+    }
+}
