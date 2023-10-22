@@ -12,4 +12,5 @@ export interface Problem {
 export interface TestCase {
     input: string;
     output: string;
+    data: any;
 }

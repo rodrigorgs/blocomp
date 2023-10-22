@@ -20,6 +20,7 @@ import RunBarComponent from './editor/run_bar';
 import { Toast } from './alerts/toast';
 import ProblemNavigationComponent from './problem_navigation/problem_navigation_component';
 import { generatePythonCode, loadPythonGenerator } from './python/generator';
+import ProblemTestComponent from './problem_navigation/problem_test_component';
 
 //////////
 
@@ -175,6 +176,10 @@ export function configureWorkspace() {
     
     const rootRunbar = createRoot(document.getElementById("runbar"));
     rootRunbar.render(React.createElement(RunBarComponent, {editor}));
+
+    const rootTestbar = createRoot(document.getElementById("testbar"));
+    rootTestbar.render(React.createElement(ProblemTestComponent, {problem: window.workspaceConfig.problem, editor}));
+
 
     const rootProblembar = createRoot(document.getElementById("problemBar"));
     rootProblembar.render(React.createElement(ProblemNavigationComponent, {problem: window.workspaceConfig.problem}));

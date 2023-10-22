@@ -20,7 +20,7 @@ export class ChatManager {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
         messageElement.classList.add(type);
-        messageElement.textContent = messageText;
+        messageElement.innerHTML = messageText;
     
         // Append the message to the chat
         this.element.appendChild(messageElement);
