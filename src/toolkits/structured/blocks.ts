@@ -201,6 +201,9 @@ export function loadIlpBlocks() {
           code += `${variable_var} = prompt(${msg}, "");\n`;
       }
       code += `window.chatManager.addMessage(${variable_var}, 'sent');\n`;
+
+      code += `this.log('<b>${variable_var}</b>:', ${variable_var});\n`
+
       return code;
     };
 
@@ -248,4 +251,16 @@ export function loadIlpBlocks() {
 
     return [code, Order.FUNCTION_CALL];
   };
+
+  javascriptGenerator.forBlock['variables_set'] = function (block: Blockly.Block, generator: any) {
+    const varName = generator.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Names.NameType.VARIABLE);
+    const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+    return `${varName} = ${value};\nthis.log('<b>${varName}</b>:', ${varName});\n`;
+  }
+
+  javascriptGenerator.forBlock['math_change'] = function (block: Blockly.Block, generator: any) {
+    const varName = generator.nameDB_.getName(block.getFieldValue('VAR'), Blockly.Names.NameType.VARIABLE);
+    const value = generator.valueToCode(block, 'DELTA', Order.ATOMIC);
+    return `${varName} += ${value};\nthis.log('<b>${varName}</b>:', ${varName});\n`;
+  }
 }

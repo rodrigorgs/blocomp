@@ -51,6 +51,7 @@ export class Editor {
     private _runMode = RunMode.SLOW;
     private _runState = RunState.PAUSED;
     private changeListeners: Array<() => void> = [];
+    private _showLogMessages = false;
     
     constructor(private workspace: Blockly.WorkspaceSvg, private problem: Problem) {
         this.loadWorkspaceFromLocalStorage();
@@ -76,6 +77,7 @@ export class Editor {
     get runMode() { return this._runMode; }
     get runState() { return this._runState; }
     get programState() { return this._programState; }
+    get showLogMessages() { return this._showLogMessages; }
 
     private set runMode(value: RunMode) {
         if (value != this._runMode) {
@@ -92,6 +94,13 @@ export class Editor {
     private set programState(value: ProgramState) {
         if (value != this._programState) {
             this._programState = value;
+            this.onChange();
+        }
+    }
+
+    set showLogMessages(value: boolean) {
+        if (value != this._showLogMessages) {
+            this._showLogMessages = value;
             this.onChange();
         }
     }
@@ -175,6 +184,15 @@ export class Editor {
             console.log('error', e);
         } finally {
             javascriptGenerator.STATEMENT_PREFIX = _oldStatementPrefix;
+        }
+    }
+
+    log(...args: any[]) {
+        if (this.showLogMessages) {
+            console.log(...args);
+            if (window.chatManager) {
+                window.chatManager.addMessage(args.join(' '), MessageType.STATUS);
+            }
         }
     }
     
