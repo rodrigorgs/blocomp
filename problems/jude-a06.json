@@ -1,10 +1,19 @@
 {
     "problem": {
-        "name": "Livre",
-        "description": "Ache a saída"
+        "name": "Ajude o Bart",
+        "description": "Lembre-se de submeter o código Python no JUDE (Ajude o Bart)."
     },
     "toolbox": {
         "blocks": [
+            "text_print",
+            "input_question",
+            "variables_get",
+            "variables_set",
+            "controls_for",
+            "text",
+            "text_join",
+            "math_number",
+            "comment"
         ]
     }
 }
