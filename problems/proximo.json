@@ -13,7 +13,7 @@
         "blocks": [
             "text_print",
             "text",
-            "input",
+            "input_question",
             "math_number",
             "math_arithmetic",
             "variables_get"

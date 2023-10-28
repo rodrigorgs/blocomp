@@ -6,7 +6,7 @@
     "toolbox": {
         "blocks": [
             "text_print",
-            "input",
+            "input_question",
             "text",
             "controls_if",
             "controls_repeat_ext",
