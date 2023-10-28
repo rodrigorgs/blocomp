@@ -152,7 +152,7 @@ const roundBlock: any = {
 
 const formatBlock: any = {
   "type": "format",
-  "message0": "formata %1 com %2 casa(s) decimal(is)",
+  "message0": "formate %1 com %2 casa(s) decimal(is)",
   "args0": [
     {
       "type": "input_value",
