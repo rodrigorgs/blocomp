@@ -118,6 +118,16 @@ export function loadPythonGenerator() {
     
         return [code, Order.FUNCTION_CALL];
       };
+
+      pythonGenerator.forBlock['format'] = function (block: Blockly.Block, generator: any) {
+        const numericExpression = generator.valueToCode(block, 'NUMBER', Order.ATOMIC);
+        const precision = block.getFieldValue('PRECISION');
+        
+        const code = 'f"{' + numericExpression + ':.' + precision + 'f}"';
+    
+        return [code, Order.FUNCTION_CALL];
+      };
+    
 }
 
 function detectNumericType(s: string) {

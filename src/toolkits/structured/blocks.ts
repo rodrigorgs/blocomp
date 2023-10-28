@@ -146,6 +146,30 @@ const roundBlock: any = {
   "helpUrl": ""
 }
 
+const formatBlock: any = {
+  "type": "format",
+  "message0": "formata %1 com %2 casa(s) decimal(is)",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "NUMBER",
+      "check": "Number"
+    },
+    {
+      "type": "field_number",
+      "name": "PRECISION",
+      "value": 0,
+      "min": 0
+    }
+  ],
+  "inputsInline": false,
+  "output": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+
 const truncateBlock: any = {
   "type": "truncate",
   "message0": "trunca %1",
@@ -168,6 +192,7 @@ export function loadIlpBlocks() {
         inputQuestionBlock,
         commentBlock,
         repeatNBlock,
+        formatBlock,
         roundBlock,
         truncateBlock,
     ]);
@@ -243,6 +268,17 @@ export function loadIlpBlocks() {
 
     return [code, Order.FUNCTION_CALL];
   };
+
+  javascriptGenerator.forBlock['format'] = function (block: Blockly.Block, generator: any) {
+    const numericExpression = generator.valueToCode(block, 'NUMBER', Order.ATOMIC);
+    const precision = block.getFieldValue('PRECISION');
+    
+    const code = `(${numericExpression}).toFixed(${precision})`
+    // const code = 'Math.round((' + numericExpression + ') * Math.pow(10, ' + precision + ')) / Math.pow(10, ' + precision + ')';
+
+    return [code, Order.FUNCTION_CALL];
+  };
+
 
   javascriptGenerator.forBlock['truncate'] = function (block: Blockly.Block, generator: any) {
     const numericExpression = generator.valueToCode(block, 'NUMBER', Order.ATOMIC);

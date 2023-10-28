@@ -19,8 +19,9 @@ const toolbox = {
     { "kind": "category", "flyoutOpen": true, "name": "Números", "colour": 230, "contents": [
       { "kind": "block", "type": "math_number", "fields": { "NUM": 1 } },
       { "kind": "block", "type": "math_arithmetic" },
-      { "kind": "block", "type": "round" },
       { "kind": "block", "type": "truncate" },
+      { "kind": "block", "type": "round" },
+      { "kind": "block", "type": "format" },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Variáveis", "custom": "VARIABLE", "colour": 330, "contents": [
       { "kind": "block", "type": "variables_get", "fields": { "VAR": { "name": "x" } } },
