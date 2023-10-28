@@ -55,6 +55,10 @@ const inputQuestionBlock: any = {
         [
           "texto",
           "TEXT"
+        ],
+        [
+          "palavra",
+          "WORD"
         ]
       ]
     },
@@ -222,6 +226,8 @@ export function loadIlpBlocks() {
       let code = `window.chatManager.addMessage(${msg}, 'request');\n`;
       if (block.getFieldValue('TYPE') === 'NUMBER') {
           code += `${variable_var} = Number(prompt(${msg}, ""));\n`;
+      } else if (block.getFieldValue('TYPE') === 'WORD') {
+          code += `${variable_var} = prompt(${msg}, "").split(/ +/)[0];\n`;
       } else {
           code += `${variable_var} = prompt(${msg}, "");\n`;
       }

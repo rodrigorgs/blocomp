@@ -62,6 +62,8 @@ export function loadPythonGenerator() {
         if (block.getFieldValue('TYPE') === 'NUMBER') {
             code += `${variable_var} = read_number()\n`;
             // code += `${variable_var} = float(input())\n`;
+        } else if (block.getFieldValue('TYPE') === 'WORD') {
+            code += `${variable_var} = read_word()\n`;
         } else {
             // code += `${variable_var} = input()\n`;
             code += `${variable_var} = read_line()\n`;
