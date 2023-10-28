@@ -1,10 +1,17 @@
 {
     "problem": {
-        "name": "Livre",
-        "description": "A energia do Besouro Azul"
+        "name": "A energia do Besouro Azul",
+        "description": "Lembre-se de submeter o código Python no JUDE (A energia do Besouro Azul)."
     },
     "toolbox": {
         "blocks": [
+            "text_print",
+            "input_question",
+            "variables_get",
+            "variables_set",
+            "math_number",
+            "math_arithmetic",
+            "comment"
         ]
     }
 }

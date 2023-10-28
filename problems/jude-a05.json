@@ -1,10 +1,19 @@
 {
     "problem": {
-        "name": "Livre",
-        "description": "Ache a saída"
+        "name": "A tabuada do Zezinho",
+        "description": "Lembre-se de submeter o código Python no JUDE (A tabuada do Zezinho)."
     },
     "toolbox": {
         "blocks": [
+            "text_print",
+            "input_question",
+            "variables_get",
+            "variables_set",
+            "text",
+            "controls_for",
+            "math_number",
+            "math_arithmetic",
+            "comment"
         ]
     }
 }
