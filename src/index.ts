@@ -28,6 +28,8 @@ export function configureWorkspace() {
     // translation
     Blockly.setLocale(ptBR);
     Blockly.Msg["TEXT_PRINT_TITLE"] = "diga %1";
+    Blockly.Msg["VARIABLES_SET"] = "mude %1 para %2";
+    Blockly.Msg["MATH_CHANGE_TITLE"] = "adicione %2 a %1";
     
     ///////
     
