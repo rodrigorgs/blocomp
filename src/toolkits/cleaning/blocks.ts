@@ -31,7 +31,7 @@ const moveDirectionBlock: any = {
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 165,
+    "colour": 30,
     "tooltip": "Move para determinada direção",
     "helpUrl": ""
 }
@@ -49,7 +49,7 @@ const moveForwardBlock: any = {
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 165,
+    "colour": 30,
     "tooltip": "Move para frente",
     "helpUrl": ""
 }
@@ -59,7 +59,7 @@ const moveForwardOneBlock: any = {
   "message0": "ande 1 passo para frente",
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 165,
+  "colour": 30,
   "tooltip": "Move um passo para frente",
   "helpUrl": ""
 }
@@ -86,7 +86,7 @@ const turnBlock: any = {
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 165,
+    "colour": 30,
     "tooltip": "Gira",
     "helpUrl": ""
 }
@@ -150,7 +150,7 @@ const ifNoObstacleBlock: any = {
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 120,
+    "colour": 210,
     "tooltip": "",
     "helpUrl": ""
 }

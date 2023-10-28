@@ -1,7 +1,7 @@
 const toolbox = {
   "kind": "categoryToolbox",
   "contents": [
-    { "kind": "category", "flyoutOpen": true, "name": "Movimento", "colour": 165, "contents": [
+    { "kind": "category", "flyoutOpen": true, "name": "Movimento", "colour": 30, "contents": [
       { "kind": "block", "type": "move_direction" },
       { "kind": "block", "type": "move_forward_one" },
       { "kind": "block", "type": "move_forward", "inputs": { "STEPS": { "block": { "type": "math_number", "fields": { "NUM": 1 } } } } },
@@ -26,7 +26,7 @@ const toolbox = {
       { "kind": "block", "type": "variables_get", "fields": { "VAR": { "name": "x" } } },
       { "kind": "block", "type": "variables_set", "fields": { "VAR": { "name": "x" } } },
     ]},
-    { "kind": "category", "flyoutOpen": true, "name": "Condição", "colour": 120, "contents": [
+    { "kind": "category", "flyoutOpen": true, "name": "Condição", "colour": 210, "contents": [
       { "kind": "block", "type": "controls_if" },
       { "kind": "block", "type": "logic_compare" },
       { "kind": "block", "type": "logic_negate" },
