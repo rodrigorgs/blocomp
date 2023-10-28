@@ -10,7 +10,6 @@ const toolbox = {
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Comunicação", "colour": 165, "contents": [
       { "kind": "block", "type": "text_print", "inputs": { "TEXT": { "block": { "type": "text", "fields": { "TEXT": "Olá" } } } } },
-      { "kind": "block", "type": "input" },
       { "kind": "block", "type": "input_question", "inputs": { "QUESTION": { "block": { "type": "text", "fields": { "TEXT": "Qual sua idade?" } } } } },
     ]},
     { "kind": "category", "flyoutOpen": true, "name": "Texto", "colour": 165, "contents": [
