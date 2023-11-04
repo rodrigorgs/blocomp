@@ -48,6 +48,10 @@ def read_word():
 `
 
 export function loadPythonGenerator() { 
+    pythonGenerator.forBlock['comment'] = function (block: Blockly.Block, generator: any) {
+        return '';
+    }
+
     pythonGenerator.forBlock['text_print'] = function (block: Blockly.Block, generator: any) {
         const msg = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
 
