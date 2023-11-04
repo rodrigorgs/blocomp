@@ -11,6 +11,7 @@
             "variables_set",
             "controls_if",
             "logic_compare",
+            "logic_operation",
             "text",
             "comment"
         ]
