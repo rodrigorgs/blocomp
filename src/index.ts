@@ -94,10 +94,10 @@ export function configureWorkspace() {
         // Position blocklyDiv over blocklyArea.
         blocklyDiv.style.left = x + 'px';
         blocklyDiv.style.top = y + 'px';
-        blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-        blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+        // Compensate for scale (0.8): set width/height to 1/0.8 = 125%
+        blocklyDiv.style.width = (blocklyArea.offsetWidth / 0.8) + 'px';
+        blocklyDiv.style.height = (blocklyArea.offsetHeight / 0.8) + 'px';
         Blockly.svgResize(workspace);
-    
         console.log('resize');
     };
     window.addEventListener('resize', onresize, false);
