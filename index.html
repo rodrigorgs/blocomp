@@ -42,7 +42,7 @@ Resources:
         }
 
         .content {
-            flex: 1;
+            flex: 2;
             background-color: #eee;
             flex-direction: row;
             display: flex;
@@ -169,6 +169,12 @@ Resources:
             left: -10px;
             top: 50%;
             margin-top: -10px;
+        }
+
+        /* Zoom out block palette on the left and fill available space */
+        #blocklyDiv {
+            transform: scale(0.8);
+            transform-origin: top left;
         }
     </style>
     <script src="http://localhost:8097"></script>
