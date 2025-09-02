@@ -43,18 +43,29 @@ export default function RunBarComponent(props: { editor: Editor }) {
     // memoProgramState == ProgramState.STARTED && (memoRunMode == RunMode.FAST || memoRunMode == RunMode.SLOW)
     // memoProgramState == ProgramState.STARTED
     
-    const buttonStyle = { fontSize: 30 };
+    const buttonStyle = { fontSize: 25,
+        color: "#fff",
+        borderRadius: "50%",
+        margin: "3px solid black",
+        width: 40,
+        height: 40,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        boxShadow: "0 2px 6px rgba(0,0,0,0.15)"
+     };
     return (<>
         {memoProgramState != ProgramState.RESET && (
-            <button style={buttonStyle} id="btnRodar" onClick={backToStart}>↺</button>
+            <button style={{...buttonStyle, backgroundColor: "#2d2da0ff"}} id="btnRodar" onClick={backToStart}>↺</button>
         )}
         &nbsp;
         {canRun && (
-            <button style={buttonStyle} id="btnRodar" onClick={run}>▶</button>
+            <button style={{...buttonStyle, backgroundColor: "#28a745"}} id="btnRodar" onClick={run}>▶</button>
         )}
         &nbsp;
         {canStep && (
-            <button style={buttonStyle} id="btnPasso" onClick={step}>⏯</button>
+            <button style={{...buttonStyle, backgroundColor: "#8B8000" }} id="btnPasso" onClick={step}>⏯</button>
         )}
         &nbsp;
         {/* <button onClick={toggleLog}>{memoShowLogMessages ? 'Log on' : 'Log off'}</button> */}
