@@ -298,7 +298,13 @@ export class Editor {
                 Toast.fire({
                     icon: 'error',
                     showCloseButton: true,
+                    showConfirmButton: true,
+                    confirmButtonText: `<a style="color: white;">Tentar novamente ↺</a>`,
                     title: outcome.message,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.reset();
+                    }
                 });
             }
         }
