@@ -1,7 +1,7 @@
 {
     "problem": {
         "name": "Robô 01",
-        "description": "A UFBA comprou um robô aspirador e você precisa programá-lo para limpar essa sujeira. Arraste os blocos para a área branca e conecte-os, então aperte o botão ⏵ para executar o programa."
+        "description": "A UFBA comprou um robô aspirador e você precisa programá-lo para limpar essa sujeira. Arraste os blocos para a área branca e conecte-os, então aperte o botão [▶] para executar o programa."
     },
     "stage": {
         "type": "cleaning",

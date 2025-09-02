@@ -1,7 +1,7 @@
 {
     "problem": {
-        "name": "Robô 04",
-        "description": "O robô possui um bloco que permite executar uma sequência de blocos várias vezes. Use isso para limpar a sujeira usando apenas 2 blocos no seu programa."
+        "name": "Robô 04: Repetição",
+        "description": "Precisamos cortar despesas! Use o bloco de repetição para limpar a sujeira usando menos blocos."
     },
     "stage": {
         "type": "cleaning",

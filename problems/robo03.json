@@ -1,7 +1,7 @@
 {
     "problem": {
-        "name": "Robô 03",
-        "description": "Vamos usar a estratégia de DECOMPOSIÇÃO: (1) limpe até os cones, e depois (2) limpe o restante, em zig-zag. Note que você já resolveu os sub-problemas (1) e (2) anteriormente, é só reusar a solução.",
+        "name": "Robô 03: Decomposição",
+        "description": "Agora combine os dois programas anteriores para limpar essa sujeira. Use os blocos de anotação para organizar seu programa em partes menores e mais fáceis de entender.",
         "initialWorkspace": {"blocks":{"languageVersion":0,"blocks":[{"type":"comment","id":"Xn#HU~4TI/ABNE%K^5|(","x":48,"y":186,"fields":{"CONTENT":"Limpe até os cones"},"next":{"block":{"type":"comment","id":"NfzSkiR7[V`|Hc25ONn5","fields":{"CONTENT":"Limpe em zig-zag"}}}}]}}
     },
     "stage": {
