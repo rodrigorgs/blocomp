@@ -288,6 +288,7 @@ export class Editor {
             if (outcome.successful) {
                 Toast.fire({
                     icon: 'success',
+                    showCloseButton: true,
                     title: outcome.message,
                     showConfirmButton: true,
                     confirmButtonText: `<a style="color: white;" onclick="window.location.href = '?p=${getNextProblemId()}';">Próximo desafio</a>`,
@@ -296,6 +297,7 @@ export class Editor {
             } else {
                 Toast.fire({
                     icon: 'error',
+                    showCloseButton: true,
                     title: outcome.message,
                 });
             }
