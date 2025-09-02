@@ -81,10 +81,11 @@ export default function SigninComponent(props: { client: EZSubmissionClient, ses
 
     return (
         <>
+            <span><a href="https://forms.gle/xuwJ7gwirRJJNx2e9" target="_blank" rel="noopener noreferrer">Avaliar</a></span>
+            &nbsp;
             {username ? (
                 <>
-                <span><a href="https://forms.gle/xuwJ7gwirRJJNx2e9" target="_blank" rel="noopener noreferrer">Avaliar</a></span>
-                &nbsp;
+                
                 <span>Olá, {username}! <button onClick={handleLogoutClick}>Sair</button></span>
                 &nbsp;
                 <button onClick={submitAnswer}>Enviar solução</button>
