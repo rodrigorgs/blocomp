@@ -198,7 +198,7 @@ export function run() {
                 if (typeof response.data == 'string') {
                     Swal.fire({
                         title: 'Erro',
-                        text: `Erro ao tentar carregar problema ${jsonFile}`,
+                        text: `Erro ao tentar carregar desafio ${jsonFile}`,
                         icon: 'error',
                         confirmButtonText: 'Ok'
                     });
@@ -210,7 +210,7 @@ export function run() {
             }).catch(function (error) {
                 Swal.fire({
                     title: 'Erro',
-                    text: `O problema ${jsonFile} não existe`,
+                    text: `O desafio ${jsonFile} não existe`,
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 });
