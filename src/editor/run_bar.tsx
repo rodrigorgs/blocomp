@@ -50,7 +50,7 @@ export default function RunBarComponent(props: { editor: Editor }) {
         )}
         &nbsp;
         {canRun && (
-            <button style={buttonStyle} id="btnRodar" onClick={run}>⏵</button>
+            <button style={buttonStyle} id="btnRodar" onClick={run}>▶</button>
         )}
         &nbsp;
         {canStep && (
