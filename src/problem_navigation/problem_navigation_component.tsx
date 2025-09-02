@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import { Problem } from "../problem";
+import { getNextProblemId } from "./problem_controller";
 
 export default function ProblemNavigationComponent(props: { problem: Problem }) {
 
@@ -17,9 +18,7 @@ export default function ProblemNavigationComponent(props: { problem: Problem }) 
     };
 
     const navigateProblem = (direction: number) => {
-        const currentProblemNumber = parseInt(props.problem.id.match(/[0-9]{2}$/)[0]);
-        const nextProblemNumber = currentProblemNumber + direction;
-        window.location.href = `?p=${props.problem.id.replace(/[0-9]{2}$/, nextProblemNumber.toString().padStart(2, '0'))}`;
+        window.location.href = `?p=${getNextProblemId(direction)}`;
     }
 
     let problemNumber: number = null;
