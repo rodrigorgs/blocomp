@@ -57,7 +57,7 @@ export default function RunBarComponent(props: { editor: Editor }) {
      };
     return (<>
         {memoProgramState != ProgramState.RESET && (
-            <button style={{...buttonStyle, backgroundColor: "#2d2da0ff"}} id="btnRodar" onClick={backToStart}>↺</button>
+            <button style={{...buttonStyle, backgroundColor: "#2d2da0ff"}} id="btnReset" onClick={backToStart}>↺</button>
         )}
         &nbsp;
         {canRun && (
