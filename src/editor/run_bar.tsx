@@ -43,9 +43,18 @@ export default function RunBarComponent(props: { editor: Editor }) {
     // memoProgramState == ProgramState.STARTED && (memoRunMode == RunMode.FAST || memoRunMode == RunMode.SLOW)
     // memoProgramState == ProgramState.STARTED
     return (<>
-        <button id="btnRodar" onClick={backToStart} disabled={memoProgramState == ProgramState.RESET}>Voltar ao início</button> &nbsp;
-        <button id="btnRodar" onClick={run} disabled={!canRun}>Rodar até o fim</button> &nbsp;
-        <button id="btnPasso" onClick={step} disabled={!canStep}>Rodar próximo bloco</button> &nbsp;
+        {memoProgramState != ProgramState.RESET && (
+            <button id="btnRodar" onClick={backToStart}>Voltar ao início</button>
+        )}
+        &nbsp;
+        {canRun && (
+            <button id="btnRodar" onClick={run}>Rodar até o fim</button>
+        )}
+        &nbsp;
+        {canStep && (
+            <button id="btnPasso" onClick={step}>Rodar próximo bloco</button>
+        )}
+        &nbsp;
         {/* <button onClick={toggleLog}>{memoShowLogMessages ? 'Log on' : 'Log off'}</button> */}
     </>
     )
