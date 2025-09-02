@@ -200,21 +200,20 @@ Resources:
                 </div>
             </div>
         </div>
-        <div class="bottom-bar">
+        <div class="bottom-bar" style="display: flex; align-items: center; position: relative; width: 100%; justify-content: space-between;">
             <button id="sandwichMenu" style="font-size: 24px; background: none; border: none; cursor: pointer;">&#9776;</button>
             <span id="runbar"></span>
-            <span id="testbar"></span>
-            <span>
-                &nbsp;
-                <div id="popupMenu" style="display: none; position: absolute; bottom: 60px; left: 0; right: auto; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); padding: 16px; z-index: 1000;">
-                    <button id="btnLimpar">Limpar programa</button><br>
-                    <button id="btnPython">Código Python</button><br>
-                    <button id="btnLoadMap">Carregar mapa</button>
-                </div>
-                <!-- <button id="btnCarregar">Carregar</button> -->
-                <!-- <button id="btnTestar">Testar</button> -->
-            </span>
+            <span id="testbar" style="padding-right: 10px;"></span>
         </div>
+        <span>
+            <div id="popupMenu" style="display: none; position: absolute; bottom: 60px; left: 0; right: auto; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); padding: 16px; z-index: 1000;">
+                <button id="btnLimpar">Limpar programa</button><br>
+                <button id="btnPython">Código Python</button><br>
+                <button id="btnLoadMap">Carregar mapa</button>
+            </div>
+            <!-- <button id="btnCarregar">Carregar</button> -->
+            <!-- <button id="btnTestar">Testar</button> -->
+        </span>
     </div>
     <div id="blocklyDiv" style="position: absolute"></div>
 
