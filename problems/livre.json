@@ -1,0 +1,21 @@
+{
+    "problem": {
+        "name": "Livre",
+        "description": "Explore os blocos livremente."
+    },
+    "stage": {
+        "type": "cleaning",
+        "data": {
+            "map": [
+                ".........",
+                ".........",
+                ".........",
+                ".........",
+                "..r......",
+                ".........",
+                ".........",
+                "........."
+            ]
+        }
+    }
+}

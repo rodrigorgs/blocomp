@@ -1,7 +1,7 @@
 {
     "problem": {
         "name": "Robô 01",
-        "description": "A UFBA comprou um robô aspirador, o UFBABot, e precisa que você programe o robô para limpar essa sujeira que vai até os cones (cuidado pra não bater neles!). O UFBABot possui 8 rodas, 3 sensores e um aspirador de 900 W, capaz de limpar as sujeiras mais difíceis. (Use a estratégia de ABSTRAÇÃO para focar apenas nos aspectos relevantes do problema.)"
+        "description": "A UFBA comprou um robô aspirador e você precisa programá-lo para limpar essa sujeira. Arraste os blocos para a área branca e conecte-os, então aperte o botão [▶] para executar o programa."
     },
     "stage": {
         "type": "cleaning",
