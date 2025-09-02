@@ -46,7 +46,7 @@ export default function RunBarComponent(props: { editor: Editor }) {
         <button id="btnRodar" onClick={backToStart} disabled={memoProgramState == ProgramState.RESET}>Voltar ao início</button> &nbsp;
         <button id="btnRodar" onClick={run} disabled={!canRun}>Rodar até o fim</button> &nbsp;
         <button id="btnPasso" onClick={step} disabled={!canStep}>Rodar próximo bloco</button> &nbsp;
-        <button onClick={toggleLog}>{memoShowLogMessages ? 'Log on' : 'Log off'}</button>
+        {/* <button onClick={toggleLog}>{memoShowLogMessages ? 'Log on' : 'Log off'}</button> */}
     </>
     )
 }``

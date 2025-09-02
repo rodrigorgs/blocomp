@@ -31,7 +31,9 @@ export default function ProblemTestComponent(props: { problem: Problem, editor: 
 
     const totalTestCases = () => props.problem.testCases?.length ?? 0;
 
-    return (<>
-        <button onClick={runNextTestCase} disabled={totalTestCases() == 0}>Mostrar próximo exemplo</button>
-    </>);
+    return (
+        totalTestCases() > 0 ?
+            <button onClick={runNextTestCase}>Próximo exemplo</button>
+            : <></>
+    );
 }
