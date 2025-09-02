@@ -14,7 +14,7 @@ export default function ProblemNavigationComponent(props: { problem: Problem }) 
             return;
         }
     
-        window.location.href = `?p=${name.value}`;
+        window.location.href = `?p=${name.value.toLowerCase()}`;
     };
 
     const navigateProblem = (direction: number) => {
