@@ -290,7 +290,7 @@ export class Editor {
                     icon: 'success',
                     title: outcome.message,
                     showConfirmButton: true,
-                    confirmButtonText: `<a style="color: white;" href="#" onclick="window.location.href = '?p=${getNextProblemId()}';">Próximo desafio</a>`,
+                    confirmButtonText: `<a style="color: white;" onclick="window.location.href = '?p=${getNextProblemId()}';">Próximo desafio</a>`,
                     timer: null
                 });
             } else {
