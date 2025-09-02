@@ -119,6 +119,26 @@ export function configureWorkspace() {
     document.getElementById("btnLimpar")?.addEventListener("click", () => {
         editor.clearWorkspace();
     });
+    document.getElementById("btnLimparTudo")?.addEventListener("click", () => {
+        const confirm = Swal.fire({
+            title: 'Tem certeza?',
+            text: "Isso irá apagar todos os programas salvos localmente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, apagar tudo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.clear();
+                editor.clearWorkspace();
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Todos os programas foram apagados'
+                });
+            }
+        });
+    });
     document.getElementById("btnTestar")?.addEventListener("click", () => {
         editor.runTests();
     });
