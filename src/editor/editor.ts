@@ -284,10 +284,27 @@ export class Editor {
 
         const outcome = window.stageManager?.outcome();
         if (outcome) {
-            Toast.fire({
-                icon: outcome.successful ? 'success' : 'error',
-                title: outcome.message
-            });
+            if (outcome.successful) {
+                let nextProblemUrl = null;
+                const urlParams = new URLSearchParams(window.location.search);
+                const currentProblemId = urlParams.get('p');
+                const currentProblemNumber = parseInt(currentProblemId.match(/[0-9]{2}$/)[0]);
+                const nextProblemNumber = currentProblemNumber + 1;
+                const nextProblemId = `?p=${currentProblemId.replace(/[0-9]{2}$/, nextProblemNumber.toString().padStart(2, '0'))}`;   
+
+                Toast.fire({
+                    icon: 'success',
+                    title: outcome.message,
+                    showConfirmButton: true,
+                    confirmButtonText: `<a style="color: white;" href="#" onclick="window.location.href = '${nextProblemId}';">Próximo desafio</a>`,
+                    timer: null
+                });
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: outcome.message,
+                });
+            }
         }
     }
 
