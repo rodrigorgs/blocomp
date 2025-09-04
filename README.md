@@ -37,12 +37,12 @@ See also:
 - [x] Run mode: debug (step-by-step, with button)
 - [.] Run mode: production (run all blocks at once)
 - [x] Run mode: test (use cin-like input)
-- [ ] Improve run bar: disable run button when code is being run etc.
+- [x] Improve run bar: disable run button when code is being run etc.
 - [ ] Customize time interval between steps
 - [ ] Automatically stop after running and reset the stage
 
 - [x] Save to EZSubmission
-- [ ] Export Python code for automatic evaluation
+- [x] Export Python code for automatic evaluation
 
 - [x] Load block JSON
 - [x] Save generated code to workspace JSON
@@ -59,3 +59,6 @@ See also:
 - [x] "Ask for a number": change block color
 - [x] Add color to categories in the toolbox
 - [x] Use React (or preact)
+
+- [ ] Bugfix: repeat with decimal value yields infinte loop
+- [ ] Bugfix: number input should be a numeric keyboard on mobile
